@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Cosmic Nexus: 3D circular group of portals connecting Aman's world-building universe, creations, and 9-chapter chronicle.">
+  <title>The Cosmic Nexus · 3D Circular Portals | Aman: The Young Worldsmith</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/portals.css') }}">
+</head>
+<body>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Fullscreen Three.js WebGL Canvas -->
+  <div id="webgl-canvas-container" title="Drag to rotate the 3D portal ring"></div>
+
+  <!-- Warp Flash Transition Overlay -->
+  <div id="warp-tunnel-overlay" class="warp-tunnel-overlay"></div>
+
+  <!-- Interactive 3D HUD UI Overlay -->
+  <div class="portal-ui-layer">
+    <!-- Top Navigation Bar -->
+    <header class="portal-top-bar">
+      <div class="brand-capsule">
+        <div class="brand-orb"></div>
+        <span class="brand-title">Aman<span style="color: var(--accent-cyan);">.dev</span> · Cosmic Nexus</span>
+        <span class="brand-tag">Track 2: Original Character</span>
+      </div>
+
+      <div class="top-actions">
+        <!-- Sound Toggle Switch -->
+        <button id="mute-toggle-btn" class="glass-btn" aria-label="Toggle ambient chimes" title="Toggle audio sound FX">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+
+        <!-- Switch to Full Portfolio View -->
+        <a href="{{ url_for('portfolio') }}" class="glass-btn glass-btn-primary" title="View complete portfolio & 9-chapter codex">
+          <span>Full Portfolio 📖</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Center Headline & Guidance -->
+    <div class="portal-center-guide">
+      <div class="guide-pill">
+        <span>✨</span>
+        <span>The 6 Realms of Aman's World · Circular 3D Portals</span>
+      </div>
+
+      <h1 class="guide-title">
+        The Boy Who Was<br>
+        <em>Building His Own World.</em>
+      </h1>
+
+      <p class="guide-subtitle">
+        Drag or swipe to rotate the 3D portal ring • Click any portal to warp inside
+      </p>
+    </div>
+
+    <!-- Bottom Portal HUD Card & Quick Switcher -->
+    <div class="portal-bottom-hud">
+      <!-- Active Portal Card -->
+      <div id="portal-hud-card" class="portal-hud-card">
+        <div class="hud-details">
+          <div id="hud-badge" class="hud-badge">Realm 01 · Infrastructure</div>
+          <h2 id="hud-name" class="hud-name">MyRail Orbit</h2>
+          <p id="hud-desc" class="hud-desc">
+            Intelligent train transit and route navigation console connecting commuters across railway distances.
+          </p>
+        </div>
+
+        <button id="hud-warp-btn" class="hud-warp-btn" aria-label="Warp into this realm">
+          <span>Warp Into Realm</span>
+          <span>✦</span>
+        </button>
+      </div>
+
+      <!-- Quick-Select Navigation Pill Dots -->
+      <nav id="portal-pills-row" class="portal-pills-row" aria-label="Portal Selectors"></nav>
+    </div>
+  </div>
+
+  <!-- Load Three.js r128 from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Load 3D Portals Engine -->
+  <script src="{{ url_for('static', filename='js/portals.js') }}"></script>
+</body>
+</html>

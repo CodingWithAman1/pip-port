@@ -3,419 +3,617 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Pip, The Skull Baby · Junior Dream Engineer at Midnight Nursery. Built for haX.baby 48-Hour Hackathon.">
-  <title>Pip · Junior Dream Engineer | haX.baby Portfolio</title>
-  <link rel="icon" href="{{ url_for('static', filename='assets/pip_avatar_cloud.png') }}" type="image/png">
+  <meta name="description" content="Aman: The Young Worldsmith · The Boy Who Was Building His Own World. Built for the haX.baby 48-Hour Hackathon (Track 2).">
+  <title>Aman · The Young Worldsmith | haX.baby Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
+  <!-- Tier 2: Flashlight / Torch Cursor Overlay Canvas -->
+  <canvas id="torch-overlay-canvas"></canvas>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Wand Handle -->
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <!-- Wand Shaft -->
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Glowing Magic Tip -->
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
   <!-- Sticky Top Navigation -->
   <header class="site-nav">
     <div class="container nav-wrap">
-      <a href="#" class="brand-badge" aria-label="Pip Dream Portfolio Home">
-        <span class="brand-icon">🌙</span>
-        <span>Pip<span style="color: var(--brand-berry);">.baby</span></span>
+      <a href="/" class="brand-badge" aria-label="Aman Worldsmith Home">
+        <span class="brand-gem">🪄</span>
+        <span>Aman<span style="color: var(--neon-cyan);">.dev</span></span>
       </a>
 
       <nav aria-label="Main Navigation">
         <ul class="nav-links">
-          <li><a href="#about" class="nav-link">About Pip</a></li>
-          <li><a href="#projects" class="nav-link">Dream Lab</a></li>
-          <li><a href="#story" class="nav-link">Bedtime Journey</a></li>
-          <li><a href="#guestbook" class="nav-link">Dream Wall</a></li>
+          <li><a href="#about" class="nav-link">Character Sheet</a></li>
+          <li><a href="#projects" class="nav-link">Creations</a></li>
+          <li><a href="#story" class="nav-link">The 9 Chapters</a></li>
+          <li><a href="#guestbook" class="nav-link">Inspiration Wall</a></li>
         </ul>
       </nav>
 
       <div class="nav-controls">
-        <!-- Accessible Mute / Sound Toggle (Strict Hackathon Requirement) -->
-        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle sound and chimes" title="Mute or unmute music and chimes">
+        <!-- Tier 1: Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day (Dawn) / Night (Midnight) Mood (Tier 1)">
+          <span id="mood-icon">🌙</span>
+          <span id="mood-label">Night</span>
+        </button>
+
+        <!-- Tier 2: Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Flashlight Torch Mode (Tier 2)">
+          <span id="torch-icon">🔦</span>
+          <span id="torch-label">Torch: Off</span>
+        </button>
+
+        <!-- 3D Circular Portals Hub Switcher -->
+        <a href="{{ url_for('portals_landing') }}" class="btn-pill btn-cyan" title="Step into the 3D Circular Portals Nexus">
+          <span>🌀 3D Portals Nexus</span>
+        </a>
+
+        <!-- Accessible Mute / Sound Toggle (Side Quest 4) -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle magic audio chimes" title="Toggle sound effects">
           <span id="mute-icon">🔔</span>
           <span id="mute-label">Sound On</span>
         </button>
 
-        <!-- Day / Night Mood Shift Toggle -->
-        <button id="theme-toggle-btn" class="btn-pill" aria-label="Toggle day and night mode" title="Shift between Nursery Day and Starlight Night">
-          <span id="theme-icon">☀️</span>
-        </button>
-
-        <a href="#guestbook" class="btn-pill btn-primary">Leave a Wish ✦</a>
+        <a href="#guestbook" class="btn-pill btn-violet">Leave a Spark ✦</a>
       </div>
     </div>
   </header>
 
   <main id="main-content">
-    <!-- Hero Section (Section 01 - What Pip Is) -->
+    <!-- Hero Section -->
     <section class="hero-section">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="hero-eyebrow">
+          <!-- Tier 3: Returning Visitor Memory Badge -->
+          <div id="visitor-memory-badge" class="visitor-memory-badge">
+            <span>✦</span>
+            <span id="visitor-memory-text">Welcome, voyager! Starting your Worldsmith journey...</span>
+          </div>
+
+          <div class="hero-tag-pill">
             <span>✨</span>
-            <span>haX.baby Hackathon · Track 1 Entry</span>
+            <span>haX.baby Hackathon · Track 2 (Original Character)</span>
           </div>
 
           <h1 class="hero-title">
-            Hello, I’m <em>Pip.</em><br>
-            Junior Dream Engineer.
+            The Boy Who Was<br>
+            <em>Building His Own World.</em>
           </h1>
 
-          <p class="hero-tagline">
-            “I build the dreams you fall asleep inside at the Midnight Nursery.”
-            A friendly baby with a smooth round skull, glowing amber eyes, and a cozy starry nightcap.
+          <p class="hero-quote">
+            “There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”
           </p>
 
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <a href="#projects" class="btn-pill btn-primary" style="padding: 0.75rem 1.4rem; font-size: 0.95rem;">
-              Explore Inventions ↓
+          <p style="color: var(--text-soft); font-size: 1.05rem; margin-bottom: 2rem; max-width: 520px;">
+            Meet <strong>Aman, The Young Worldsmith</strong>. A student and software creator turning lines of C, Python, and SQL into living platforms that solve real human challenges.
+          </p>
+
+          <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+            <a href="#projects" class="btn-pill btn-cyan" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">
+              Explore 3 Creations ↓
             </a>
-            <a href="#story" class="btn-pill" style="padding: 0.75rem 1.4rem; font-size: 0.95rem;">
-              Read My Journey 📖
-            </a>
+            <button id="open-story-codex-btn" class="btn-pill btn-violet" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">
+              Read Full 9-Chapter Story 📖
+            </button>
           </div>
 
-          <!-- Vintage Hit Counter Odometer (+1 Bonus Point) -->
-          <div class="hero-stats-strip">
-            <div class="stat-item">
-              <span class="stat-label">Dreams Delivered</span>
-              <div class="odometer-box" title="Live SQLite Visitor Odometer">
+          <!-- Live SQLite Odometer Stats (Side Quest 3) -->
+          <div class="hero-odometer-row">
+            <div class="stat-box">
+              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Dreams Delivered
+              </span>
+              <div class="odometer-neon" title="Live SQLite Dreams Delivered Count">
                 <span>✦</span>
-                <span id="odometer-val">{{ '{:,}'.format(stats['dreams_delivered']) if stats else '1,482' }}</span>
+                <span id="odometer-val">{{ '{:,}'.format(stats['dreams_delivered']) if stats else '2,840' }}</span>
               </div>
             </div>
 
-            <div class="stat-item">
-              <span class="stat-label">Nursery Role</span>
-              <span class="stat-num" style="font-size: 1.1rem; color: var(--text-main);">Lullaby Architect</span>
+            <div class="stat-box">
+              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Lines of Code Written
+              </span>
+              <div class="odometer-neon" style="color: var(--solar-gold); border-color: rgba(251, 191, 36, 0.4);" title="Lines of Code">
+                <span>⚡</span>
+                <span>{{ '{:,}'.format(stats['lines_of_code']) if stats else '48,920' }}</span>
+              </div>
             </div>
 
-            <div class="stat-item">
-              <span class="stat-label">Favorite Blanket</span>
-              <span class="stat-num" style="font-size: 1.1rem; color: var(--text-main);">Cloud Fluff</span>
+            <div class="stat-box">
+              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Core Philosophy
+              </span>
+              <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 1.15rem; color: var(--neon-cyan);">
+                Never Stop Learning
+              </span>
             </div>
           </div>
         </div>
 
-        <!-- Interactive Avatar Stage with Eye Tracking -->
-        <div class="avatar-stage">
-          <div class="avatar-halo"></div>
-          
-          <div class="avatar-frame" title="Click Pip to tickle & say hello!">
-            <!-- Official haX Track 1 Asset: pip_avatar_cloud.png -->
-            <img src="{{ url_for('static', filename='assets/pip_avatar_cloud.png') }}" alt="Pip The Skull Baby on soft cloud" class="avatar-img">
+        <!-- 3D Hologram Character Stage with Tier 1 Eye & Cursor Tracking -->
+        <div class="hero-character-stage">
+          <div class="hologram-halo"></div>
 
-            <!-- Dynamic Eye-Tracking Glowing Pinpricks -->
-            <div class="eye-pinprick left"></div>
-            <div class="eye-pinprick right"></div>
+          <div class="character-card-holographic" id="character-holo-card">
+            <div class="character-avatar-icon" id="character-avatar-icon">🪄</div>
 
-            <!-- Secret Easter Egg Star Bow on Nightcap (+Easter Egg Requirement) -->
-            <button class="easter-egg-star" aria-label="Secret starry bow" title="Click me 3 times for a secret dream!">★</button>
-          </div>
+            <!-- Tier 1: Character Eyes Tracking Pointer -->
+            <div class="character-eyes-container" aria-hidden="true">
+              <div class="character-eye" id="left-eye"><div class="character-pupil" id="left-pupil"></div></div>
+              <div class="character-eye" id="right-eye"><div class="character-pupil" id="right-pupil"></div></div>
+            </div>
 
-          <p style="margin-top: 1rem; font-family: var(--font-bubbly); font-size: 0.84rem; color: var(--text-muted);">
-            ↖ Move your pointer: Pip’s warm amber eyes follow you!
-          </p>
-        </div>
-      </div>
-    </section>
+            <h2 class="character-role-title">Aman</h2>
+            <div class="character-spec">&lt; The Young Worldsmith /&gt;</div>
+            <div id="character-mood-status" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--solar-gold); margin-bottom: 0.75rem;">
+              🌙 Mode: Midnight Sleepless Coder
+            </div>
 
-    <!-- Character Sheet (Formal Profile) -->
-    <section id="about" class="section" style="padding-top: 1rem;">
-      <div class="container">
-        <div class="character-sheet-card">
-          <div class="character-sketch-box">
-            <!-- Official Reference Sketch -->
-            <img src="{{ url_for('static', filename='assets/pip_portrait.png') }}" alt="Official character portrait of Pip holding dream lantern">
-            <p style="text-align: center; font-size: 0.76rem; color: var(--text-muted); padding: 0.5rem; background: var(--bg-surface-soft);">
-              Official Studio Character Render
+            <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin-bottom: 1.25rem;">
+              Armed with a glowing coding wand, star-dusted patience, and an unshakeable belief that broken code is just the first draft of mastery.
             </p>
-          </div>
 
-          <div>
-            <div class="section-tag">Canon Character Sheet</div>
-            <h2 class="section-title" style="font-size: 1.85rem; margin-bottom: 1rem;">About Pip & Midnight Nursery</h2>
+            <div class="character-chips">
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">C / C++</span>
+              <span class="tech-chip">SQL</span>
+              <span class="tech-chip">Flask</span>
+              <span class="tech-chip">Web Dev</span>
+              <span class="tech-chip">Algorithms</span>
+            </div>
 
-            <table class="character-traits-table">
-              <tr>
-                <th>Character Name</th>
-                <td><strong>Pip</strong> (Sweet baby age)</td>
-              </tr>
-              <tr>
-                <th>What Pip Is</th>
-                <td>A cute baby with a smooth round skull, huge soft eye sockets glowing with warm amber pinpricks, a tiny crooked smile, and a bedtime nightcap with stars and a pink bow. (Always kind & cozy, never scary!).</td>
-              </tr>
-              <tr>
-                <th>Personality</th>
-                <td>Curious, sleepy, clumsy, giggles at everything, and loves the sound of gentle wind chimes.</td>
-              </tr>
-              <tr>
-                <th>Profession</th>
-                <td><strong>Junior Dream Engineer at Midnight Nursery.</strong> Designs the dreams, lullabies, and nightlights that help creatures fall asleep.</td>
-              </tr>
-              <tr>
-                <th>Personal Motto</th>
-                <td style="font-style: italic; color: var(--brand-berry);">“No shadow is scary once you turn on a nightlight.”</td>
-              </tr>
-            </table>
+            <!-- Secret Wand Gem for Discoverable Easter Egg -->
+            <button id="secret-wand-gem" class="btn-pill btn-violet" style="margin-top: 1.25rem; font-size: 0.8rem; width: 100%; justify-content: center;" title="Click to channel wand energy">
+              ✦ Channel Wand Energy (Easter Egg)
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 02: What Pip Does (3 Showcase Projects) -->
-    <section id="projects" class="section" style="background: var(--bg-surface-soft);">
+    <!-- Character Sheet (Section 01 - Track 2 Formal Profile) -->
+    <section id="about" class="section" style="background: var(--bg-space); border-top: 1px solid var(--border-neon); border-bottom: 1px solid var(--border-neon);">
       <div class="container">
         <div class="section-head">
-          <div class="section-tag">Section 02 · Showcase Projects</div>
-          <h2 class="section-title">Pip’s Dream Laboratory</h2>
+          <div class="section-tag">Track 2 · 5-Point Character Sheet</div>
+          <h2 class="section-title">Character Profile: The Worldsmith</h2>
           <p class="section-subtitle">
-            Explore 3 handcrafted inventions Pip built to ensure peaceful sleep across the neighborhood.
+            An original character grounded in real-world aspirations, quiet persistence, and the craft of code.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 2px solid var(--border-neon); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--card-shadow); max-width: 860px; margin: 0 auto;">
+          <div style="display: grid; gap: 1.5rem;">
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">1. Character Name</span>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.25rem;">Aman, The Young Worldsmith</h3>
+            </div>
+
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">2. What They Are (Species, Look & Personality)</span>
+              <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
+                A young computer science student and digital architect wrapped in a midnight hoodie with glowing circuitry patterns. Curious, impatient with stagnation yet endlessly patient with bugs, deeply devoted to his family, and driven by the quiet hunger to build things that outlast ordinary marks.
+              </p>
+            </div>
+
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">3. What They Do (Craft & Inventions)</span>
+              <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
+                Software Developer & Living World Creator. He architects real systems: <strong>MyRail</strong> (transit intelligence), <strong>INVENTRA</strong> (inventory management), and <strong>CivicConnect</strong> (citizen civic empowerment platform).
+              </p>
+            </div>
+
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">4. Their Story</span>
+              <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
+                The quiet battle between wanting to improve and the time required to do so. Navigating family health hurdles, exam deadlines, API failures, and silent uncertainties—discovering that becoming someone isn’t a single event, but a continuous decision to open the laptop and build.
+              </p>
+            </div>
+
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">5. Tagline Motto</span>
+              <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--solar-gold); margin-top: 0.25rem;">
+                “The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 1: Discoverable Easter Egg Banner (Triggered by Wand Gem or Keyboard) -->
+        <div id="easter-egg-banner" class="easter-egg-banner">
+          <h4 style="font-family: var(--font-bubbly); color: var(--solar-gold); font-size: 1.25rem; margin-bottom: 0.35rem;">
+            🌟 Hidden Easter Egg Discovered!
+          </h4>
+          <p style="font-size: 0.98rem; color: #ffffff; line-height: 1.6;">
+            “Every expert was once a beginner who refused to quit.”<br>
+            <strong style="color: var(--neon-cyan);">✦ You unlocked Aman’s Secret Constellation! (+500 Worldsmith XP)</strong>
+          </p>
+        </div>
+
+        <!-- Tier 2: Hidden Torch Message (Revealed by Flashlight Torch Mode) -->
+        <div class="torch-secret-message" style="text-align: center; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.88rem; color: var(--neon-cyan);">
+          🔦 [TORCH SECRET]: "A broken program isn't a dead end. It is a map of what needs understanding next."
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: What Aman Does (3 Showcase Projects) -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Section 02 · 3 Flagship Projects</div>
+          <h2 class="section-title">The Worldsmith’s Creations</h2>
+          <p class="section-subtitle">
+            Three real applications built by Aman, turning theoretical code into tools that solve tangible problems.
           </p>
         </div>
 
         <div class="projects-grid">
-          <!-- Project 1: The Lullaby Lab -->
+          <!-- Project 1: MyRail -->
           <article class="project-card">
-            <div class="project-card-header">
-              <div class="project-icon-box">
-                <img src="{{ url_for('static', filename='assets/pip_lullaby_box.png') }}" alt="Lullaby music box icon">
-              </div>
-              <span class="project-badge">Project 01 · Audio Synth</span>
+            <div class="project-header-top">
+              <div class="project-icon-cube">🚆</div>
+              <span class="project-badge-pill">Project 01 · Transit</span>
             </div>
 
-            <h3 class="project-title">1. The Lullaby Lab</h3>
-            <p class="project-desc">
-              A generative music box synthesizer calibrated to soothing pentatonic frequencies. Click the pins below or play the automated melody!
+            <h3 class="project-name">MyRail</h3>
+            <p class="project-lore">
+              An intelligent railway information and train service navigation platform inspired by real-world commuter logistics. Connects live railway schedules, route optimization, and intuitive journey tracking.
             </p>
 
-            <div class="lullaby-box-interactive">
-              <div class="lullaby-keys-row">
-                <button class="lullaby-key" data-note="0">C5<span>523</span></button>
-                <button class="lullaby-key" data-note="1">D5<span>587</span></button>
-                <button class="lullaby-key" data-note="2">E5<span>659</span></button>
-                <button class="lullaby-key" data-note="3">G5<span>784</span></button>
-                <button class="lullaby-key" data-note="4">A5<span>880</span></button>
-                <button class="lullaby-key" data-note="5">C6<span>1046</span></button>
-              </div>
-
-              <div class="lullaby-controls-row">
-                <button id="play-lullaby-btn" class="btn-pill btn-primary" style="font-size: 0.78rem;">
-                  ▶ Play Lullaby
-                </button>
-                <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-bubbly);">
-                  Pure Sine Oscillator
-                </span>
-              </div>
+            <div class="project-tech-bar">
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">Flask API</span>
+              <span class="tech-chip">SQL</span>
+              <span class="tech-chip">Real-Time Data</span>
             </div>
 
-            <div style="font-size: 0.75rem; color: var(--text-muted);">
-              ✦ Web Audio API sound synthesis • Zero external audio dependencies
+            <div class="project-action-row">
+              <button class="star-project-btn" data-project="myrail">
+                <span>⭐ Star Project</span>
+                <span class="star-num">{{ projects['myrail']['stars_count'] if projects.get('myrail') else 342 }}</span>
+              </button>
+              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-cyan);">Infrastructure</span>
             </div>
           </article>
 
-          <!-- Project 2: Nightlight Collection -->
+          <!-- Project 2: INVENTRA -->
           <article class="project-card">
-            <div class="project-card-header">
-              <div class="project-icon-box">
-                <img src="{{ url_for('static', filename='assets/pip_dream_lantern.png') }}" alt="Dream lantern icon">
-              </div>
-              <span class="project-badge">Project 02 · Lighting</span>
+            <div class="project-header-top">
+              <div class="project-icon-cube">📦</div>
+              <span class="project-badge-pill">Project 02 · Enterprise</span>
             </div>
 
-            <h3 class="project-title">2. Nightlight Collection</h3>
-            <p class="project-desc">
-              Hand-poured porcelain lamps infused with bottled starlight. Tap any lantern below to illuminate and register a sparkle touch!
+            <h3 class="project-name">INVENTRA</h3>
+            <p class="project-lore">
+              A comprehensive inventory and resource management system. Orchestrates warehouse stock, suppliers, automated reorder thresholds, and interactive analytics dashboards in harmony.
             </p>
 
-            <div class="lantern-shelf">
-              <div class="lantern-card-item lit" data-lantern-id="lantern-moon">
-                <div class="lantern-icon-circle">🌙</div>
-                <span class="lantern-name">Moon Lamp</span>
-                <span class="lantern-sparkles"><span class="sparkle-num">{{ lanterns.get('lantern-moon', 142) }}</span> ✨</span>
-              </div>
-
-              <div class="lantern-card-item" data-lantern-id="lantern-star">
-                <div class="lantern-icon-circle">⭐</div>
-                <span class="lantern-name">Star Jar</span>
-                <span class="lantern-sparkles"><span class="sparkle-num">{{ lanterns.get('lantern-star', 98) }}</span> ✨</span>
-              </div>
-
-              <div class="lantern-card-item" data-lantern-id="lantern-lavender">
-                <div class="lantern-icon-circle">🔮</div>
-                <span class="lantern-name">Lavender</span>
-                <span class="lantern-sparkles"><span class="sparkle-num">{{ lanterns.get('lantern-lavender', 167) }}</span> ✨</span>
-              </div>
+            <div class="project-tech-bar">
+              <span class="tech-chip">Database Architecture</span>
+              <span class="tech-chip">CRUD Engine</span>
+              <span class="tech-chip">Analytics</span>
+              <span class="tech-chip">Full-Stack</span>
             </div>
 
-            <div style="font-size: 0.75rem; color: var(--text-muted);">
-              ✦ Backed by SQLite persistence • Radial CSS lighting filters
+            <div class="project-action-row">
+              <button class="star-project-btn" data-project="inventra">
+                <span>⭐ Star Project</span>
+                <span class="star-num">{{ projects['inventra']['stars_count'] if projects.get('inventra') else 418 }}</span>
+              </button>
+              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-cyan);">Operations</span>
             </div>
           </article>
 
-          <!-- Project 3: Dream Delivery Routes -->
+          <!-- Project 3: CivicConnect -->
           <article class="project-card">
-            <div class="project-card-header">
-              <div class="project-icon-box">
-                <span style="font-size: 1.8rem;">🗺️</span>
-              </div>
-              <span class="project-badge">Project 03 · Navigation</span>
+            <div class="project-header-top">
+              <div class="project-icon-cube">🏛️</div>
+              <span class="project-badge-pill">Project 03 · Civic Impact</span>
             </div>
 
-            <h3 class="project-title">3. Delivery Flight Map</h3>
-            <p class="project-desc">
-              The nocturnal flight route Pip uses to fly over chimney tops delivering bottled sweet dreams. Click the glowing nodes!
+            <h3 class="project-name">CivicConnect</h3>
+            <p class="project-lore">
+              A public engagement and transparency platform reaching beyond ordinary code. Empowers citizens to report local civic issues, track governmental resolution progress, and hold authorities accountable.
             </p>
 
-            <div class="dream-map-wrap">
-              <svg class="dream-map-svg" viewBox="0 0 320 120" preserveAspectRatio="none">
-                <!-- Stars in night sky -->
-                <circle cx="25" cy="18" r="1.5" fill="#fbbf24" opacity="0.8"/>
-                <circle cx="95" cy="22" r="1.2" fill="#fff" opacity="0.6"/>
-                <circle cx="160" cy="15" r="1.5" fill="#fbbf24" opacity="0.9"/>
-                <circle cx="240" cy="28" r="1.2" fill="#fff" opacity="0.7"/>
-
-                <!-- Rooftop silhouettes -->
-                <polygon points="0,120 0,90 35,68 70,90 70,120" fill="#080912"/>
-                <polygon points="65,120 65,82 110,55 155,82 155,120" fill="#090b16"/>
-                <polygon points="150,120 150,75 190,52 230,75 230,120" fill="#070810"/>
-                <polygon points="225,120 225,85 270,60 320,85 320,120" fill="#090b16"/>
-
-                <!-- Dotted flight path -->
-                <path d="M 35,60 Q 110,20 190,48 T 300,55" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4,4" opacity="0.85"/>
-
-                <!-- Interactive Delivery Checkpoints -->
-                <circle class="flight-marker" data-dest="Caterpillar Meadow" cx="35" cy="60" r="7" fill="#fbbf24"/>
-                <circle class="flight-marker" data-dest="Owl Hollow" cx="190" cy="48" r="7" fill="#ec4899"/>
-                <circle class="flight-marker" data-dest="Sleepy Hollow" cx="300" cy="55" r="7" fill="#38bdf8"/>
-              </svg>
+            <div class="project-tech-bar">
+              <span class="tech-chip">Public Transparency</span>
+              <span class="tech-chip">Geo-Reporting</span>
+              <span class="tech-chip">Community Core</span>
+              <span class="tech-chip">Social Good</span>
             </div>
 
-            <div id="route-tooltip" style="font-size: 0.78rem; font-family: var(--font-bubbly); color: var(--brand-berry); font-weight: 700;">
-              ✦ Click any glowing marker to deliver a dream drop
+            <div class="project-action-row">
+              <button class="star-project-btn" data-project="civicconnect">
+                <span>⭐ Star Project</span>
+                <span class="star-num">{{ projects['civicconnect']['stars_count'] if projects.get('civicconnect') else 529 }}</span>
+              </button>
+              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-cyan);">Civic Tech</span>
             </div>
           </article>
+        </div>
+
+        <!-- Tier 2: Dream Delivery & Transit Routes SVG Map (Synced with Scroll) -->
+        <div class="transit-map-card" id="dream-transit-map">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Tier 2 Memorable Standout · Route Motion</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
+                MyRail & Dream Delivery Transit Map
+              </h3>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan);">
+              Scroll-Synced Transit Animation
+            </span>
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.5;">
+            Follow the starlit transit line connecting midnight nursery stops to the central world-building station. The transit star capsule glides along the curve as you journey down the page!
+          </p>
+          <div class="transit-route-svg-box">
+            <svg id="transit-svg" width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none">
+              <!-- Background Grid Lines -->
+              <line x1="0" y1="60" x2="800" y2="60" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+              <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+              <line x1="0" y1="180" x2="800" y2="180" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+
+              <!-- Animated Route Path -->
+              <path id="transit-path" class="svg-route-path" d="M 40 190 Q 220 30, 400 120 T 760 60" />
+
+              <!-- Stations along Route -->
+              <circle cx="40" cy="190" r="7" fill="#00f5ff" />
+              <text x="40" y="222" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Nursery Lab</text>
+
+              <circle cx="260" cy="85" r="7" fill="#a855f7" />
+              <text x="260" y="115" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Algorithm Ridge</text>
+
+              <circle cx="490" cy="125" r="7" fill="#ff759f" />
+              <text x="490" y="155" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Civic Plaza</text>
+
+              <circle cx="760" cy="60" r="7" fill="#38bdf8" />
+              <text x="760" y="90" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Worldsmith Peak</text>
+
+              <!-- Animated Transit Train Vehicle -->
+              <g class="transit-vehicle" id="transit-train-group" transform="translate(40, 190)">
+                <circle r="14" fill="#fbbf24" stroke="#ffffff" stroke-width="2"/>
+                <text text-anchor="middle" dy="5" font-size="12">🚆</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tier 2: Lullaby Lab & Generative Audio Synth (with Required Mute Switch) -->
+        <div class="lullaby-synth-card" id="lullaby-lab">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Tier 2 Memorable Standout · Real Audio</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
+                Lullaby Lab & Generative Audio Synth
+              </h3>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold);">
+              Web Audio API Oscillator Engine
+            </span>
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.5;">
+            Generative pentatonic chime lullabies designed to help Aman (and late-night hackathon coders) focus, rest, and build. Generated in real-time with Web Audio oscillators!
+          </p>
+          <div class="synth-controls-row">
+            <button id="synth-play-btn" class="btn-pill btn-cyan" style="padding: 0.75rem 1.5rem;">
+              <span id="synth-play-icon">▶</span>
+              <span id="synth-play-label">Play Generative Lullaby</span>
+            </button>
+            <button id="synth-preset-midnight" class="btn-pill active" style="font-size: 0.82rem;">🌙 Midnight Nursery</button>
+            <button id="synth-preset-coder" class="btn-pill" style="font-size: 0.82rem;">⚡ Deep Coder Focus</button>
+            <button id="synth-preset-starlight" class="btn-pill" style="font-size: 0.82rem;">✨ Stardust Serenade</button>
+            
+            <div class="synth-visualizer-bar" id="synth-visualizer" aria-label="Synthesizer Visualizer">
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2: Playable Arcade Mini-Game: Catch the Code Sparks -->
+        <div class="arcade-minigame-card" id="minigame-section">
+          <div class="minigame-hud-top">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Tier 2 Memorable Standout · Mini-Game</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
+                Playable Arcade: Catch the Code Sparks
+              </h3>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+              <div style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--solar-gold);">
+                Score: <span id="game-score" style="font-weight: 700; font-size: 1.15rem; color: #fff;">0</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan);">
+                Best: <span id="game-high-score" style="font-weight: 700; color: #fff;">0</span>
+              </div>
+              <button id="game-start-btn" class="btn-pill btn-violet" style="padding: 0.5rem 1.15rem; font-size: 0.85rem;">
+                Start Game 🎮
+              </button>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-soft); margin-bottom: 0.85rem;">
+            Slide Aman's magic wand basket with your cursor to catch falling syntax runes ({ }, &lt;/&gt;, 01, ⚡, ★) before they fade into the void!
+          </p>
+          <canvas id="minigame-canvas" width="800" height="260"></canvas>
         </div>
       </div>
     </section>
 
-    <!-- Section 03: Story Section (What Pip's Story Is) -->
-    <section id="story" class="section">
+    <!-- Section 03: The 9 Chapters of Aman's Journey -->
+    <section id="story" class="section" style="background: var(--bg-space);">
       <div class="container">
         <div class="section-head">
-          <div class="section-tag">Section 03 · Origin Story</div>
-          <h2 class="section-title">Pip’s Bedtime Journey</h2>
+          <div class="section-tag">Section 03 · The 9 Chapters</div>
+          <h2 class="section-title">The Boy Who Was Building His Own World</h2>
           <p class="section-subtitle">
-            Follow Pip through the four quiet scenes of a night at Midnight Nursery (under 150 words per scene).
+            An honest chronicle of ambition, responsibility, family, and the quiet struggle of becoming someone.
           </p>
         </div>
 
-        <div class="story-timeline">
-          <!-- Scene 1 -->
-          <article class="story-card">
-            <div class="story-step-badge">1</div>
-            <div class="story-time-label">7:00 PM · Dusk Waking</div>
-            <h3 class="story-heading">The Nursery Awakes</h3>
-            <p class="story-text">
-              While human children yawn and brush their teeth, Pip wakes up in a cloud hammock. Pip ties the starry nightcap, gives a tiny crooked smile to the moon, and brews warm chamomile stardust for the long night ahead.
-            </p>
-          </article>
+        <!-- Tier 2: Interactive Storybook Flipbook (Touch & Keyboard Left/Right Arrow Support) -->
+        <div class="flipbook-container" id="flipbook-section">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <span class="section-tag" style="margin-bottom: 0.2rem;">Tier 2 Memorable Standout · Interactive Flipbook</span>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff;">Flip Through Aman's Codex</h3>
+            </div>
+            <span id="flipbook-page-indicator" style="font-family: var(--font-mono); font-weight: 700; font-size: 0.88rem; color: var(--solar-gold); background: rgba(251, 191, 36, 0.12); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid rgba(251, 191, 36, 0.3);">
+              Chapter 1 of 9
+            </span>
+          </div>
 
-          <!-- Scene 2 -->
-          <article class="story-card">
-            <div class="story-step-badge">2</div>
-            <div class="story-time-label">9:30 PM · The Craft</div>
-            <h3 class="story-heading">Winding the Music Boxes</h3>
-            <p class="story-text">
-              In the Lullaby Lab, Pip tests every music box with tiny fingers. If a note sounds too sharp, Pip softens it with lavender oil. Each song must feel like being wrapped in a warm flannel blanket fresh from the dryer.
+          {% for chap in chapters %}
+          <div class="flipbook-page {% if loop.first %}active{% endif %}" data-page="{{ loop.index0 }}">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px {{ chap.color }});">{{ chap.icon }}</span>
+              <div>
+                <span class="chapter-tag" style="color: {{ chap.color }};">{{ chap.tag }}</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter {{ chap.num }}: {{ chap.title }}</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              {{ chap.excerpt }}
             </p>
-          </article>
+          </div>
+          {% endfor %}
 
-          <!-- Scene 3 -->
-          <article class="story-card">
-            <div class="story-step-badge">3</div>
-            <div class="story-time-label">12:00 AM · Midnight Flight</div>
-            <h3 class="story-heading">Across the Chimneys</h3>
-            <p class="story-text">
-              With a cloud tucked under each arm, Pip floats over neighborhood rooftops. Through open attic windows, Pip slips dreams of strawberry meadows, gentle rains, and floating balloons into children’s sleepy ears.
-            </p>
-          </article>
+          <div class="flipbook-nav-row">
+            <button id="flipbook-prev-btn" class="btn-pill" style="padding: 0.55rem 1.35rem;">
+              ← Previous Chapter
+            </button>
+            <span style="font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono);">
+              Use Arrow Keys (← / →) or Buttons
+            </span>
+            <button id="flipbook-next-btn" class="btn-pill btn-cyan" style="padding: 0.55rem 1.35rem;">
+              Next Chapter →
+            </button>
+          </div>
+        </div>
 
-          <!-- Scene 4 -->
-          <article class="story-card">
-            <div class="story-step-badge">4</div>
-            <div class="story-time-label">5:30 AM · Morning Slumber</div>
-            <h3 class="story-heading">Pip’s Own Goodnight</h3>
-            <p class="story-text">
-              As the horizon blushes pink, Pip returns home to Midnight Nursery. Satisfied that every creature is fast asleep, Pip curls into the soft cloud, closes the glowing amber eyes, and drifts into a dream of their own.
-            </p>
-          </article>
+        <div style="text-align: center; margin: 3rem 0 1.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">
+            Or Explore All 9 Chapter Overview Cards Below:
+          </span>
+        </div>
+
+        <div class="story-chapters-grid">
+          {% for chap in chapters %}
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">{{ chap.num }}</div>
+              <span class="chapter-tag">{{ chap.tag }}</span>
+            </div>
+
+            <h3 class="chapter-title">{{ chap.title }}</h3>
+            <p class="chapter-excerpt">{{ chap.excerpt }}</p>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <button id="open-story-codex-btn-2" class="btn-pill btn-violet" style="padding: 0.85rem 2rem; font-size: 1rem;">
+            Read the Complete Unabridged Story 📖
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- Section 04: Live Guestbook Wall (+2 Bonus Points) -->
-    <section id="guestbook" class="section" style="background: var(--bg-surface-soft);">
+    <!-- Section 04: The Dreamers' Wall (SQLite Guestbook) -->
+    <section id="guestbook" class="section">
       <div class="container">
         <div class="section-head">
-          <div class="section-tag">Side Quest · Live Guestbook (+2 Pts)</div>
-          <h2 class="section-title">Pip’s Dream Wish Wall</h2>
+          <div class="section-tag">Side Quest · Live Beacon Wall (+2 Pts)</div>
+          <h2 class="section-title">The Dreamers’ Beacon</h2>
           <p class="section-subtitle">
-            Leave a bedtime wish or message for Pip! Saved permanently to our SQLite database.
+            Leave a message, piece of advice, or encouragement for Aman on this persistent SQLite wall!
           </p>
         </div>
 
-        <div class="guestbook-grid">
+        <div class="guestbook-layout">
           <!-- Submission Form -->
-          <div class="guestbook-form-card">
-            <h3 style="font-family: var(--font-bubbly); font-size: 1.15rem; margin-bottom: 1.25rem;">
-              ✍ Sign the Nursery Wall
+          <div class="guestbook-card">
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-bottom: 1.25rem;">
+              ✍ Transmit a Thought
             </h3>
 
             <form id="guestbook-form">
               <div class="form-group">
-                <label for="guest-author" class="form-label">Your Name or Pen-Name</label>
-                <input type="text" id="guest-author" class="form-input" placeholder="e.g. Luna the Dreamer" maxlength="40" required>
+                <label for="guest-author" class="form-label">Your Name or Handle</label>
+                <input type="text" id="guest-author" class="form-input" placeholder="e.g. Fellow Coder" maxlength="40" required>
               </div>
 
               <div class="form-group">
-                <label for="guest-mood" class="form-label">Dream Mood Badge</label>
+                <label for="guest-mood" class="form-label">Your Tag / Badge</label>
                 <select id="guest-mood" class="form-select">
-                  <option value="🌙 Sweet Dreams">🌙 Sweet Dreams</option>
-                  <option value="✨ Starry Slumber">✨ Starry Slumber</option>
-                  <option value="☁ Cloud Fluff">☁ Cloud Fluff</option>
-                  <option value="🫐 Berry Sweet">🫐 Berry Sweet</option>
-                  <option value="🏆 haX Builder">🏆 haX Builder</option>
+                  <option value="✨ Dream Builder">✨ Dream Builder</option>
+                  <option value="💻 Code Craftsman">💻 Code Craftsman</option>
+                  <option value="❤️ Family Heart">❤️ Family Heart</option>
+                  <option value="⚡ Relentless Learner">⚡ Relentless Learner</option>
+                  <option value="🏆 haX Champion">🏆 haX Champion</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label for="guest-wish" class="form-label">Your Bedtime Wish for Pip</label>
-                <textarea id="guest-wish" class="form-textarea" rows="3" placeholder="What dream should Pip weave for you tonight?" maxlength="280" required></textarea>
+                <label for="guest-wish" class="form-label">Message / Advice for the Worldsmith</label>
+                <textarea id="guest-wish" class="form-textarea" rows="4" placeholder="What words keep you moving when the code gets tough?" maxlength="320" required></textarea>
               </div>
 
-              <button type="submit" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
-                Send Wish to Nursery ✨
+              <button type="submit" class="btn-pill btn-cyan" style="width: 100%; justify-content: center; padding: 0.85rem;">
+                Broadcast Message ✦
               </button>
             </form>
           </div>
 
-          <!-- Dynamic Wishes Wall -->
+          <!-- Live Wish Cards Wall -->
           <div>
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-              <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.92rem; color: var(--text-muted);">
-                Recent Wishes from Visitors:
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+              <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 1rem; color: var(--text-soft);">
+                Messages from Across the Web:
               </span>
-              <span style="font-size: 0.78rem; font-mono font-weight: 600; color: var(--brand-berry);">
-                Persistent SQLite Store
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">
+                SQLite Real-Time Beacon
               </span>
             </div>
 
-            <div id="wishes-list" class="wishes-scroll-box">
+            <div id="wishes-list" class="wishes-scroll-grid">
               {% for wish in wishes %}
-              <div class="wish-sticky-note">
-                <span class="wish-badge">{{ wish['mood_badge'] }}</span>
-                <p class="wish-body">“{{ wish['dream_wish'] }}”</p>
-                <div class="wish-author">— {{ wish['author_name'] }}</div>
-                <div class="wish-date">{{ wish['created_at'][:10] }}</div>
+              <div class="wish-card">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-cyan); margin-bottom: 0.4rem;">
+                  {{ wish['mood_badge'] }}
+                </div>
+                <p style="font-size: 0.92rem; color: #fff; line-height: 1.5; margin-bottom: 0.85rem;">
+                  “{{ wish['dream_wish'] }}”
+                </p>
+                <div style="font-family: var(--font-bubbly); font-size: 0.82rem; font-weight: 700; color: var(--solar-gold);">
+                  — {{ wish['author_name'] }}
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); opacity: 0.8;">
+                  {{ wish['created_at'][:10] }}
+                </div>
               </div>
               {% endfor %}
             </div>
@@ -425,40 +623,120 @@
     </section>
   </main>
 
-  <!-- Easter Egg Modal Dialog -->
-  <div id="easter-egg-modal" class="hidden" style="position: fixed; inset: 0; background: rgba(12, 13, 27, 0.85); backdrop-filter: blur(8px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
-    <div style="background: var(--bg-surface); border: 2px solid var(--border-strong); border-radius: var(--radius-lg); max-width: 480px; width: 100%; padding: 2rem; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-      <div style="font-size: 3rem; margin-bottom: 0.5rem; animation: pulseGlow 2s infinite;">🌟</div>
-      <h3 style="font-family: var(--font-bubbly); font-size: 1.5rem; color: var(--brand-berry); margin-bottom: 0.75rem;">
-        You Found Pip’s Secret Wish!
-      </h3>
-      <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
-        “Thank you for being so curious! My deepest secret wish is that every tired builder on the web finds a cozy blanket, a warm drink, and waking dreams full of gentle wonders.”
-      </p>
-      <button id="close-easter-btn" class="btn-pill btn-primary" style="padding: 0.6rem 1.8rem;">
-        Sleep Tight, Pip 🌙
-      </button>
+  <!-- Complete 9-Chapter Story Modal Reader -->
+  <div id="story-codex-modal" class="hidden" style="position: fixed; inset: 0; background: rgba(6, 9, 20, 0.92); backdrop-filter: blur(16px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--bg-surface); border: 2px solid var(--border-neon); border-radius: var(--radius-lg); max-width: 760px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.8);">
+      <div style="padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: space-between; background: var(--bg-space);">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); text-transform: uppercase;">The Complete Story Codex</span>
+          <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">The Boy Who Was Building His Own World</h3>
+        </div>
+        <button id="close-story-codex-btn" class="btn-pill" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">✕ Close</button>
+      </div>
+
+      <div style="padding: 2rem; overflow-y: auto; line-height: 1.8; color: var(--text-soft); font-size: 0.98rem; space-y: 1.5rem;">
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem;">Chapter 1: A Boy With Too Many Dreams</h4>
+        <p>There was once a boy named Aman. He wasn't the kind of boy who had his entire life planned out. But he had something that kept him moving: he had dreams. C. Python. SQL. Web development. Data structures and algorithms. He didn't want to spend his life simply following instructions; he wanted to build, create, and find out what he was capable of.</p>
+        
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 2: The War Nobody Could See</h4>
+        <p>People measure progress by what they can see: a certificate, a competition, a mark. They rarely see the days someone sits in front of a screen, staring at an error they cannot understand. Every expert had once been a beginner who couldn't understand something. Aman was unfinished.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 3: More Than Just a Student</h4>
+        <p>He wanted skills that lived outside classrooms. He started building MyRail for railway transit, INVENTRA for inventory management, and CivicConnect for civic accountability. Every broken database connection was collecting the real kind of experience: understanding why things break and fixing them.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 4: The People He Carried in His Heart</h4>
+        <p>Aman wasn't made entirely of ambition. When his mother had health problems, ordinary student schedules could no longer be all that mattered. Caring was part of his story. He had a future to build, but also a life to live while building it.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 5: The Endless Race Against Time</h4>
+        <p>A person can be so determined to become someone in the future that he starts treating his present self as a disappointment. Aman learned that becoming someone is about continuing—not at somebody else's speed, just forward.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 6: Building Something That Mattered</h4>
+        <p>What if technology could make public services transparent? What if code could solve real problems? You didn't become capable first and then enter difficult situations; you entered them uncertain, and became capable along the way.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 7: The Days When Nothing Seemed to Change</h4>
+        <p>Routine days. Staring at the terminal. Yet every fixed bug strengthened the habit of continuing. He wasn't where he wanted to be, but he wasn't where he had started, either.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 8: The Future Was Not a Promise</h4>
+        <p>The future wasn't an entitlement. Becoming someone was not a single event; it was a process—one decision, one skill, one difficult day at a time.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 9: The Real Beginning</h4>
+        <p>He opened his laptop again. Not because he had figured everything out, but because there was something he wanted to build, understand, and become. He was building more than an application. He was building himself.</p>
+
+        <div style="border-top: 1px dashed var(--border-glass); padding-top: 1.5rem; margin-top: 2rem;">
+          <p style="font-family: var(--font-serif); font-style: italic; color: var(--solar-gold); font-size: 1.1rem; text-align: center;">
+            “The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Early-Web Retro Footer & Nostalgic Badge Strip -->
+  <!-- Retro Early-Web Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-badges-strip">
-        <span class="retro-badge-88x31">🍼 haX.baby 2026</span>
-        <span class="retro-badge-88x31">👾 Track 1 Canon</span>
-        <span class="retro-badge-88x31">🐍 Python 3.13 + Flask</span>
-        <span class="retro-badge-88x31">💾 SQLite DB Powered</span>
-        <span class="retro-badge-88x31">⚡ Zero Console Errors</span>
+    <div class="container" style="text-align: center;">
+      <div class="footer-badges">
+        <span class="retro-chip">🪄 Aman: The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Track 2: Original Character</span>
+        <span class="retro-chip">🐍 Python 3.13 + Flask</span>
+        <span class="retro-chip">💾 SQLite3 Storage</span>
+        <span class="retro-chip">✨ Magic Wand Cursor</span>
       </div>
 
-      <p class="footer-copy">
-        Crafted with cozy warmth for the <strong>haX.baby 48-Hour Hackathon</strong> · “Baby’s First Website” (October 2026).<br>
-        Character Canon: <strong>Pip The Skull Baby</strong>, Junior Dream Engineer at Midnight Nursery.<br>
-        Official Assets from <a href="https://hax.baby" target="_blank" rel="noopener noreferrer">haX.baby</a>.
+      <!-- Side Quest 5: Retro 88x31 Chaos Mode Badges -->
+      <div class="chaos-badges-strip" title="haX.baby Retro 88x31 Chaos Badges (+5 Pts)">
+        <span class="retro-badge-88x31">haX.baby '26</span>
+        <span class="retro-badge-88x31">Python 3.13</span>
+        <span class="retro-badge-88x31">SQLite3</span>
+        <span class="retro-badge-88x31">Three.js 3D</span>
+        <span class="retro-badge-88x31">Audio Synth</span>
+        <span class="retro-badge-88x31">Track 2 Baby</span>
+        <span class="retro-badge-88x31">Wand Stardust</span>
+        <span class="retro-badge-88x31">Netscape OK</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        Original Character & Story for <strong>haX.baby 48-Hour Hackathon</strong> · “Baby’s First Website” (October 2026).<br>
+        Character: <strong>Aman, The Young Worldsmith</strong> · Tagline: <em>“There is a difference between being lost and being unfinished.”</em>
       </p>
     </div>
   </footer>
+
+  <!-- Tier 3: Floating "Chat with Aman" Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Character Chats Back (Tier 3)">
+    <span>💬</span>
+    <span>Chat with Aman</span>
+  </button>
+
+  <div id="chat-console-panel" class="hidden" role="dialog" aria-label="Chat with Aman">
+    <div class="chat-console-header">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="font-size: 1.25rem;">🪄</span>
+        <div>
+          <div style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.95rem; color: #fff;">Aman, The Worldsmith</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">Online · Listening in real-time</div>
+        </div>
+      </div>
+      <button id="close-chat-btn" class="btn-pill" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages-scroll" id="chat-messages-scroll">
+      <div class="chat-bubble aman">
+        Hey there! I'm Aman. Ask me about MyRail, why I build INVENTRA, how I deal with imposter syndrome and self-doubts, or what keeping faith in family means to me.
+      </div>
+    </div>
+
+    <div class="chat-quick-prompts">
+      <button class="quick-prompt-chip" data-prompt="Dealing with doubt">Dealing with doubt</button>
+      <button class="quick-prompt-chip" data-prompt="Why MyRail?">Why MyRail?</button>
+      <button class="quick-prompt-chip" data-prompt="Tell me about your family">Family & Care</button>
+      <button class="quick-prompt-chip" data-prompt="Advice for beginners">Advice for beginners</button>
+    </div>
+
+    <form id="chat-form" class="chat-input-bar">
+      <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Ask Aman something..." maxlength="140" autocomplete="off">
+      <button type="submit" class="btn-pill btn-cyan" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Send</button>
+    </form>
+  </div>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

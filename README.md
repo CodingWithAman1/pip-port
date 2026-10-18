@@ -1,94 +1,94 @@
-# 🌙 Pip's Dream Portfolio · haX.baby Hackathon
+# 🪄 Aman: The Young Worldsmith · haX.baby Hackathon
 
-> *"small ideas. brighter beginnings."*
+> *“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”*
 > **Event:** haX.baby 48-Hour Online Hackathon (17–19 October 2026)  
 > **Challenge:** "Baby's First Portfolio: Meet the Baby"  
-> **Track Chosen:** **Track 1: Pip, The Skull Baby ("Same Baby, 1,000 Websites")**  
-> **Stack:** HTML5, CSS3, JavaScript (ES6+), Python 3.13, Flask 3.1, SQLite3
+> **Track Chosen:** **Track 2: Your Own Baby (Original Character & Universe)**  
+> **Stack:** HTML5, CSS3, JavaScript (ES6+), Python 3.13, Flask 3.1, SQLite3, Three.js WebGL
 
 ---
 
-## 🧸 Meet Pip: Junior Dream Engineer at Midnight Nursery
+## 🌟 The 5-Point Character Sheet (Track 2 Canon)
 
-Pip is a sleepy, gentle baby with a smooth round skull face, huge soft eye sockets with glowing warm amber pinpricks, a tiny crooked smile, and a bedtime nightcap with stars and a pink bow. Pip works at the **Midnight Nursery**, designing and weaving the dreams, lullabies, nightlights, and bedtime stories that help the neighborhood's little creatures fall asleep.
-
----
-
-## ✨ Three Core Portfolio Pillars Answered
-
-1. **Who Pip Is:** Established in the hero section and formal **Character Sheet**, capturing Pip's canon traits (gentle, curious, loves music chimes, never scary).
-2. **What Pip Does (3 Showcase Projects):**
-   - **Project 1: The Lullaby Lab** — Interactive Web Audio music box synthesizer with playable pentatonic chimes (C5 to C6) and automated bedtime melody generator.
-   - **Project 2: Nightlight Collection** — Interactive gallery of porcelain dream lanterns (Moon Lamp, Star Jar, Lavender Globe) with dynamic radial CSS lighting and live SQLite touch tracking.
-   - **Project 3: Dream Delivery Routes** — Interactive SVG flight map tracing Pip's nocturnal rooftop flight path over chimney silhouettes with clickable delivery checkpoints.
-3. **What Pip's Story Is:** A 4-scene illustrated bedtime scroll (*Dusk in the Nursery*, *The Craft of Lullabies*, *Midnight Chimney Flight*, and *Pip's Own Goodnight*) kept under 150 words per scene.
+1. **Character Name:** **Aman, The Young Worldsmith** (The Code Weaver)
+2. **What They Are:** A young computer science student and digital architect wrapped in a midnight hoodie with glowing circuit constellations, wielding a magic wand of code. Curious, fighting self-doubts, endlessly loyal to his family, and building to prove what is possible when given a genuine chance.
+3. **What They Do:** Software Developer & World Creator. He architects real systems:
+   - **MyRail:** Railway intelligence and commuter navigation system.
+   - **INVENTRA:** Enterprise inventory engine with relational database dashboards.
+   - **CivicConnect:** Citizen empowerment and municipal transparency platform.
+4. **Their Story:** *“The Boy Who Was Building His Own World”* — A 9-chapter chronicle exploring the silent war against impatience, balancing family health hurdles, and discovering that becoming someone is not a single achievement, but a continuous decision to build.
+5. **Tagline Motto:** *“The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”*
 
 ---
 
-## 🎯 Tier Requirements & Bonus Side Quests (+13 Points)
+## 🌀 Interactive 3D Circular Portals Landing Page (Tier 3 Boss Level)
 
-| Feature | Tier / Quest | Status | Details |
-| :--- | :--- | :--- | :--- |
-| **Interactive Eye-Tracking** | **Tier 1 (Core)** | ✅ Complete | Pip's warm glowing amber eye pinpricks smoothly follow the mouse cursor with smooth trigonometry. |
-| **Day / Night Mood Shift** | **Tier 1 (Core)** | ✅ Complete | One-click toggle between "Warm Nursery Cream" (`#fff8f1`, `#a34063`) and "Midnight Starlight Dream" (`#0c0d1b`, `#fbbf24`). |
-| **Web Audio Synthesizer** | **Tier 2 (Hard)** | ✅ Complete | Native Web Audio API pure sine-wave oscillator chimes with realistic exponential gain envelopes. |
-| **Click Sounds + Mute Toggle** | **Side Quest (+3 pts)** | ✅ Complete | Gentle pentatonic feedback on interactions with an accessible, persistent **Mute Switch** in the top navigation bar. |
-| **Sparkle Cursor Trail** | **Side Quest (+2 pts)** | ✅ Complete | Retro floating stars, dreamy clouds, and amber sparkles following the pointer. |
-| **Hit Counter Odometer** | **Side Quest (+1 pt)** | ✅ Complete | Vintage mechanical-style ticker counting "Dreams Delivered", synchronized with SQLite database. |
-| **Live Dream Guestbook Wall** | **Side Quest (+2 pts)** | ✅ Complete | Persistent SQLite database wall where visitors write wishes and sign Pip's nursery. |
-| **Responsive Chaos Mode** | **Side Quest (+5 pts)** | ✅ Complete | Early-web nostalgic badge strip, 88x31 badges, and 100% fluid mobile responsiveness. |
-| **Hidden Easter Egg** | **Core Requirement** | ✅ Complete | Clicking the starry nightcap bow reveals Pip's secret dream wish modal with celebratory chimes. |
+The landing page features a **cylindrical 3D carousel of 6 celestial portals** built with **Three.js (r128)**:
+1. **MyRail Orbit** (`/portfolio#projects`) — Electric Cyan (`#00f5ff`)
+2. **INVENTRA Vault** (`/portfolio#projects`) — Vivid Violet (`#a855f7`)
+3. **CivicConnect Pulse** (`/portfolio#projects`) — Emerald Starlight (`#10b981`)
+4. **The Worldsmith Codex** (`/portfolio#story`) — Solar Gold (`#fbbf24`)
+5. **The Tech Forge** (`/portfolio#about`) — Heart Rose (`#ff759f`)
+6. **The Dreamers' Beacon** (`/portfolio#guestbook`) — Sky Starlight (`#38bdf8`)
+
+### Interactions:
+- **Interactive Drag & Touch Inertia:** Pointer drag smoothly rotates the portal ring in 3D space with physics dampening.
+- **Raycasting:** Clicking any portal aligns it front-and-center.
+- **Cinematic Warp Dive:** Clicking *“Warp Into Realm ✦”* accelerates the camera through the portal with a starlight flash into the destination.
+- **Custom Magic Wand Cursor:** An SVG magic wand tilts dynamically with cursor velocity and leaves an ethereal trail of code runes (`{ }`, `</>`, `01`) and stardust sparkles.
+
+---
+
+## 🏆 Hackathon Rubric & Feature Matrix
+
+### Tier 1: Complete Portfolio (Baseline)
+- [x] **Character Reacts to Cursor:** Aman's eyes track pointer with soft 3D perspective card tilt.
+- [x] **Scroll-Driven Story:** 9-chapter cards & flipbook navigate smoothly with scroll and interactive triggers.
+- [x] **Day/Night Mood Toggle:** Toggles between "Midnight Sleepless Coder" and "Dawn Awakening Architect" with haX cream & berry theme.
+- [x] **Responsive Mobile Layout:** Fluid CSS grid & flexbox tested on all dimensions.
+- [x] **Discoverable Easter Egg:** Wand gem click or typing `hax`/`aman` unlocks the Secret Constellation with stardust fireworks.
+
+### Tier 2: Memorable Standout (Hard Tier)
+- [x] **Lullaby Lab with Real Audio:** Web Audio API generative ambient synth with 3 presets and waveform visualizer.
+- [x] **Flashlight / Torch Cursor:** Canvas destination-out mask illuminating dark dream layers and secret developer messages.
+- [x] **Dream Delivery Transit Map Animation:** SVG path motion synced with user scroll progress.
+- [x] **Interactive Storybook:** 3D page-turn flipbook with Next/Prev buttons and Left/Right keyboard arrow support.
+- [x] **Playable Arcade Mini-Game:** "Catch the Code Sparks" HTML5 canvas game with score tracking and high score memory.
+
+### Tier 3: Legendary (Boss Level)
+- [x] **3D WebGL / Three.js Model:** 3D circular cylindrical portals carousel (`/portals`) with procedural starfield and physics drag.
+- [x] **Live Dream Guestbook:** Persistent SQLite3 database with real-time submission and live wish cards.
+- [x] **Character Remembers Visitor:** `localStorage` visit counter and personalized returning greeting badge.
+- [x] **Character Chats Back:** Floating "Chat with Aman" console powered by `/api/chat` with dialogue in Aman's authentic voice.
+- [x] **High Lighthouse Score (90+):** Zero bloated dependencies, fast vanilla ES6+ & pure CSS.
+
+### 5 Bonus Side Quests (+13 Points)
+| Side Quest | Points | Implementation |
+| :--- | :--- | :--- |
+| **Magic Wand Sparkle Trail** | **+2 pts** | Custom SVG wand cursor emitting runic code particles (`{ }`, `</>`, `★`, `01`, `⚡`). |
+| **Hit Counter Odometer** | **+1 pt** | Animated mechanical ticker counting live *"Dreams Delivered"* backed by SQLite. |
+| **Click Sounds + Mute Toggle** | **+3 pts** | Satisfying harmonic pentatonic Web Audio chimes with a persistent **Mute Button**. |
+| **Live Guestbook Wall** | **+2 pts** | Persistent SQLite database wall where visitors broadcast messages and sparks of encouragement. |
+| **Responsive Chaos Mode** | **+5 pts** | Retro 88x31 badges, fluid mobile layouts, and custom Aurora Void theme. |
 
 ---
 
 ## 🚀 How to Run Locally
 
-### Prerequisites
-- Python 3.10+ (Tested on Python 3.13)
-- `pip`
-
-### Step 1: Install Dependencies
 ```bash
+# 1. Install dependencies
 pip install -r requirements.txt
-```
 
-### Step 2: Run the Flask Application
-```bash
+# 2. Run Flask application
 python app.py
-```
 
-### Step 3: Open in Browser
-Visit **`http://127.0.0.1:5050`** in your browser to experience Pip's Dream Portfolio!
-
----
-
-## 📂 Project Architecture
-
-```
-pip-portfolio/
-├── app.py                      # Flask backend & SQLite API endpoints
-├── dreams.db                   # SQLite database (auto-generated on startup)
-├── requirements.txt            # Python dependencies (Flask>=3.0.0)
-├── README.md                   # Complete documentation & hackathon details
-├── templates/
-│   └── index.html              # Semantic HTML5 portfolio template
-└── static/
-    ├── css/
-    │   └── style.css           # Custom haX.baby warm cream & midnight CSS
-    ├── js/
-    │   └── main.js             # Eye tracking, Web Audio synth, guestbook AJAX
-    └── assets/
-        ├── pip_avatar_cloud.png   # Official hero cloud render
-        ├── pip_lullaby_box.png    # Official music box render
-        ├── pip_dream_lantern.png  # Official dream lantern render
-        ├── pip_portrait.png       # Official studio character portrait
-        └── pip_sketch.jpg         # Official character sketch
+# 3. Open in browser
+http://127.0.0.1:5050
 ```
 
 ---
 
 ## 📜 Credits & Attributions
-- **Character Concept & Assets:** [haX.baby](https://hax.baby) official Track 1 creator pack.
-- **Color Palette & Styling:** haX.baby official design tokens (`#fff8f1`, `#a34063`, `#5c4033`).
-- **Typography:** Google Fonts (*Fraunces*, *Fredoka*, *Comfortaa*, *Plus Jakarta Sans*).
-- **Audio:** Native Web Audio API mathematical oscillator synthesis (zero external audio files).
+- **Concept & Story:** Original story by Aman (*The Boy Who Was Building His Own World*).
+- **Design & 3D WebGL:** Custom Three.js (r128) WebGL engine & Web Audio API synthesizer.
+- **Data Layer:** SQLite3 with Flask REST endpoints.
