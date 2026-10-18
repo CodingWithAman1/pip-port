@@ -1,0 +1,1006 @@
+/* ==========================================================================
+   Pip's Dream Portfolio - haX.baby Hackathon Visual Stylesheet
+   Theme: Editorial Warm Cream (#fff8f1), Rich Berry (#a34063), Espresso (#5c4033)
+   Dark/Dream Theme: Midnight Indigo (#0c0d1b) with Starlight Amber (#fbbf24)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,600&family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Official haX.baby Light Theme Palette */
+  --bg-primary: #fff8f1;
+  --bg-surface: #ffffff;
+  --bg-surface-soft: #fff5f4;
+  --bg-accent-soft: #ffedf2;
+  --text-main: #5c4033;
+  --text-muted: #8a5868;
+  --brand-berry: #a34063;
+  --brand-berry-hover: #862f4e;
+  --brand-gold: #f59e0b;
+  --brand-gold-glow: rgba(245, 158, 11, 0.35);
+  --border-color: #ffd6e0;
+  --border-strong: #f3aebf;
+  --card-shadow: 0 8px 24px -4px rgba(163, 64, 99, 0.08), 0 2px 6px -1px rgba(92, 64, 51, 0.04);
+  --header-glass: rgba(255, 248, 241, 0.88);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-bubbly: 'Fredoka', 'Comfortaa', sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  /* Midnight Dream / Starlight Palette */
+  --bg-primary: #0c0d1b;
+  --bg-surface: #14172c;
+  --bg-surface-soft: #1a1e38;
+  --bg-accent-soft: #242a4d;
+  --text-main: #f3f0e8;
+  --text-muted: #a6aed1;
+  --brand-berry: #ff759f;
+  --brand-berry-hover: #ff9bbb;
+  --brand-gold: #fbbf24;
+  --brand-gold-glow: rgba(251, 191, 36, 0.45);
+  --border-color: #2b3157;
+  --border-strong: #3e4679;
+  --card-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 191, 36, 0.08);
+  --header-glass: rgba(12, 13, 27, 0.88);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(255, 204, 216, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(245, 158, 11, 0.12) 0%, transparent 45%);
+}
+
+[data-theme="dark"] body {
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 60%, rgba(251, 191, 36, 0.15) 0%, transparent 40%);
+}
+
+a {
+  color: var(--brand-berry);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--brand-berry-hover);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Top Navigation Bar */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--header-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid var(--border-color);
+  padding: 0.75rem 0;
+  transition: var(--transition-smooth);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-bubbly);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-main);
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--brand-berry), var(--brand-gold));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px var(--brand-gold-glow);
+  transform: rotate(-3deg);
+  transition: var(--transition-smooth);
+}
+
+.brand-badge:hover .brand-icon {
+  transform: rotate(6deg) scale(1.08);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  font-family: var(--font-bubbly);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--brand-berry);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-bubbly);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.btn-pill:hover {
+  border-color: var(--brand-berry);
+  transform: translateY(-1.5px);
+  color: var(--brand-berry);
+}
+
+.btn-primary {
+  background: var(--brand-berry);
+  color: #fff !important;
+  border-color: var(--brand-berry);
+  box-shadow: 0 4px 14px rgba(163, 64, 99, 0.28);
+}
+
+.btn-primary:hover {
+  background: var(--brand-berry-hover);
+  border-color: var(--brand-berry-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(163, 64, 99, 0.35);
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 3.5rem 0 2.5rem;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-accent-soft);
+  color: var(--brand-berry);
+  border: 1.5px solid var(--border-color);
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-bubbly);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--brand-berry);
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+
+.hero-tagline {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+  max-width: 520px;
+}
+
+.hero-stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1.5px dashed var(--border-color);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-family: var(--font-bubbly);
+  font-weight: 700;
+  font-size: 1.45rem;
+  color: var(--brand-berry);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.25rem;
+}
+
+/* Mechanical Hit Counter Odometer Style */
+.odometer-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #1e1e24;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #3d3d45;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fbbf24;
+  letter-spacing: 0.1em;
+}
+
+/* Hero Avatar Stage with Interactive Eye Tracking */
+.avatar-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-halo {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, var(--brand-gold-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.avatar-frame {
+  position: relative;
+  z-index: 1;
+  width: 290px;
+  height: 290px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-frame:hover {
+  transform: scale(1.05) rotate(1deg);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(92, 64, 51, 0.16));
+}
+
+/* Eye Pinprick Elements (Interactive tracking) */
+.eye-pinprick {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 3px #f59e0b, 0 0 4px #ffffff;
+  pointer-events: none;
+  transition: transform 0.06s linear;
+}
+
+.eye-pinprick.left {
+  top: 46%;
+  left: 42%;
+}
+
+.eye-pinprick.right {
+  top: 46%;
+  left: 55%;
+}
+
+/* Easter Egg Star Badge on Nightcap */
+.easter-egg-star {
+  position: absolute;
+  top: 14%;
+  left: 64%;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  background: #fbbf24;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 0 14px #fbbf24;
+  animation: spinSlow 8s linear infinite;
+  transition: var(--transition-smooth);
+}
+
+.easter-egg-star:hover {
+  transform: scale(1.3) !important;
+  background: var(--brand-berry);
+}
+
+/* Section Common Headers */
+.section {
+  padding: 4rem 0;
+  position: relative;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-accent-soft);
+  color: var(--brand-berry);
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-bubbly);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+  margin-bottom: 0.85rem;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Project Showcase Grid (Section 02 - What Pip Does)
+   ========================================================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  border-color: var(--brand-berry);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -6px rgba(163, 64, 99, 0.16);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.project-icon-box {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-soft);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+}
+
+.project-icon-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.project-badge {
+  font-family: var(--font-bubbly);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-accent-soft);
+  color: var(--brand-berry);
+  border: 1px solid var(--border-color);
+}
+
+.project-title {
+  font-family: var(--font-bubbly);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.project-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+/* Interactive Project 1: Lullaby Synthesizer */
+.lullaby-box-interactive {
+  background: var(--bg-surface-soft);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.lullaby-keys-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.lullaby-key {
+  height: 52px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--brand-berry);
+  font-family: var(--font-bubbly);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.lullaby-key:hover,
+.lullaby-key.active {
+  background: var(--brand-berry);
+  color: #fff;
+  border-color: var(--brand-berry);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(163, 64, 99, 0.3);
+}
+
+.lullaby-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Interactive Project 2: Nightlight Lantern Shelf */
+.lantern-shelf {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  background: var(--bg-surface-soft);
+  padding: 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-color);
+  margin-bottom: 1.25rem;
+}
+
+.lantern-card-item {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.4rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.lantern-card-item:hover,
+.lantern-card-item.lit {
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 16px var(--brand-gold-glow);
+  transform: translateY(-2px);
+}
+
+.lantern-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin: 0 auto 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: var(--bg-accent-soft);
+  transition: var(--transition-smooth);
+}
+
+.lantern-card-item.lit .lantern-icon-circle {
+  background: #fbbf24;
+  color: #fff;
+  box-shadow: 0 0 12px #fbbf24;
+}
+
+.lantern-name {
+  font-family: var(--font-bubbly);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: block;
+}
+
+.lantern-sparkles {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Interactive Project 3: Dream Flight SVG Map */
+.dream-map-wrap {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(180deg, #16182e 0%, #0c0d1b 100%);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1.5px solid var(--border-color);
+}
+
+.dream-map-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.flight-marker {
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px #fbbf24);
+  transition: transform 0.2s ease;
+}
+
+.flight-marker:hover {
+  transform: scale(1.3);
+}
+
+/* ==========================================================================
+   Storybook Section (Section 03 - Pip's Origin & Journey)
+   ========================================================================== */
+.story-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.story-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.story-card:hover {
+  border-color: var(--brand-berry);
+  transform: translateY(-4px);
+}
+
+.story-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--brand-berry);
+  color: #fff;
+  font-family: var(--font-bubbly);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.story-time-label {
+  font-family: var(--font-bubbly);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-gold);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.story-heading {
+  font-family: var(--font-bubbly);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+}
+
+.story-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Character Sheet Card (About Pip)
+   ========================================================================== */
+.character-sheet-card {
+  background: var(--bg-surface);
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 3.5rem;
+}
+
+.character-sketch-box {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.character-sketch-box img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.character-traits-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.character-traits-table tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.character-traits-table tr:last-child {
+  border-bottom: none;
+}
+
+.character-traits-table th {
+  text-align: left;
+  padding: 0.75rem 0;
+  font-family: var(--font-bubbly);
+  font-size: 0.85rem;
+  color: var(--brand-berry);
+  width: 32%;
+}
+
+.character-traits-table td {
+  padding: 0.75rem 0;
+  font-size: 0.92rem;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Guestbook Wall Section (+2 Bonus Points)
+   ========================================================================== */
+.guestbook-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.guestbook-form-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--card-shadow);
+}
+
+.form-group {
+  margin-bottom: 1.15rem;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-bubbly);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-surface-soft);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  transition: var(--transition-smooth);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--brand-berry);
+  background: var(--bg-surface);
+  box-shadow: 0 0 0 3px rgba(163, 64, 99, 0.12);
+}
+
+.wishes-scroll-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.wish-sticky-note {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.wish-sticky-note:hover {
+  transform: translateY(-3px) rotate(0.5deg);
+  border-color: var(--brand-berry);
+}
+
+.wish-badge {
+  font-family: var(--font-bubbly);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--brand-berry);
+  margin-bottom: 0.5rem;
+}
+
+.wish-body {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  line-height: 1.5;
+  margin-bottom: 0.85rem;
+  flex-grow: 1;
+}
+
+.wish-author {
+  font-family: var(--font-bubbly);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.wish-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Retro 90s Early-Web Footer & Badges
+   ========================================================================== */
+.site-footer {
+  border-top: 2px dashed var(--border-color);
+  background: var(--bg-surface);
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+}
+
+.footer-badges-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.retro-badge-88x31 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #2a2a35;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  box-shadow: 1px 1px 0 #fff;
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Sparkle Cursor Animation */
+@keyframes sparkleFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px) scale(0);
+  }
+}
+
+.sparkle-particle {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  font-size: 13px;
+  z-index: 9999;
+  animation: sparkleFade 0.75s forwards ease-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 0.9; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-tagline {
+    margin: 0 auto 1.75rem;
+  }
+  .hero-stats-strip {
+    justify-content: center;
+  }
+  .character-sheet-card {
+    grid-template-columns: 1fr;
+  }
+  .character-sketch-box {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .guestbook-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    display: none; /* Mobile collapse */
+  }
+  .hero-title {
+    font-size: 2.15rem;
+  }
+  .avatar-frame {
+    width: 230px;
+    height: 230px;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

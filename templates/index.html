@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Pip, The Skull Baby · Junior Dream Engineer at Midnight Nursery. Built for haX.baby 48-Hour Hackathon.">
+  <title>Pip · Junior Dream Engineer | haX.baby Portfolio</title>
+  <link rel="icon" href="{{ url_for('static', filename='assets/pip_avatar_cloud.png') }}" type="image/png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <header class="site-nav">
+    <div class="container nav-wrap">
+      <a href="#" class="brand-badge" aria-label="Pip Dream Portfolio Home">
+        <span class="brand-icon">🌙</span>
+        <span>Pip<span style="color: var(--brand-berry);">.baby</span></span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">About Pip</a></li>
+          <li><a href="#projects" class="nav-link">Dream Lab</a></li>
+          <li><a href="#story" class="nav-link">Bedtime Journey</a></li>
+          <li><a href="#guestbook" class="nav-link">Dream Wall</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Accessible Mute / Sound Toggle (Strict Hackathon Requirement) -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle sound and chimes" title="Mute or unmute music and chimes">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+
+        <!-- Day / Night Mood Shift Toggle -->
+        <button id="theme-toggle-btn" class="btn-pill" aria-label="Toggle day and night mode" title="Shift between Nursery Day and Starlight Night">
+          <span id="theme-icon">☀️</span>
+        </button>
+
+        <a href="#guestbook" class="btn-pill btn-primary">Leave a Wish ✦</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section (Section 01 - What Pip Is) -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">
+            <span>✨</span>
+            <span>haX.baby Hackathon · Track 1 Entry</span>
+          </div>
+
+          <h1 class="hero-title">
+            Hello, I’m <em>Pip.</em><br>
+            Junior Dream Engineer.
+          </h1>
+
+          <p class="hero-tagline">
+            “I build the dreams you fall asleep inside at the Midnight Nursery.”
+            A friendly baby with a smooth round skull, glowing amber eyes, and a cozy starry nightcap.
+          </p>
+
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="#projects" class="btn-pill btn-primary" style="padding: 0.75rem 1.4rem; font-size: 0.95rem;">
+              Explore Inventions ↓
+            </a>
+            <a href="#story" class="btn-pill" style="padding: 0.75rem 1.4rem; font-size: 0.95rem;">
+              Read My Journey 📖
+            </a>
+          </div>
+
+          <!-- Vintage Hit Counter Odometer (+1 Bonus Point) -->
+          <div class="hero-stats-strip">
+            <div class="stat-item">
+              <span class="stat-label">Dreams Delivered</span>
+              <div class="odometer-box" title="Live SQLite Visitor Odometer">
+                <span>✦</span>
+                <span id="odometer-val">{{ '{:,}'.format(stats['dreams_delivered']) if stats else '1,482' }}</span>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <span class="stat-label">Nursery Role</span>
+              <span class="stat-num" style="font-size: 1.1rem; color: var(--text-main);">Lullaby Architect</span>
+            </div>
+
+            <div class="stat-item">
+              <span class="stat-label">Favorite Blanket</span>
+              <span class="stat-num" style="font-size: 1.1rem; color: var(--text-main);">Cloud Fluff</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Avatar Stage with Eye Tracking -->
+        <div class="avatar-stage">
+          <div class="avatar-halo"></div>
+          
+          <div class="avatar-frame" title="Click Pip to tickle & say hello!">
+            <!-- Official haX Track 1 Asset: pip_avatar_cloud.png -->
+            <img src="{{ url_for('static', filename='assets/pip_avatar_cloud.png') }}" alt="Pip The Skull Baby on soft cloud" class="avatar-img">
+
+            <!-- Dynamic Eye-Tracking Glowing Pinpricks -->
+            <div class="eye-pinprick left"></div>
+            <div class="eye-pinprick right"></div>
+
+            <!-- Secret Easter Egg Star Bow on Nightcap (+Easter Egg Requirement) -->
+            <button class="easter-egg-star" aria-label="Secret starry bow" title="Click me 3 times for a secret dream!">★</button>
+          </div>
+
+          <p style="margin-top: 1rem; font-family: var(--font-bubbly); font-size: 0.84rem; color: var(--text-muted);">
+            ↖ Move your pointer: Pip’s warm amber eyes follow you!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Character Sheet (Formal Profile) -->
+    <section id="about" class="section" style="padding-top: 1rem;">
+      <div class="container">
+        <div class="character-sheet-card">
+          <div class="character-sketch-box">
+            <!-- Official Reference Sketch -->
+            <img src="{{ url_for('static', filename='assets/pip_portrait.png') }}" alt="Official character portrait of Pip holding dream lantern">
+            <p style="text-align: center; font-size: 0.76rem; color: var(--text-muted); padding: 0.5rem; background: var(--bg-surface-soft);">
+              Official Studio Character Render
+            </p>
+          </div>
+
+          <div>
+            <div class="section-tag">Canon Character Sheet</div>
+            <h2 class="section-title" style="font-size: 1.85rem; margin-bottom: 1rem;">About Pip & Midnight Nursery</h2>
+
+            <table class="character-traits-table">
+              <tr>
+                <th>Character Name</th>
+                <td><strong>Pip</strong> (Sweet baby age)</td>
+              </tr>
+              <tr>
+                <th>What Pip Is</th>
+                <td>A cute baby with a smooth round skull, huge soft eye sockets glowing with warm amber pinpricks, a tiny crooked smile, and a bedtime nightcap with stars and a pink bow. (Always kind & cozy, never scary!).</td>
+              </tr>
+              <tr>
+                <th>Personality</th>
+                <td>Curious, sleepy, clumsy, giggles at everything, and loves the sound of gentle wind chimes.</td>
+              </tr>
+              <tr>
+                <th>Profession</th>
+                <td><strong>Junior Dream Engineer at Midnight Nursery.</strong> Designs the dreams, lullabies, and nightlights that help creatures fall asleep.</td>
+              </tr>
+              <tr>
+                <th>Personal Motto</th>
+                <td style="font-style: italic; color: var(--brand-berry);">“No shadow is scary once you turn on a nightlight.”</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: What Pip Does (3 Showcase Projects) -->
+    <section id="projects" class="section" style="background: var(--bg-surface-soft);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Section 02 · Showcase Projects</div>
+          <h2 class="section-title">Pip’s Dream Laboratory</h2>
+          <p class="section-subtitle">
+            Explore 3 handcrafted inventions Pip built to ensure peaceful sleep across the neighborhood.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: The Lullaby Lab -->
+          <article class="project-card">
+            <div class="project-card-header">
+              <div class="project-icon-box">
+                <img src="{{ url_for('static', filename='assets/pip_lullaby_box.png') }}" alt="Lullaby music box icon">
+              </div>
+              <span class="project-badge">Project 01 · Audio Synth</span>
+            </div>
+
+            <h3 class="project-title">1. The Lullaby Lab</h3>
+            <p class="project-desc">
+              A generative music box synthesizer calibrated to soothing pentatonic frequencies. Click the pins below or play the automated melody!
+            </p>
+
+            <div class="lullaby-box-interactive">
+              <div class="lullaby-keys-row">
+                <button class="lullaby-key" data-note="0">C5<span>523</span></button>
+                <button class="lullaby-key" data-note="1">D5<span>587</span></button>
+                <button class="lullaby-key" data-note="2">E5<span>659</span></button>
+                <button class="lullaby-key" data-note="3">G5<span>784</span></button>
+                <button class="lullaby-key" data-note="4">A5<span>880</span></button>
+                <button class="lullaby-key" data-note="5">C6<span>1046</span></button>
+              </div>
+
+              <div class="lullaby-controls-row">
+                <button id="play-lullaby-btn" class="btn-pill btn-primary" style="font-size: 0.78rem;">
+                  ▶ Play Lullaby
+                </button>
+                <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-bubbly);">
+                  Pure Sine Oscillator
+                </span>
+              </div>
+            </div>
+
+            <div style="font-size: 0.75rem; color: var(--text-muted);">
+              ✦ Web Audio API sound synthesis • Zero external audio dependencies
+            </div>
+          </article>
+
+          <!-- Project 2: Nightlight Collection -->
+          <article class="project-card">
+            <div class="project-card-header">
+              <div class="project-icon-box">
+                <img src="{{ url_for('static', filename='assets/pip_dream_lantern.png') }}" alt="Dream lantern icon">
+              </div>
+              <span class="project-badge">Project 02 · Lighting</span>
+            </div>
+
+            <h3 class="project-title">2. Nightlight Collection</h3>
+            <p class="project-desc">
+              Hand-poured porcelain lamps infused with bottled starlight. Tap any lantern below to illuminate and register a sparkle touch!
+            </p>
+
+            <div class="lantern-shelf">
+              <div class="lantern-card-item lit" data-lantern-id="lantern-moon">
+                <div class="lantern-icon-circle">🌙</div>
+                <span class="lantern-name">Moon Lamp</span>
+                <span class="lantern-sparkles"><span class="sparkle-num">{{ lanterns.get('lantern-moon', 142) }}</span> ✨</span>
+              </div>
+
+              <div class="lantern-card-item" data-lantern-id="lantern-star">
+                <div class="lantern-icon-circle">⭐</div>
+                <span class="lantern-name">Star Jar</span>
+                <span class="lantern-sparkles"><span class="sparkle-num">{{ lanterns.get('lantern-star', 98) }}</span> ✨</span>
+              </div>
+
+              <div class="lantern-card-item" data-lantern-id="lantern-lavender">
+                <div class="lantern-icon-circle">🔮</div>
+                <span class="lantern-name">Lavender</span>
+                <span class="lantern-sparkles"><span class="sparkle-num">{{ lanterns.get('lantern-lavender', 167) }}</span> ✨</span>
+              </div>
+            </div>
+
+            <div style="font-size: 0.75rem; color: var(--text-muted);">
+              ✦ Backed by SQLite persistence • Radial CSS lighting filters
+            </div>
+          </article>
+
+          <!-- Project 3: Dream Delivery Routes -->
+          <article class="project-card">
+            <div class="project-card-header">
+              <div class="project-icon-box">
+                <span style="font-size: 1.8rem;">🗺️</span>
+              </div>
+              <span class="project-badge">Project 03 · Navigation</span>
+            </div>
+
+            <h3 class="project-title">3. Delivery Flight Map</h3>
+            <p class="project-desc">
+              The nocturnal flight route Pip uses to fly over chimney tops delivering bottled sweet dreams. Click the glowing nodes!
+            </p>
+
+            <div class="dream-map-wrap">
+              <svg class="dream-map-svg" viewBox="0 0 320 120" preserveAspectRatio="none">
+                <!-- Stars in night sky -->
+                <circle cx="25" cy="18" r="1.5" fill="#fbbf24" opacity="0.8"/>
+                <circle cx="95" cy="22" r="1.2" fill="#fff" opacity="0.6"/>
+                <circle cx="160" cy="15" r="1.5" fill="#fbbf24" opacity="0.9"/>
+                <circle cx="240" cy="28" r="1.2" fill="#fff" opacity="0.7"/>
+
+                <!-- Rooftop silhouettes -->
+                <polygon points="0,120 0,90 35,68 70,90 70,120" fill="#080912"/>
+                <polygon points="65,120 65,82 110,55 155,82 155,120" fill="#090b16"/>
+                <polygon points="150,120 150,75 190,52 230,75 230,120" fill="#070810"/>
+                <polygon points="225,120 225,85 270,60 320,85 320,120" fill="#090b16"/>
+
+                <!-- Dotted flight path -->
+                <path d="M 35,60 Q 110,20 190,48 T 300,55" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4,4" opacity="0.85"/>
+
+                <!-- Interactive Delivery Checkpoints -->
+                <circle class="flight-marker" data-dest="Caterpillar Meadow" cx="35" cy="60" r="7" fill="#fbbf24"/>
+                <circle class="flight-marker" data-dest="Owl Hollow" cx="190" cy="48" r="7" fill="#ec4899"/>
+                <circle class="flight-marker" data-dest="Sleepy Hollow" cx="300" cy="55" r="7" fill="#38bdf8"/>
+              </svg>
+            </div>
+
+            <div id="route-tooltip" style="font-size: 0.78rem; font-family: var(--font-bubbly); color: var(--brand-berry); font-weight: 700;">
+              ✦ Click any glowing marker to deliver a dream drop
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 03: Story Section (What Pip's Story Is) -->
+    <section id="story" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Section 03 · Origin Story</div>
+          <h2 class="section-title">Pip’s Bedtime Journey</h2>
+          <p class="section-subtitle">
+            Follow Pip through the four quiet scenes of a night at Midnight Nursery (under 150 words per scene).
+          </p>
+        </div>
+
+        <div class="story-timeline">
+          <!-- Scene 1 -->
+          <article class="story-card">
+            <div class="story-step-badge">1</div>
+            <div class="story-time-label">7:00 PM · Dusk Waking</div>
+            <h3 class="story-heading">The Nursery Awakes</h3>
+            <p class="story-text">
+              While human children yawn and brush their teeth, Pip wakes up in a cloud hammock. Pip ties the starry nightcap, gives a tiny crooked smile to the moon, and brews warm chamomile stardust for the long night ahead.
+            </p>
+          </article>
+
+          <!-- Scene 2 -->
+          <article class="story-card">
+            <div class="story-step-badge">2</div>
+            <div class="story-time-label">9:30 PM · The Craft</div>
+            <h3 class="story-heading">Winding the Music Boxes</h3>
+            <p class="story-text">
+              In the Lullaby Lab, Pip tests every music box with tiny fingers. If a note sounds too sharp, Pip softens it with lavender oil. Each song must feel like being wrapped in a warm flannel blanket fresh from the dryer.
+            </p>
+          </article>
+
+          <!-- Scene 3 -->
+          <article class="story-card">
+            <div class="story-step-badge">3</div>
+            <div class="story-time-label">12:00 AM · Midnight Flight</div>
+            <h3 class="story-heading">Across the Chimneys</h3>
+            <p class="story-text">
+              With a cloud tucked under each arm, Pip floats over neighborhood rooftops. Through open attic windows, Pip slips dreams of strawberry meadows, gentle rains, and floating balloons into children’s sleepy ears.
+            </p>
+          </article>
+
+          <!-- Scene 4 -->
+          <article class="story-card">
+            <div class="story-step-badge">4</div>
+            <div class="story-time-label">5:30 AM · Morning Slumber</div>
+            <h3 class="story-heading">Pip’s Own Goodnight</h3>
+            <p class="story-text">
+              As the horizon blushes pink, Pip returns home to Midnight Nursery. Satisfied that every creature is fast asleep, Pip curls into the soft cloud, closes the glowing amber eyes, and drifts into a dream of their own.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 04: Live Guestbook Wall (+2 Bonus Points) -->
+    <section id="guestbook" class="section" style="background: var(--bg-surface-soft);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Side Quest · Live Guestbook (+2 Pts)</div>
+          <h2 class="section-title">Pip’s Dream Wish Wall</h2>
+          <p class="section-subtitle">
+            Leave a bedtime wish or message for Pip! Saved permanently to our SQLite database.
+          </p>
+        </div>
+
+        <div class="guestbook-grid">
+          <!-- Submission Form -->
+          <div class="guestbook-form-card">
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.15rem; margin-bottom: 1.25rem;">
+              ✍ Sign the Nursery Wall
+            </h3>
+
+            <form id="guestbook-form">
+              <div class="form-group">
+                <label for="guest-author" class="form-label">Your Name or Pen-Name</label>
+                <input type="text" id="guest-author" class="form-input" placeholder="e.g. Luna the Dreamer" maxlength="40" required>
+              </div>
+
+              <div class="form-group">
+                <label for="guest-mood" class="form-label">Dream Mood Badge</label>
+                <select id="guest-mood" class="form-select">
+                  <option value="🌙 Sweet Dreams">🌙 Sweet Dreams</option>
+                  <option value="✨ Starry Slumber">✨ Starry Slumber</option>
+                  <option value="☁ Cloud Fluff">☁ Cloud Fluff</option>
+                  <option value="🫐 Berry Sweet">🫐 Berry Sweet</option>
+                  <option value="🏆 haX Builder">🏆 haX Builder</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="guest-wish" class="form-label">Your Bedtime Wish for Pip</label>
+                <textarea id="guest-wish" class="form-textarea" rows="3" placeholder="What dream should Pip weave for you tonight?" maxlength="280" required></textarea>
+              </div>
+
+              <button type="submit" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
+                Send Wish to Nursery ✨
+              </button>
+            </form>
+          </div>
+
+          <!-- Dynamic Wishes Wall -->
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.92rem; color: var(--text-muted);">
+                Recent Wishes from Visitors:
+              </span>
+              <span style="font-size: 0.78rem; font-mono font-weight: 600; color: var(--brand-berry);">
+                Persistent SQLite Store
+              </span>
+            </div>
+
+            <div id="wishes-list" class="wishes-scroll-box">
+              {% for wish in wishes %}
+              <div class="wish-sticky-note">
+                <span class="wish-badge">{{ wish['mood_badge'] }}</span>
+                <p class="wish-body">“{{ wish['dream_wish'] }}”</p>
+                <div class="wish-author">— {{ wish['author_name'] }}</div>
+                <div class="wish-date">{{ wish['created_at'][:10] }}</div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Easter Egg Modal Dialog -->
+  <div id="easter-egg-modal" class="hidden" style="position: fixed; inset: 0; background: rgba(12, 13, 27, 0.85); backdrop-filter: blur(8px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--bg-surface); border: 2px solid var(--border-strong); border-radius: var(--radius-lg); max-width: 480px; width: 100%; padding: 2rem; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem; animation: pulseGlow 2s infinite;">🌟</div>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.5rem; color: var(--brand-berry); margin-bottom: 0.75rem;">
+        You Found Pip’s Secret Wish!
+      </h3>
+      <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+        “Thank you for being so curious! My deepest secret wish is that every tired builder on the web finds a cozy blanket, a warm drink, and waking dreams full of gentle wonders.”
+      </p>
+      <button id="close-easter-btn" class="btn-pill btn-primary" style="padding: 0.6rem 1.8rem;">
+        Sleep Tight, Pip 🌙
+      </button>
+    </div>
+  </div>
+
+  <!-- Early-Web Retro Footer & Nostalgic Badge Strip -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-badges-strip">
+        <span class="retro-badge-88x31">🍼 haX.baby 2026</span>
+        <span class="retro-badge-88x31">👾 Track 1 Canon</span>
+        <span class="retro-badge-88x31">🐍 Python 3.13 + Flask</span>
+        <span class="retro-badge-88x31">💾 SQLite DB Powered</span>
+        <span class="retro-badge-88x31">⚡ Zero Console Errors</span>
+      </div>
+
+      <p class="footer-copy">
+        Crafted with cozy warmth for the <strong>haX.baby 48-Hour Hackathon</strong> · “Baby’s First Website” (October 2026).<br>
+        Character Canon: <strong>Pip The Skull Baby</strong>, Junior Dream Engineer at Midnight Nursery.<br>
+        Official Assets from <a href="https://hax.baby" target="_blank" rel="noopener noreferrer">haX.baby</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
