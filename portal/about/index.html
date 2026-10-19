@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aman Sharma: Software Architect & Digital Worldsmith — Portfolio, Inventions, and Creative Engineering.">
+  <title>Character Sheet · Aman: The Young Worldsmith | Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
+  <link rel="stylesheet" href="../../static/css/style.css">
+  
+
+<script>
+// Standalone API interceptor for GitHub Pages & static hosting
+(function() {
+  const originalFetch = window.fetch;
+  window.fetch = async function(url, options) {
+    if (typeof url === 'string' && (url.startsWith('/api/') || url.includes('/api/'))) {
+      try {
+        const response = await originalFetch(url, options);
+        if (response.ok) return response;
+      } catch (err) {
+        // Fall back to offline emulation
+      }
+      
+      const endpoint = url.split('/api/')[1];
+      const body = options && options.body ? JSON.parse(options.body) : {};
+      
+      if (endpoint === 'chat') {
+        const msg = (body.message || '').toLowerCase();
+        let reply = "Thank you for visiting my universe! Keep building and never stop learning.";
+        if (msg.includes('doubt') || msg.includes('fail') || msg.includes('hard') || msg.includes('stuck')) {
+          reply = "I know that feeling so well. Every expert had once been a beginner who couldn't understand an error. There is a difference between being lost and being unfinished. You are unfinished.";
+        } else if (msg.includes('myrail') || msg.includes('train')) {
+          reply = "MyRail was inspired by real commuter struggles. Connecting routing engines, real-time tracking, and seamless transit maps!";
+        } else if (msg.includes('inventra') || msg.includes('inventory')) {
+          reply = "INVENTRA is an enterprise inventory and dashboard engine. CRUD integrity, supplier relations, and real-time analytics.";
+        } else if (msg.includes('civic') || msg.includes('citizen')) {
+          reply = "CivicConnect empowers citizens to report civic grievances and hold municipal authorities accountable with transparency.";
+        } else if (msg.includes('family') || msg.includes('mom')) {
+          reply = "Aman isn't made entirely of ambition. Caring for family gives our code true meaning and purpose.";
+        }
+        return new Response(JSON.stringify({ status: 'ok', reply: reply, character: 'Aman, The Young Worldsmith' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'project/star') {
+        const pid = body.project_id || 'project';
+        const key = 'stars_' + pid;
+        const current = parseInt(localStorage.getItem(key) || '350') + 1;
+        localStorage.setItem(key, current.toString());
+        return new Response(JSON.stringify({ status: 'ok', project_id: pid, stars_count: current }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'guestbook') {
+        const entry = {
+          id: Date.now(),
+          author_name: body.author_name || 'Fellow Builder',
+          dream_wish: body.dream_wish || 'Keep shining!',
+          mood_badge: body.mood_badge || '✨ Dream Builder',
+          created_at: new Date().toISOString()
+        };
+        const saved = JSON.parse(localStorage.getItem('guestbook_wishes') || '[]');
+        saved.unshift(entry);
+        localStorage.setItem('guestbook_wishes', JSON.stringify(saved));
+        return new Response(JSON.stringify({ status: 'ok', entry: entry }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'stats/visit') {
+        const visits = parseInt(localStorage.getItem('visit_count') || '612') + 1;
+        localStorage.setItem('visit_count', visits.toString());
+        return new Response(JSON.stringify({ status: 'ok', visits_count: visits }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+    return originalFetch(url, options);
+  };
+})();
+</script>
+
+</head>
+<body>
+
+  <!-- Flashlight / Torch Cursor Overlay Canvas -->
+  <canvas id="torch-overlay-canvas"></canvas>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Sticky Top Navigation with Visible Separators -->
+  <header class="site-nav">
+    <div class="container nav-wrap">
+      <a href="../../portals/index.html" class="brand-badge" aria-label="Aman Worldsmith Cosmic Nexus">
+        <span class="brand-gem">🪄</span>
+        <span>Aman<span style="color: var(--neon-cyan);">.dev</span></span>
+      </a>
+
+      <!-- Navigation with required separators in between -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../../portals/index.html" class="nav-link ">🌀 Nexus</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/about/index.html" class="nav-link active">🪄 About &amp; Profile</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/myrail/index.html" class="nav-link ">🚆 MyRail</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/inventra/index.html" class="nav-link ">📦 INVENTRA</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/civicconnect/index.html" class="nav-link ">🏛️ CivicConnect</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/story/index.html" class="nav-link ">📖 9 Chapters</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/guestbook/index.html" class="nav-link ">✨ Beacon Wall</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/arcade/index.html" class="nav-link ">🎮 Arcade Lab</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day (Dawn) / Night (Midnight) Mood">
+          <span id="mood-icon">🌙</span>
+          <span id="mood-label">Night</span>
+        </button>
+
+        <!-- Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Flashlight Torch Mode">
+          <span id="torch-icon">🔦</span>
+          <span id="torch-label">Torch: Off</span>
+        </button>
+
+        <!-- 3D Circular Portals Nexus Hub Switcher -->
+        <a href="../../portals/index.html" class="btn-pill btn-cyan" title="Step into the 3D Circular Portals Nexus">
+          <span>🌀 3D Nexus</span>
+        </a>
+
+        <!-- Sound Toggle -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle magic audio chimes" title="Toggle sound effects">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Portal Content -->
+  <main id="main-content">
+    
+<section class="realm-hero-banner" style="--realm-color: #ff759f; --realm-glow: rgba(255, 117, 159, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: #ff759f; color: #ff759f;">
+      <span>🪄</span>
+      <span>Realm 05 · Character Core & Tech Forge</span>
+    </div>
+
+    <h1 class="realm-title">
+      Aman<span style="color: #ff759f;">.character</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      “There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.” Software architect, digital worldsmith, and devoted son turning code into living platforms.
+    </p>
+
+    <!-- Returning Visitor Memory Badge -->
+    <div id="visitor-memory-badge" class="visitor-memory-badge" style="margin-bottom: 1.5rem;">
+      <span>✦</span>
+      <span id="visitor-memory-text">Welcome, voyager! Starting your Worldsmith journey...</span>
+    </div>
+
+    <div class="project-actions-cta">
+      <a href="../../portal/myrail/index.html" class="btn-pill btn-cyan" style="padding: 0.85rem 1.75rem;">
+        <span>Explore Inventions (MyRail & More) →</span>
+      </a>
+      <button id="secret-wand-gem" class="btn-pill" style="border-color: #ff759f; color: #ff759f;" title="Tap to awaken magic runes">
+        <span>🪄 Tap Wand Gem</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: Character Stage & Interactive 3D Card -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 3rem; align-items: center;">
+    
+    <!-- 3D Holographic Character Stage with Eye & Cursor Tracking -->
+    <div class="hero-character-stage">
+      <div class="hologram-halo"></div>
+
+      <div class="character-card-holographic" id="character-holo-card">
+        <div class="character-avatar-icon" id="character-avatar-icon">🪄</div>
+
+        <!-- Character Eyes Tracking Pointer -->
+        <div class="character-eyes-container" aria-hidden="true">
+          <div class="character-eye" id="left-eye"><div class="character-pupil" id="left-pupil"></div></div>
+          <div class="character-eye" id="right-eye"><div class="character-pupil" id="right-pupil"></div></div>
+        </div>
+
+        <h2 class="character-role-title">Aman</h2>
+        <div class="character-subtitle-badge">The Young Worldsmith · Code Weaver</div>
+
+        <p class="character-bio-snippet">
+          Wrapped in a midnight hoodie woven with glowing circuitry constellations. Armed with a magic wand of C, Python, and SQL, he navigates college exams and real-world responsibilities.
+        </p>
+
+        <!-- Day / Night Mood Reaction Badge -->
+        <div class="character-mood-pill" id="character-mood-status">
+          🌙 Mode: Midnight Sleepless Coder · Building in the Quiet Hours
+        </div>
+
+        <div class="wand-specs-grid">
+          <div class="wand-spec-item">
+            <span class="wand-spec-label">Core Wand</span>
+            <span class="wand-spec-value">Starlight IDE</span>
+          </div>
+          <div class="wand-spec-item">
+            <span class="wand-spec-label">XP Level</span>
+            <span class="wand-spec-value">Rising Junior</span>
+          </div>
+          <div class="wand-spec-item">
+            <span class="wand-spec-label">Primary Brick</span>
+            <span class="wand-spec-value">Python & SQL</span>
+          </div>
+          <div class="wand-spec-item">
+            <span class="wand-spec-label">Magic Element</span>
+            <span class="wand-spec-value">Perseverance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Developer Profile & Mindset -->
+    <div class="character-sheet-card">
+      <div class="section-tag">Creator Bio · Engineer Identity</div>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.85rem; color: #fff; margin: 0.4rem 0 1.25rem;">
+        The Developer Profile & Philosophy
+      </h3>
+
+      <div style="display: grid; gap: 1.25rem;">
+        <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 0.85rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">1. The Developer</span>
+          <h4 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-top: 0.2rem;">Aman Sharma · The Young Worldsmith</h4>
+        </div>
+
+        <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 0.85rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">2. Identity, Craft & Mindset</span>
+          <p style="font-size: 0.94rem; color: var(--text-soft); margin-top: 0.2rem; line-height: 1.6;">
+            A young digital architect in a midnight hoodie with glowing circuitry constellations. Impatient with stagnation yet patient with bugs, deeply devoted to his family, and driven by the hunger to build things that outlast ordinary marks.
+          </p>
+        </div>
+
+        <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 0.85rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">3. Engineered Systems & Flagship Projects</span>
+          <p style="font-size: 0.94rem; color: var(--text-soft); margin-top: 0.2rem; line-height: 1.6;">
+            Software Developer & World Creator. He architects real systems: <strong>MyRail</strong> (transit intelligence), <strong>INVENTRA</strong> (inventory management), and <strong>CivicConnect</strong> (civic empowerment).
+          </p>
+        </div>
+
+        <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 0.85rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">4. Journey, Family & Purpose</span>
+          <p style="font-size: 0.94rem; color: var(--text-soft); margin-top: 0.2rem; line-height: 1.6;">
+            The quiet battle between wanting to improve and the time required to do so. Navigating family health hurdles, exam deadlines, and compiler failures—learning that becoming someone is a continuous decision to open the laptop and build.
+          </p>
+        </div>
+
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">5. Guiding Motto</span>
+          <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; color: var(--solar-gold); margin-top: 0.2rem;">
+            “The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”
+          </p>
+        </div>
+      </div>
+    </div>
+  <!-- Section 2: Creative Visual Assets & Companions -->
+  <section class="character-assets-section" id="character-assets">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <div class="section-tag" style="margin-bottom: 0.25rem;">Visual Artifacts & Companions · Asset Showcase</div>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.85rem; color: #fff; margin: 0;">
+          Creative Character & Relic Showcase
+        </h3>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan);">
+        3D Stylized Studio Showcase
+      </div>
+    </div>
+    <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.5rem; max-width: 780px; line-height: 1.6;">
+      Explore the four foundational visual artifacts designed for Aman's universe. Featuring Baby Iron Man (and Baby Hulk companion) bridging high-tech invention with childhood bedtime warmth.
+    </p>
+
+    <div class="character-assets-grid">
+      <!-- Card 1: Baby Waving on Cloud -->
+      <article class="character-asset-card" id="asset-card-cloud">
+        <span class="asset-badge-top">HIGH-RES IMAGE</span>
+        <div class="asset-image-box">
+          <img id="asset-cloud-img" src="../../static/assets/baby_ironman_cloud.png" alt="Baby Iron Man Waving on Cloud" loading="lazy">
+        </div>
+        <h4 class="asset-card-title" id="asset-cloud-title">Baby Hero Waving on Cloud</h4>
+        <p class="asset-card-desc" id="asset-cloud-desc">
+          Chibi Baby Iron Man floating on a sleepy cloud waving a tiny hand. Features polished nano-armor, smiling baby eyes, and starlight aura. Ideal for floating hero avatars and cursor companions.
+        </p>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+          <button class="btn-pill" id="btn-toggle-cloud-hero" style="flex: 1; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: var(--neon-cyan); color: var(--neon-cyan);">
+            ⇄ Swap to Baby Hulk
+          </button>
+        </div>
+        <a href="../../static/assets/baby_ironman_cloud.png" target="_blank" download="baby_hero_cloud.png" class="asset-action-btn">
+          <span>📥 Download Image</span>
+        </a>
+      </article>
+
+      <!-- Card 2: The Lullaby Lab Music Box -->
+      <article class="character-asset-card" id="asset-card-music-box">
+        <span class="asset-badge-top">HIGH-RES IMAGE</span>
+        <div class="asset-image-box">
+          <img src="../../static/assets/baby_ironman_music_box.png" alt="The Lullaby Lab Music Box" loading="lazy">
+        </div>
+        <h4 class="asset-card-title">The Lullaby Lab Music Box</h4>
+        <p class="asset-card-desc">
+          Pastel high-tech music box with a golden winding key, glowing micro arc-reactor core, circuit traces, and floating star chimes. Centerpiece for Aman's Web Audio sound engine.
+        </p>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+          <a href="../../portal/arcade#lullaby-lab/index.html" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.74rem; padding: 0.35rem 0.6rem;">
+            ▶ Test in Audio Lab
+          </a>
+        </div>
+        <a href="../../static/assets/baby_ironman_music_box.png" target="_blank" download="lullaby_music_box.png" class="asset-action-btn">
+          <span>📥 Download Image</span>
+        </a>
+      </article>
+
+      <!-- Card 3: Dream Nightlight Lantern -->
+      <article class="character-asset-card" id="asset-card-lantern">
+        <span class="asset-badge-top">HIGH-RES IMAGE</span>
+        <div class="asset-image-box">
+          <img src="../../static/assets/baby_ironman_lantern.png" alt="Dream Nightlight Lantern" loading="lazy">
+        </div>
+        <h4 class="asset-card-title">Dream Nightlight Lantern</h4>
+        <p class="asset-card-desc">
+          Glowing sleeping crescent moon porcelain lamp with crimson-and-gold brass trim, glowing filament core, and bedside handle. Perfect for day/night ambient focus illumination.
+        </p>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+          <button class="btn-pill" id="btn-lantern-ignite" style="flex: 1; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: var(--solar-gold); color: var(--solar-gold);">
+            💡 Ignite Lantern
+          </button>
+        </div>
+        <a href="../../static/assets/baby_ironman_lantern.png" target="_blank" download="dream_nightlight_lantern.png" class="asset-action-btn">
+          <span>📥 Download Image</span>
+        </a>
+      </article>
+
+      <!-- Card 4: Studio Character Portrait -->
+      <article class="character-asset-card" id="asset-card-portrait">
+        <span class="asset-badge-top">HIGH-RES IMAGE</span>
+        <div class="asset-image-box">
+          <img src="../../static/assets/baby_ironman_portrait.png" alt="Baby Iron Man Studio Character Portrait" loading="lazy">
+        </div>
+        <h4 class="asset-card-title">3D Hero Studio Portrait</h4>
+        <p class="asset-card-desc">
+          Official full-body reference illustration of Baby Iron Man holding the dream nightlight lantern on a studio pedestal. Official character mascot of the Worldsmith ecosystem.
+        </p>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+          <a href="../../portal/story/index.html" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: #ff759f; color: #ff759f;">
+            📖 Read in Codex
+          </a>
+        </div>
+        <a href="../../static/assets/baby_ironman_portrait.png" target="_blank" download="character_studio_portrait.png" class="asset-action-btn">
+          <span>📥 Download Image</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Discoverable Easter Egg Banner -->
+  <div id="easter-egg-banner" class="easter-egg-banner">
+    <h4 style="font-family: var(--font-bubbly); color: var(--solar-gold); font-size: 1.35rem; margin-bottom: 0.35rem;">
+      🌟 Hidden Easter Egg Discovered!
+    </h4>
+    <p style="font-size: 1rem; color: #ffffff; line-height: 1.6;">
+      “Every expert was once a beginner who refused to quit.”<br>
+      <strong style="color: var(--neon-cyan);">✦ You unlocked Aman’s Secret Constellation! (Developer Secret Unlocked)</strong>
+    </p>
+  </div>
+
+  <!-- Hidden Torch Message -->
+  <div class="torch-secret-message" style="text-align: center; margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem; color: var(--neon-cyan);">
+    🔦 [TORCH SECRET]: "A broken program isn't a dead end. It is a map of what needs understanding next."
+  </div>
+
+  <!-- Tech Forge Arsenal -->
+  <div class="sim-console-card">
+    <div class="sim-header">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 0.76rem; color: #ff759f; text-transform: uppercase;">
+          The Code Forge · Skills & Tools
+        </span>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">
+          Aman's Coding Arsenal
+        </h3>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">Continuous Learning</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
+      <div style="background: var(--bg-space); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+        <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">🐍</div>
+        <h4 style="font-family: var(--font-bubbly); color: #fff; font-size: 1.1rem;">Python & Flask</h4>
+        <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.5; margin-top: 0.35rem;">
+          Backend APIs, web routing, graph algorithms, and asynchronous request handling.
+        </p>
+      </div>
+
+      <div style="background: var(--bg-space); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+        <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">💾</div>
+        <h4 style="font-family: var(--font-bubbly); color: #fff; font-size: 1.1rem;">SQL & Relational DBs</h4>
+        <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.5; margin-top: 0.35rem;">
+          Database design, normalization, ACID transactions, complex queries, and foreign key integrity.
+        </p>
+      </div>
+
+      <div style="background: var(--bg-space); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+        <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">⚙️</div>
+        <h4 style="font-family: var(--font-bubbly); color: #fff; font-size: 1.1rem;">C & Low-Level</h4>
+        <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.5; margin-top: 0.35rem;">
+          Pointers, memory management, structural logic, and hardware-near performance understanding.
+        </p>
+      </div>
+
+      <div style="background: var(--bg-space); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+        <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">🌐</div>
+        <h4 style="font-family: var(--font-bubbly); color: #fff; font-size: 1.1rem;">Web Development</h4>
+        <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.5; margin-top: 0.35rem;">
+          Modern semantic HTML5, fluid responsive CSS3, vanilla ES6+, and interactive WebGL / Three.js.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Universal Realm Jumper Strip -->
+    <div class="container">
+      <aside class="realm-jumper-strip" aria-label="Warp into other portal realms">
+        <div class="realm-jumper-head">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--neon-cyan); text-transform: uppercase;">
+              🌀 The Cosmic Nexus Gateways
+            </span>
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-top: 0.2rem;">
+              Jump Between Portal Realms
+            </h3>
+          </div>
+          <a href="../../portals/index.html" class="btn-pill btn-cyan" style="font-size: 0.8rem;">
+            <span>🌀 3D Rotating Portals View</span>
+          </a>
+        </div>
+
+        <div class="realm-jumper-grid">
+          <a href="../../portal/myrail/index.html" class="realm-jump-card" style="--card-accent: #00f5ff;">
+            <span class="realm-jump-icon">🚆</span>
+            <div>
+              <div class="realm-jump-name">MyRail Orbit</div>
+              <div class="realm-jump-tag">Realm 01 · Transit</div>
+            </div>
+          </a>
+
+          <a href="../../portal/inventra/index.html" class="realm-jump-card" style="--card-accent: #a855f7;">
+            <span class="realm-jump-icon">📦</span>
+            <div>
+              <div class="realm-jump-name">INVENTRA Vault</div>
+              <div class="realm-jump-tag">Realm 02 · Enterprise</div>
+            </div>
+          </a>
+
+          <a href="../../portal/civicconnect/index.html" class="realm-jump-card" style="--card-accent: #10b981;">
+            <span class="realm-jump-icon">🏛️</span>
+            <div>
+              <div class="realm-jump-name">CivicConnect Pulse</div>
+              <div class="realm-jump-tag">Realm 03 · Public Good</div>
+            </div>
+          </a>
+
+          <a href="../../portal/story/index.html" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">📖</span>
+            <div>
+              <div class="realm-jump-name">Worldsmith Codex</div>
+              <div class="realm-jump-tag">Realm 04 · 9 Chapters</div>
+            </div>
+          </a>
+
+          <a href="../../portal/about/index.html" class="realm-jump-card" style="--card-accent: #ff759f;">
+            <span class="realm-jump-icon">🪄</span>
+            <div>
+              <div class="realm-jump-name">Character Sheet</div>
+              <div class="realm-jump-tag">Realm 05 · Tech Forge</div>
+            </div>
+          </a>
+
+          <a href="../../portal/guestbook/index.html" class="realm-jump-card" style="--card-accent: #38bdf8;">
+            <span class="realm-jump-icon">✨</span>
+            <div>
+              <div class="realm-jump-name">Dreamers' Beacon</div>
+              <div class="realm-jump-tag">Realm 06 · Live Wall</div>
+            </div>
+          </a>
+
+          <a href="../../portal/arcade/index.html" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">🎮</span>
+            <div>
+              <div class="realm-jump-name">Arcade & Synth Lab</div>
+              <div class="realm-jump-tag">Creative Labs</div>
+            </div>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Retro Web Badges & Footer -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div class="footer-badges">
+        <span class="retro-chip">🪄 Aman Sharma · The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Full-Stack Software Developer</span>
+        <span class="retro-chip">🐍 Python 3.13 + Flask</span>
+        <span class="retro-chip">💾 SQLite3 Storage</span>
+        <span class="retro-chip">✨ Wand Navigation</span>
+      </div>
+
+      <!-- Developer Tech Badges Strip -->
+      <div class="chaos-badges-strip" title="Aman Sharma · Developer Badges">
+        <span class="retro-badge-88x31">Aman.dev</span>
+        <span class="retro-badge-88x31">Python 3.13</span>
+        <span class="retro-badge-88x31">SQLite3</span>
+        <span class="retro-badge-88x31">Three.js 3D</span>
+        <span class="retro-badge-88x31">Audio Synth</span>
+        <span class="retro-badge-88x31">Portfolio</span>
+        <span class="retro-badge-88x31">Starlight UI</span>
+        <span class="retro-badge-88x31">Modern Web</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        Designed & engineered by <strong>Aman Sharma</strong> · Software Architect & Living World Creator.<br>
+        Tagline: <em>“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”</em>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Mascot Companion (Baby Iron Man & Baby Hulk) -->
+  <div class="floating-companion-widget" id="floating-companion-widget">
+    <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+      <div class="companion-bubble-header">
+        <div class="companion-bubble-title" id="companion-name-display">
+          <span>🚀</span>
+          <span id="companion-name-text">Baby Tony (Iron Man)</span>
+        </div>
+        <button id="close-companion-bubble" class="btn-pill" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;" aria-label="Close companion speech">✕</button>
+      </div>
+      <p class="companion-bubble-text" id="companion-dialogue-text">
+        “Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”
+      </p>
+      <div class="companion-switch-bar">
+        <button class="companion-switch-btn active" id="switch-to-ironman" data-character="ironman">🔴 Baby Iron Man</button>
+        <button class="companion-switch-btn" id="switch-to-hulk" data-character="hulk">💚 Baby Hulk</button>
+      </div>
+      <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+        <a href="../../portal/arcade#lullaby-lab/index.html" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem;">🎵 Lullaby Box</a>
+        <a href="../../portal/about#character-assets/index.html" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem; border-color: var(--solar-gold); color: var(--solar-gold);">🎨 Asset Vault</a>
+      </div>
+    </div>
+
+    <button class="companion-trigger-btn" id="companion-trigger-btn" aria-label="Toggle Companion Mascot" title="Click to talk with your Baby Super-Hero Companion!">
+      <img id="companion-avatar-img" src="../../static/assets/baby_ironman_cloud.png" alt="Baby Superhero Companion">
+      <span class="companion-online-dot"></span>
+    </button>
+  </div>
+
+  <!-- Interactive Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Chat with Aman in real-time">
+    <span>💬</span>
+    <span>Chat with Aman</span>
+  </button>
+
+  <div id="chat-console-panel" class="hidden" role="dialog" aria-label="Chat with Aman">
+    <div class="chat-console-header">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="font-size: 1.25rem;">🪄</span>
+        <div>
+          <div style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.95rem; color: #fff;">Aman, The Worldsmith</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">Online · Listening in real-time</div>
+        </div>
+      </div>
+      <button id="close-chat-btn" class="btn-pill" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages-scroll" id="chat-messages-scroll">
+      <div class="chat-bubble aman">
+        Hey there! I'm Aman. Ask me about MyRail, why I build INVENTRA, how I deal with imposter syndrome and self-doubts, or what keeping faith in family means to me.
+      </div>
+    </div>
+
+    <div class="chat-quick-prompts">
+      <button class="quick-prompt-chip" data-prompt="Dealing with doubt">Dealing with doubt</button>
+      <button class="quick-prompt-chip" data-prompt="Why MyRail?">Why MyRail?</button>
+      <button class="quick-prompt-chip" data-prompt="Tell me about your family">Family & Care</button>
+      <button class="quick-prompt-chip" data-prompt="Advice for beginners">Advice for beginners</button>
+    </div>
+
+    <form id="chat-form" class="chat-input-bar">
+      <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Ask Aman something..." maxlength="140" autocomplete="off">
+      <button type="submit" class="btn-pill btn-cyan" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Send</button>
+    </form>
+  </div>
+
+  <script src="../../static/js/main.js"></script>
+  
+</body>
+</html>
