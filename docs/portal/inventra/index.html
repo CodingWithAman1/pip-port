@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aman Sharma: Software Architect & Digital Worldsmith — Portfolio, Inventions, and Creative Engineering.">
+  <title>INVENTRA Vault · Enterprise Realm | Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
+  <link rel="stylesheet" href="../../static/css/style.css">
+  
+
+<script>
+// Standalone API interceptor for GitHub Pages & static hosting
+(function() {
+  const originalFetch = window.fetch;
+  window.fetch = async function(url, options) {
+    if (typeof url === 'string' && (url.startsWith('/api/') || url.includes('/api/'))) {
+      try {
+        const response = await originalFetch(url, options);
+        if (response.ok) return response;
+      } catch (err) {
+        // Fall back to offline emulation
+      }
+      
+      const endpoint = url.split('/api/')[1];
+      const body = options && options.body ? JSON.parse(options.body) : {};
+      
+      if (endpoint === 'chat') {
+        const msg = (body.message || '').toLowerCase();
+        let reply = "Thank you for visiting my universe! Keep building and never stop learning.";
+        if (msg.includes('doubt') || msg.includes('fail') || msg.includes('hard') || msg.includes('stuck')) {
+          reply = "I know that feeling so well. Every expert had once been a beginner who couldn't understand an error. There is a difference between being lost and being unfinished. You are unfinished.";
+        } else if (msg.includes('myrail') || msg.includes('train')) {
+          reply = "MyRail was inspired by real commuter struggles. Connecting routing engines, real-time tracking, and seamless transit maps!";
+        } else if (msg.includes('inventra') || msg.includes('inventory')) {
+          reply = "INVENTRA is an enterprise inventory and dashboard engine. CRUD integrity, supplier relations, and real-time analytics.";
+        } else if (msg.includes('civic') || msg.includes('citizen')) {
+          reply = "CivicConnect empowers citizens to report civic grievances and hold municipal authorities accountable with transparency.";
+        } else if (msg.includes('family') || msg.includes('mom')) {
+          reply = "Aman isn't made entirely of ambition. Caring for family gives our code true meaning and purpose.";
+        }
+        return new Response(JSON.stringify({ status: 'ok', reply: reply, character: 'Aman, The Young Worldsmith' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'project/star') {
+        const pid = body.project_id || 'project';
+        const key = 'stars_' + pid;
+        const current = parseInt(localStorage.getItem(key) || '350') + 1;
+        localStorage.setItem(key, current.toString());
+        return new Response(JSON.stringify({ status: 'ok', project_id: pid, stars_count: current }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'guestbook') {
+        const entry = {
+          id: Date.now(),
+          author_name: body.author_name || 'Fellow Builder',
+          dream_wish: body.dream_wish || 'Keep shining!',
+          mood_badge: body.mood_badge || '✨ Dream Builder',
+          created_at: new Date().toISOString()
+        };
+        const saved = JSON.parse(localStorage.getItem('guestbook_wishes') || '[]');
+        saved.unshift(entry);
+        localStorage.setItem('guestbook_wishes', JSON.stringify(saved));
+        return new Response(JSON.stringify({ status: 'ok', entry: entry }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'stats/visit') {
+        const visits = parseInt(localStorage.getItem('visit_count') || '612') + 1;
+        localStorage.setItem('visit_count', visits.toString());
+        return new Response(JSON.stringify({ status: 'ok', visits_count: visits }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+    return originalFetch(url, options);
+  };
+})();
+</script>
+
+</head>
+<body>
+
+  <!-- Flashlight / Torch Cursor Overlay Canvas -->
+  <canvas id="torch-overlay-canvas"></canvas>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Sticky Top Navigation with Visible Separators -->
+  <header class="site-nav">
+    <div class="container nav-wrap">
+      <a href="../../portals/index.html" class="brand-badge" aria-label="Aman Worldsmith Cosmic Nexus">
+        <span class="brand-gem">🪄</span>
+        <span>Aman<span style="color: var(--neon-cyan);">.dev</span></span>
+      </a>
+
+      <!-- Navigation with required separators in between -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../../portals/index.html" class="nav-link ">🌀 Nexus</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/about/index.html" class="nav-link ">🪄 About &amp; Profile</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/myrail/index.html" class="nav-link ">🚆 MyRail</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/inventra/index.html" class="nav-link active">📦 INVENTRA</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/civicconnect/index.html" class="nav-link ">🏛️ CivicConnect</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/story/index.html" class="nav-link ">📖 9 Chapters</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/guestbook/index.html" class="nav-link ">✨ Beacon Wall</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/arcade/index.html" class="nav-link ">🎮 Arcade Lab</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day (Dawn) / Night (Midnight) Mood">
+          <span id="mood-icon">🌙</span>
+          <span id="mood-label">Night</span>
+        </button>
+
+        <!-- Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Flashlight Torch Mode">
+          <span id="torch-icon">🔦</span>
+          <span id="torch-label">Torch: Off</span>
+        </button>
+
+        <!-- 3D Circular Portals Nexus Hub Switcher -->
+        <a href="../../portals/index.html" class="btn-pill btn-cyan" title="Step into the 3D Circular Portals Nexus">
+          <span>🌀 3D Nexus</span>
+        </a>
+
+        <!-- Sound Toggle -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle magic audio chimes" title="Toggle sound effects">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Portal Content -->
+  <main id="main-content">
+    
+<section class="realm-hero-banner" style="--realm-color: var(--neon-violet); --realm-glow: rgba(168, 85, 247, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: var(--neon-violet); color: #c084fc;">
+      <span>📦</span>
+      <span>Realm 02 · Enterprise Core Vault</span>
+    </div>
+
+    <h1 class="realm-title">
+      INVENTRA<span style="color: #c084fc;">.core</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      A full-stack enterprise inventory architecture orchestrating multi-warehouse relational databases, supplier APIs, automated reorder thresholds, and executive dashboards.
+    </p>
+
+    <!-- Prominent "Go to Actual Project" CTA Row -->
+    <div class="project-actions-cta">
+      <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-violet" id="btn-actual-project-inventra" title="Launch the live INVENTRA platform (inventra-rho-lac.vercel.app)">
+        <span class="btn-actual-icon">🚀</span>
+        <span>Go to Actual Project</span>
+        <span class="btn-actual-arrow">↗</span>
+      </a>
+
+      <a href="https://github.com/CodingWithAman1/Inventra" target="_blank" rel="noopener noreferrer" class="btn-pill" style="border-color: #c084fc; color: #fff; font-weight: 700; padding: 0.65rem 1.25rem;" title="Explore the source code on GitHub">
+        <span>🐙 GitHub Repo ↗</span>
+      </a>
+
+      <button class="star-project-btn" data-project="inventra" title="Star this project in SQLite">
+        <span>⭐ Star Project</span>
+        <span class="star-num">460</span>
+      </button>
+
+      <button id="add-stock-btn" class="btn-pill" style="border-color: var(--neon-violet); color: #fff;">
+        <span>📦 Bulk Restock (+50 Units)</span>
+      </button>
+
+      <span style="font-family: var(--font-mono); font-size: 0.82rem; color: #c084fc; opacity: 0.85;">
+        ● Live on Vercel: inventra-rho-lac.vercel.app
+      </span>
+    </div>
+
+    <!-- Live Project Interface Screenshot Preview Card -->
+    <div style="margin: 2rem 0 1rem; border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--card-shadow); background: var(--bg-surface);">
+      <div style="background: var(--bg-space); padding: 0.65rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass); flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #c084fc; margin-left: 0.5rem;">
+            🔒 https://inventra-rho-lac.vercel.app/
+          </span>
+        </div>
+        <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill btn-violet" style="font-size: 0.76rem; padding: 0.35rem 0.85rem; color: #fff;">
+          Open Live App in Fullscreen ↗
+        </a>
+      </div>
+      <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" style="display: block; position: relative;">
+        <img src="../../static/assets/inv.png" alt="INVENTRA Live Interface Screenshot" style="width: 100%; height: auto; max-height: 480px; object-fit: cover; display: block; filter: brightness(0.96);">
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: The Story & Inspiration -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #c084fc; text-transform: uppercase;">
+        The Creator's Log · Aman
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        The Architecture of Reliable Data
+      </h3>
+      <p style="font-size: 0.96rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 1rem;">
+        “In software, things can look fine on the surface while quietly falling apart behind the scenes. INVENTRA was my commitment to deep database integrity—relational schemas, ACID transactions, foreign keys, and preventing duplicate stock leaks during simultaneous orders.”
+      </p>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tech-chip">Database Architecture</span>
+        <span class="tech-chip">Relational CRUD</span>
+        <span class="tech-chip">Automated Thresholds</span>
+        <span class="tech-chip">Real-time Analytics</span>
+      </div>
+    </div>
+
+    <!-- Live Warehouse Valuation Dashboard -->
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold); text-transform: uppercase;">
+        Live Warehouse Telemetry
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        Vault Inventory Snapshot
+      </h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">TOTAL UNITS MANAGED</div>
+          <div id="total-units-val" style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #c084fc; font-weight: 700;">1,480 Units</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Across 3 warehouses</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">INVENTORY VALUE</div>
+          <div id="total-value-val" style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--solar-gold); font-weight: 700;">$94,520</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Live market valuation</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ACTIVE SUPPLIERS</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #10b981; font-weight: 700;">24 Partners</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">API connected</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">STOCK REORDER RATE</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--heart-rose); font-weight: 700;">0.8s Trigger</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Automated alert dispatch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Interactive Warehouse & Stock Manager Console -->
+  <div class="sim-console-card">
+    <div class="sim-header">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 0.76rem; color: #c084fc; text-transform: uppercase;">
+          Interactive Live Sandbox · CRUD & Threshold Simulator
+        </span>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">
+          INVENTRA Live Stock Controller
+        </h3>
+      </div>
+      <div style="display: flex; gap: 0.5rem;">
+        <span id="warehouse-alert-badge" class="status-badge-pulse ok">● All Warehouses Optimal</span>
+      </div>
+    </div>
+
+    <p style="font-size: 0.92rem; color: var(--text-soft); margin-bottom: 1rem;">
+      Test Aman's automated threshold engine: Click <strong>“- Dispatch”</strong> to reduce stock. If any item falls below 15 units, the automated red alarm fires! Click <strong>“+ Restock”</strong> to replenish.
+    </p>
+
+    <div style="overflow-x: auto;">
+      <table class="sim-table" id="stock-sim-table">
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Component Name</th>
+            <th>Category</th>
+            <th>In Stock</th>
+            <th>Unit Price</th>
+            <th>Threshold Status</th>
+            <th>Interactive Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-sku="MCU-301">
+            <td style="color: #c084fc; font-weight: 700;">MCU-301</td>
+            <td>ESP32-S3 Dual-Core AI Processor</td>
+            <td>Microcontrollers</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">42</strong></td>
+            <td>$14.50</td>
+            <td><span class="status-badge-pulse ok status-badge">● Healthy Stock</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="MCU-301" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="MCU-301" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+          <tr data-sku="QNT-882">
+            <td style="color: #c084fc; font-weight: 700;">QNT-882</td>
+            <td>Quantum Low-Latency Relay</td>
+            <td>Photonics</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">12</strong></td>
+            <td>$88.00</td>
+            <td><span class="status-badge-pulse danger status-badge">⚠️ LOW STOCK (Reorder)</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="QNT-882" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="QNT-882" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+          <tr data-sku="OLED-104">
+            <td style="color: #c084fc; font-weight: 700;">OLED-104</td>
+            <td>Full-Spectrum E-Ink 4K Display Panel</td>
+            <td>Displays</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">55</strong></td>
+            <td>$32.00</td>
+            <td><span class="status-badge-pulse ok status-badge">● Healthy Stock</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="OLED-104" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="OLED-104" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+          <tr data-sku="SRV-550">
+            <td style="color: #c084fc; font-weight: 700;">SRV-550</td>
+            <td>Ultra-Precision Digital Servo Motor</td>
+            <td>Mechanics</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">8</strong></td>
+            <td>$45.00</td>
+            <td><span class="status-badge-pulse danger status-badge">⚠️ CRITICAL (Supplier Alert)</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="SRV-550" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="SRV-550" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 3: Relational Architecture & Code Blueprint -->
+  <div class="sim-console-card" style="background: var(--bg-space);">
+    <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #c084fc; text-transform: uppercase;">
+      Relational Database Architecture · SQL & Schema
+    </span>
+    <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin: 0.4rem 0 1rem;">
+      INVENTRA Transactional Integrity Schema
+    </h3>
+    <pre style="background: #060914; border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.84rem; color: #e9d5ff; line-height: 1.6;"><code>-- INVENTRA Enterprise Schema: Stock & Transaction Integrity
+CREATE TABLE products (
+    sku VARCHAR(24) PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    category VARCHAR(60) NOT NULL,
+    unit_price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL DEFAULT 0,
+    reorder_threshold INT NOT NULL DEFAULT 15,
+    supplier_id INT REFERENCES suppliers(id)
+);
+
+CREATE TABLE stock_audit_log (
+    audit_id SERIAL PRIMARY KEY,
+    sku VARCHAR(24) REFERENCES products(sku),
+    quantity_delta INT NOT NULL,
+    reason VARCHAR(50) NOT NULL,  -- 'DISPATCH', 'RESTOCK', 'SUPPLIER_RETURN'
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+  </div>
+</div>
+
+
+    <!-- Universal Realm Jumper Strip -->
+    <div class="container">
+      <aside class="realm-jumper-strip" aria-label="Warp into other portal realms">
+        <div class="realm-jumper-head">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--neon-cyan); text-transform: uppercase;">
+              🌀 The Cosmic Nexus Gateways
+            </span>
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-top: 0.2rem;">
+              Jump Between Portal Realms
+            </h3>
+          </div>
+          <a href="../../portals/index.html" class="btn-pill btn-cyan" style="font-size: 0.8rem;">
+            <span>🌀 3D Rotating Portals View</span>
+          </a>
+        </div>
+
+        <div class="realm-jumper-grid">
+          <a href="../../portal/myrail/index.html" class="realm-jump-card" style="--card-accent: #00f5ff;">
+            <span class="realm-jump-icon">🚆</span>
+            <div>
+              <div class="realm-jump-name">MyRail Orbit</div>
+              <div class="realm-jump-tag">Realm 01 · Transit</div>
+            </div>
+          </a>
+
+          <a href="../../portal/inventra/index.html" class="realm-jump-card" style="--card-accent: #a855f7;">
+            <span class="realm-jump-icon">📦</span>
+            <div>
+              <div class="realm-jump-name">INVENTRA Vault</div>
+              <div class="realm-jump-tag">Realm 02 · Enterprise</div>
+            </div>
+          </a>
+
+          <a href="../../portal/civicconnect/index.html" class="realm-jump-card" style="--card-accent: #10b981;">
+            <span class="realm-jump-icon">🏛️</span>
+            <div>
+              <div class="realm-jump-name">CivicConnect Pulse</div>
+              <div class="realm-jump-tag">Realm 03 · Public Good</div>
+            </div>
+          </a>
+
+          <a href="../../portal/story/index.html" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">📖</span>
+            <div>
+              <div class="realm-jump-name">Worldsmith Codex</div>
+              <div class="realm-jump-tag">Realm 04 · 9 Chapters</div>
+            </div>
+          </a>
+
+          <a href="../../portal/about/index.html" class="realm-jump-card" style="--card-accent: #ff759f;">
+            <span class="realm-jump-icon">🪄</span>
+            <div>
+              <div class="realm-jump-name">Character Sheet</div>
+              <div class="realm-jump-tag">Realm 05 · Tech Forge</div>
+            </div>
+          </a>
+
+          <a href="../../portal/guestbook/index.html" class="realm-jump-card" style="--card-accent: #38bdf8;">
+            <span class="realm-jump-icon">✨</span>
+            <div>
+              <div class="realm-jump-name">Dreamers' Beacon</div>
+              <div class="realm-jump-tag">Realm 06 · Live Wall</div>
+            </div>
+          </a>
+
+          <a href="../../portal/arcade/index.html" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">🎮</span>
+            <div>
+              <div class="realm-jump-name">Arcade & Synth Lab</div>
+              <div class="realm-jump-tag">Creative Labs</div>
+            </div>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Retro Web Badges & Footer -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div class="footer-badges">
+        <span class="retro-chip">🪄 Aman Sharma · The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Full-Stack Software Developer</span>
+        <span class="retro-chip">🐍 Python 3.13 + Flask</span>
+        <span class="retro-chip">💾 SQLite3 Storage</span>
+        <span class="retro-chip">✨ Wand Navigation</span>
+      </div>
+
+      <!-- Developer Tech Badges Strip -->
+      <div class="chaos-badges-strip" title="Aman Sharma · Developer Badges">
+        <span class="retro-badge-88x31">Aman.dev</span>
+        <span class="retro-badge-88x31">Python 3.13</span>
+        <span class="retro-badge-88x31">SQLite3</span>
+        <span class="retro-badge-88x31">Three.js 3D</span>
+        <span class="retro-badge-88x31">Audio Synth</span>
+        <span class="retro-badge-88x31">Portfolio</span>
+        <span class="retro-badge-88x31">Starlight UI</span>
+        <span class="retro-badge-88x31">Modern Web</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        Designed & engineered by <strong>Aman Sharma</strong> · Software Architect & Living World Creator.<br>
+        Tagline: <em>“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”</em>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Mascot Companion (Baby Iron Man & Baby Hulk) -->
+  <div class="floating-companion-widget" id="floating-companion-widget">
+    <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+      <div class="companion-bubble-header">
+        <div class="companion-bubble-title" id="companion-name-display">
+          <span>🚀</span>
+          <span id="companion-name-text">Baby Tony (Iron Man)</span>
+        </div>
+        <button id="close-companion-bubble" class="btn-pill" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;" aria-label="Close companion speech">✕</button>
+      </div>
+      <p class="companion-bubble-text" id="companion-dialogue-text">
+        “Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”
+      </p>
+      <div class="companion-switch-bar">
+        <button class="companion-switch-btn active" id="switch-to-ironman" data-character="ironman">🔴 Baby Iron Man</button>
+        <button class="companion-switch-btn" id="switch-to-hulk" data-character="hulk">💚 Baby Hulk</button>
+      </div>
+      <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+        <a href="../../portal/arcade#lullaby-lab/index.html" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem;">🎵 Lullaby Box</a>
+        <a href="../../portal/about#character-assets/index.html" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem; border-color: var(--solar-gold); color: var(--solar-gold);">🎨 Asset Vault</a>
+      </div>
+    </div>
+
+    <button class="companion-trigger-btn" id="companion-trigger-btn" aria-label="Toggle Companion Mascot" title="Click to talk with your Baby Super-Hero Companion!">
+      <img id="companion-avatar-img" src="../../static/assets/baby_ironman_cloud.png" alt="Baby Superhero Companion">
+      <span class="companion-online-dot"></span>
+    </button>
+  </div>
+
+  <!-- Interactive Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Chat with Aman in real-time">
+    <span>💬</span>
+    <span>Chat with Aman</span>
+  </button>
+
+  <div id="chat-console-panel" class="hidden" role="dialog" aria-label="Chat with Aman">
+    <div class="chat-console-header">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="font-size: 1.25rem;">🪄</span>
+        <div>
+          <div style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.95rem; color: #fff;">Aman, The Worldsmith</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">Online · Listening in real-time</div>
+        </div>
+      </div>
+      <button id="close-chat-btn" class="btn-pill" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages-scroll" id="chat-messages-scroll">
+      <div class="chat-bubble aman">
+        Hey there! I'm Aman. Ask me about MyRail, why I build INVENTRA, how I deal with imposter syndrome and self-doubts, or what keeping faith in family means to me.
+      </div>
+    </div>
+
+    <div class="chat-quick-prompts">
+      <button class="quick-prompt-chip" data-prompt="Dealing with doubt">Dealing with doubt</button>
+      <button class="quick-prompt-chip" data-prompt="Why MyRail?">Why MyRail?</button>
+      <button class="quick-prompt-chip" data-prompt="Tell me about your family">Family & Care</button>
+      <button class="quick-prompt-chip" data-prompt="Advice for beginners">Advice for beginners</button>
+    </div>
+
+    <form id="chat-form" class="chat-input-bar">
+      <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Ask Aman something..." maxlength="140" autocomplete="off">
+      <button type="submit" class="btn-pill btn-cyan" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Send</button>
+    </form>
+  </div>
+
+  <script src="../../static/js/main.js"></script>
+  
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const table = document.getElementById('stock-sim-table');
+  const alertBadge = document.getElementById('warehouse-alert-badge');
+  const bulkBtn = document.getElementById('add-stock-btn');
+
+  function checkHealth() {
+    let hasDanger = false;
+    document.querySelectorAll('.status-badge').forEach(b => {
+      if (b.classList.contains('danger')) hasDanger = true;
+    });
+    if (alertBadge) {
+      if (hasDanger) {
+        alertBadge.className = 'status-badge-pulse danger';
+        alertBadge.textContent = '⚠️ Attention: Automated Reorder Triggered';
+      } else {
+        alertBadge.className = 'status-badge-pulse ok';
+        alertBadge.textContent = '● All Warehouses Optimal';
+      }
+    }
+  }
+
+  table.querySelectorAll('.restock-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const row = e.target.closest('tr');
+      const qtyEl = row.querySelector('.stock-qty');
+      const badge = row.querySelector('.status-badge');
+      let count = parseInt(qtyEl.textContent, 10) + parseInt(btn.dataset.amount, 10);
+      qtyEl.textContent = count;
+
+      if (count >= 15) {
+        badge.className = 'status-badge-pulse ok status-badge';
+        badge.textContent = '● Healthy Stock';
+      }
+      checkHealth();
+    });
+  });
+
+  table.querySelectorAll('.dispatch-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const row = e.target.closest('tr');
+      const qtyEl = row.querySelector('.stock-qty');
+      const badge = row.querySelector('.status-badge');
+      let count = Math.max(0, parseInt(qtyEl.textContent, 10) - parseInt(btn.dataset.amount, 10));
+      qtyEl.textContent = count;
+
+      if (count < 15) {
+        badge.className = 'status-badge-pulse danger status-badge';
+        badge.textContent = '⚠️ LOW STOCK (Reorder)';
+      }
+      checkHealth();
+    });
+  });
+
+  if (bulkBtn) {
+    bulkBtn.addEventListener('click', () => {
+      table.querySelectorAll('.stock-qty').forEach(qtyEl => {
+        qtyEl.textContent = parseInt(qtyEl.textContent, 10) + 20;
+      });
+      table.querySelectorAll('.status-badge').forEach(badge => {
+        badge.className = 'status-badge-pulse ok status-badge';
+        badge.textContent = '● Healthy Stock';
+      });
+      checkHealth();
+    });
+  }
+});
+</script>
+
+</body>
+</html>

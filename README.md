@@ -6,6 +6,13 @@
 > **Track Chosen:** **Track 2: Your Own Baby (Original Character & Universe)**  
 > **Stack:** HTML5, CSS3, JavaScript (ES6+), Python 3.13, Flask 3.1, SQLite3, Three.js WebGL
 
+[![Live Demo](https://img.shields.io/badge/LIVE%20DEMO-GitHub%20Pages-00f5ff?style=for-the-badge&logo=github)](https://codingwithaman1.github.io/pip-port/)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/CodingWithAman1/pip-port)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCodingWithAman1%2Fpip-port)
+
+🔗 **Live Deployment URL:** **[https://codingwithaman1.github.io/pip-port/](https://codingwithaman1.github.io/pip-port/)**  
+📂 **GitHub Repository:** **[https://github.com/CodingWithAman1/pip-port](https://github.com/CodingWithAman1/pip-port)**
+
 ---
 
 ## 🌟 The 5-Point Character Sheet (Track 2 Canon)

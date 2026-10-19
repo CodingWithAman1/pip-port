@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aman Sharma: Software Architect & Digital Worldsmith — Portfolio, Inventions, and Creative Engineering.">
+  <title>MyRail Orbit · Transit Realm | Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
+  <link rel="stylesheet" href="../../static/css/style.css">
+  
+
+<script>
+// Standalone API interceptor for GitHub Pages & static hosting
+(function() {
+  const originalFetch = window.fetch;
+  window.fetch = async function(url, options) {
+    if (typeof url === 'string' && (url.startsWith('/api/') || url.includes('/api/'))) {
+      try {
+        const response = await originalFetch(url, options);
+        if (response.ok) return response;
+      } catch (err) {
+        // Fall back to offline emulation
+      }
+      
+      const endpoint = url.split('/api/')[1];
+      const body = options && options.body ? JSON.parse(options.body) : {};
+      
+      if (endpoint === 'chat') {
+        const msg = (body.message || '').toLowerCase();
+        let reply = "Thank you for visiting my universe! Keep building and never stop learning.";
+        if (msg.includes('doubt') || msg.includes('fail') || msg.includes('hard') || msg.includes('stuck')) {
+          reply = "I know that feeling so well. Every expert had once been a beginner who couldn't understand an error. There is a difference between being lost and being unfinished. You are unfinished.";
+        } else if (msg.includes('myrail') || msg.includes('train')) {
+          reply = "MyRail was inspired by real commuter struggles. Connecting routing engines, real-time tracking, and seamless transit maps!";
+        } else if (msg.includes('inventra') || msg.includes('inventory')) {
+          reply = "INVENTRA is an enterprise inventory and dashboard engine. CRUD integrity, supplier relations, and real-time analytics.";
+        } else if (msg.includes('civic') || msg.includes('citizen')) {
+          reply = "CivicConnect empowers citizens to report civic grievances and hold municipal authorities accountable with transparency.";
+        } else if (msg.includes('family') || msg.includes('mom')) {
+          reply = "Aman isn't made entirely of ambition. Caring for family gives our code true meaning and purpose.";
+        }
+        return new Response(JSON.stringify({ status: 'ok', reply: reply, character: 'Aman, The Young Worldsmith' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'project/star') {
+        const pid = body.project_id || 'project';
+        const key = 'stars_' + pid;
+        const current = parseInt(localStorage.getItem(key) || '350') + 1;
+        localStorage.setItem(key, current.toString());
+        return new Response(JSON.stringify({ status: 'ok', project_id: pid, stars_count: current }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'guestbook') {
+        const entry = {
+          id: Date.now(),
+          author_name: body.author_name || 'Fellow Builder',
+          dream_wish: body.dream_wish || 'Keep shining!',
+          mood_badge: body.mood_badge || '✨ Dream Builder',
+          created_at: new Date().toISOString()
+        };
+        const saved = JSON.parse(localStorage.getItem('guestbook_wishes') || '[]');
+        saved.unshift(entry);
+        localStorage.setItem('guestbook_wishes', JSON.stringify(saved));
+        return new Response(JSON.stringify({ status: 'ok', entry: entry }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'stats/visit') {
+        const visits = parseInt(localStorage.getItem('visit_count') || '612') + 1;
+        localStorage.setItem('visit_count', visits.toString());
+        return new Response(JSON.stringify({ status: 'ok', visits_count: visits }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+    return originalFetch(url, options);
+  };
+})();
+</script>
+
+</head>
+<body>
+
+  <!-- Flashlight / Torch Cursor Overlay Canvas -->
+  <canvas id="torch-overlay-canvas"></canvas>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Sticky Top Navigation with Visible Separators -->
+  <header class="site-nav">
+    <div class="container nav-wrap">
+      <a href="../../portals/index.html" class="brand-badge" aria-label="Aman Worldsmith Cosmic Nexus">
+        <span class="brand-gem">🪄</span>
+        <span>Aman<span style="color: var(--neon-cyan);">.dev</span></span>
+      </a>
+
+      <!-- Navigation with required separators in between -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../../portals/index.html" class="nav-link ">🌀 Nexus</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/about/index.html" class="nav-link ">🪄 About &amp; Profile</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/myrail/index.html" class="nav-link active">🚆 MyRail</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/inventra/index.html" class="nav-link ">📦 INVENTRA</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/civicconnect/index.html" class="nav-link ">🏛️ CivicConnect</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/story/index.html" class="nav-link ">📖 9 Chapters</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/guestbook/index.html" class="nav-link ">✨ Beacon Wall</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../../portal/arcade/index.html" class="nav-link ">🎮 Arcade Lab</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day (Dawn) / Night (Midnight) Mood">
+          <span id="mood-icon">🌙</span>
+          <span id="mood-label">Night</span>
+        </button>
+
+        <!-- Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Flashlight Torch Mode">
+          <span id="torch-icon">🔦</span>
+          <span id="torch-label">Torch: Off</span>
+        </button>
+
+        <!-- 3D Circular Portals Nexus Hub Switcher -->
+        <a href="../../portals/index.html" class="btn-pill btn-cyan" title="Step into the 3D Circular Portals Nexus">
+          <span>🌀 3D Nexus</span>
+        </a>
+
+        <!-- Sound Toggle -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle magic audio chimes" title="Toggle sound effects">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Portal Content -->
+  <main id="main-content">
+    
+<section class="realm-hero-banner" style="--realm-color: var(--neon-cyan); --realm-glow: rgba(0, 245, 255, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: var(--neon-cyan); color: var(--neon-cyan);">
+      <span>🚆</span>
+      <span>Realm 01 · Infrastructure Orbit</span>
+    </div>
+
+    <h1 class="realm-title">
+      MyRail<span style="color: var(--neon-cyan);">.transit</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      An intelligent railway information and commuter navigation platform born from real-world platform delays. Powered by Python, Flask APIs, and graph shortest-path routing.
+    </p>
+
+    <!-- Prominent "Go to Actual Project" CTA Row -->
+    <div class="project-actions-cta">
+      <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-cyan" id="btn-actual-project-myrail" title="Launch the live MyRail web platform (myrailbase.netlify.app)">
+        <span class="btn-actual-icon">🚀</span>
+        <span>Go to Actual Project</span>
+        <span class="btn-actual-arrow">↗</span>
+      </a>
+
+      <a href="https://github.com/CodingWithAman1/myRail" target="_blank" rel="noopener noreferrer" class="btn-pill" style="border-color: var(--neon-cyan); color: #fff; font-weight: 700; padding: 0.65rem 1.25rem;" title="Explore the source code on GitHub">
+        <span>🐙 GitHub Repo ↗</span>
+      </a>
+
+      <button class="star-project-btn" data-project="myrail" title="Star this project in SQLite">
+        <span>⭐ Star Project</span>
+        <span class="star-num">342</span>
+      </button>
+
+      <button id="dispatch-train-btn" class="btn-pill" style="border-color: var(--neon-cyan); color: #fff;">
+        <span>🚆 Dispatch Express Train</span>
+      </button>
+
+      <span style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan); opacity: 0.85;">
+        ● Live on Netlify: myrailbase.netlify.app
+      </span>
+    </div>
+
+    <!-- Live Project Interface Screenshot Preview Card -->
+    <div style="margin: 2rem 0 1rem; border: 1.5px solid var(--border-neon); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--card-shadow); background: var(--bg-surface);">
+      <div style="background: var(--bg-space); padding: 0.65rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass); flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); margin-left: 0.5rem;">
+            🔒 https://myrailbase.netlify.app/
+          </span>
+        </div>
+        <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-pill btn-cyan" style="font-size: 0.76rem; padding: 0.35rem 0.85rem;">
+          Open Live App in Fullscreen ↗
+        </a>
+      </div>
+      <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" style="display: block; position: relative;">
+        <img src="../../static/assets/myrail.png" alt="MyRail Live Interface Screenshot" style="width: 100%; height: auto; max-height: 480px; object-fit: cover; display: block; filter: brightness(0.96);">
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: The Story & Inspiration -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">
+        The Creator's Log · Aman
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        The War Against the Unknown Delay
+      </h3>
+      <p style="font-size: 0.96rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 1rem;">
+        “Standing on a crowded train platform between exams and home, watching the departure screen flicker with unexplained delays, I realized code should solve this. Commuters shouldn't have to guess. They deserve clear data, shortest-path alternatives, and calm predictability.”
+      </p>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tech-chip">Python 3.13</span>
+        <span class="tech-chip">Flask API</span>
+        <span class="tech-chip">Graph Algorithms</span>
+        <span class="tech-chip">SQLite</span>
+      </div>
+    </div>
+
+    <!-- Live System Metrics -->
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold); text-transform: uppercase;">
+        Telemetry & Performance
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        Core Service Specs
+      </h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ROUTE COMPUTATION</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--neon-cyan); font-weight: 700;">18ms</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Dijkstra shortest-path</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ACTIVE TRACKS</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--solar-gold); font-weight: 700;">4 Corridors</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Synchronized live</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">COMMUTERS HELPED</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #10b981; font-weight: 700;">14,200+</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Across suburban hubs</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">DISPATCH ACCURACY</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--heart-rose); font-weight: 700;">99.4%</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Real-time tracking</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Interactive SVG Transit Route Simulator -->
+  <div class="transit-map-card" id="dream-transit-map">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <div>
+        <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Transit Engine · Live Simulation</div>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff;">
+          MyRail Dynamic Transit Vector Map
+        </h3>
+      </div>
+      <span id="train-status-indicator" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan); background: rgba(0, 245, 255, 0.1); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid var(--border-neon);">
+        Train 104: En Route (Platform 2)
+      </span>
+    </div>
+    <p style="font-size: 0.94rem; color: var(--text-soft); margin-top: 0.5rem; line-height: 1.6;">
+      Watch the starlit express train navigate between stations along the railway path. Click <strong>“Dispatch Express Train”</strong> above or slide down the route to run the physical simulation!
+    </p>
+
+    <div class="transit-route-svg-box">
+      <svg id="transit-svg" width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none">
+        <line x1="0" y1="60" x2="800" y2="60" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+        <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+        <line x1="0" y1="180" x2="800" y2="180" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+
+        <!-- Animated Route Path -->
+        <path id="transit-path" class="svg-route-path" d="M 40 190 Q 220 30, 400 120 T 760 60" />
+
+        <!-- Station Dots & Labels -->
+        <circle cx="40" cy="190" r="8" fill="#00f5ff" filter="drop-shadow(0 0 8px #00f5ff)" />
+        <text x="40" y="222" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Nursery Lab (0km)</text>
+
+        <circle cx="260" cy="85" r="8" fill="#a855f7" filter="drop-shadow(0 0 8px #a855f7)" />
+        <text x="260" y="115" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Algorithm Ridge (14km)</text>
+
+        <circle cx="490" cy="125" r="8" fill="#ff759f" filter="drop-shadow(0 0 8px #ff759f)" />
+        <text x="490" y="155" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Civic Plaza (28km)</text>
+
+        <circle cx="760" cy="60" r="8" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)" />
+        <text x="760" y="90" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Worldsmith Peak (45km)</text>
+
+        <!-- Animated Transit Train Vehicle -->
+        <g class="transit-vehicle" id="transit-train-group" transform="translate(40, 190)">
+          <circle r="15" fill="#fbbf24" stroke="#ffffff" stroke-width="2"/>
+          <text text-anchor="middle" dy="5" font-size="13">🚆</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Section 3: Live Station Departure Board Simulator -->
+  <div class="sim-console-card">
+    <div class="sim-header">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--neon-cyan); text-transform: uppercase;">
+          Live Telemetry Feed · SQLite & REST API
+        </span>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">
+          Central Station Departure & Arrival Board
+        </h3>
+      </div>
+      <button id="refresh-board-btn" class="sim-btn-action">
+        ↻ Refresh Feed
+      </button>
+    </div>
+
+    <table class="sim-table">
+      <thead>
+        <tr>
+          <th>Train #</th>
+          <th>Destination</th>
+          <th>Platform</th>
+          <th>Scheduled</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="departure-board-body">
+        <tr>
+          <td style="color: var(--neon-cyan); font-weight: 700;">EXP-104</td>
+          <td>Algorithm Ridge → Worldsmith Peak</td>
+          <td>Platform 02</td>
+          <td>22:35</td>
+          <td><span class="status-badge-pulse ok">● On Time</span></td>
+          <td><button class="sim-btn-action" onclick="alert('Boarding pass issued for EXP-104!')">Board</button></td>
+        </tr>
+        <tr>
+          <td style="color: var(--neon-cyan); font-weight: 700;">LOC-218</td>
+          <td>Civic Plaza Metro Express</td>
+          <td>Platform 01</td>
+          <td>22:42</td>
+          <td><span class="status-badge-pulse ok">● Boarding</span></td>
+          <td><button class="sim-btn-action" onclick="alert('Boarding pass issued for LOC-218!')">Board</button></td>
+        </tr>
+        <tr>
+          <td style="color: var(--neon-cyan); font-weight: 700;">NGT-309</td>
+          <td>Midnight Coder Night Train</td>
+          <td>Track 4</td>
+          <td>23:15</td>
+          <td><span class="status-badge-pulse warn">● +3 Min Delay</span></td>
+          <td><button class="sim-btn-action" onclick="alert('Notification alert set for NGT-309')">Track</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 4: Architecture & Code Blueprint -->
+  <div class="sim-console-card" style="background: var(--bg-space);">
+    <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">
+      Technical Architecture & Graph Routing
+    </span>
+    <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin: 0.4rem 0 1rem;">
+      How MyRail Solves Route Optimization
+    </h3>
+    <pre style="background: #060914; border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.84rem; color: #a5f3fc; line-height: 1.6;"><code># Aman's Graph-Based Train Transit Optimizer
+class TransitRouteOptimizer:
+    def __init__(self, stations, corridors):
+        self.network = corridors
+        self.stations = stations
+
+    def find_fastest_route(self, origin, destination, live_delays):
+        """Computes minimum-weight path accounting for real-time congestion."""
+        distances = {station: float('infinity') for station in self.stations}
+        distances[origin] = 0
+        priority_queue = [(0, origin, [origin])]
+        
+        while priority_queue:
+            current_delay, station, path = heapq.heappop(priority_queue)
+            if station == destination:
+                return {"path": path, "delay_min": current_delay, "status": "OPTIMAL"}
+            # Evaluate connecting tracks...</code></pre>
+  </div>
+</div>
+
+
+    <!-- Universal Realm Jumper Strip -->
+    <div class="container">
+      <aside class="realm-jumper-strip" aria-label="Warp into other portal realms">
+        <div class="realm-jumper-head">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--neon-cyan); text-transform: uppercase;">
+              🌀 The Cosmic Nexus Gateways
+            </span>
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-top: 0.2rem;">
+              Jump Between Portal Realms
+            </h3>
+          </div>
+          <a href="../../portals/index.html" class="btn-pill btn-cyan" style="font-size: 0.8rem;">
+            <span>🌀 3D Rotating Portals View</span>
+          </a>
+        </div>
+
+        <div class="realm-jumper-grid">
+          <a href="../../portal/myrail/index.html" class="realm-jump-card" style="--card-accent: #00f5ff;">
+            <span class="realm-jump-icon">🚆</span>
+            <div>
+              <div class="realm-jump-name">MyRail Orbit</div>
+              <div class="realm-jump-tag">Realm 01 · Transit</div>
+            </div>
+          </a>
+
+          <a href="../../portal/inventra/index.html" class="realm-jump-card" style="--card-accent: #a855f7;">
+            <span class="realm-jump-icon">📦</span>
+            <div>
+              <div class="realm-jump-name">INVENTRA Vault</div>
+              <div class="realm-jump-tag">Realm 02 · Enterprise</div>
+            </div>
+          </a>
+
+          <a href="../../portal/civicconnect/index.html" class="realm-jump-card" style="--card-accent: #10b981;">
+            <span class="realm-jump-icon">🏛️</span>
+            <div>
+              <div class="realm-jump-name">CivicConnect Pulse</div>
+              <div class="realm-jump-tag">Realm 03 · Public Good</div>
+            </div>
+          </a>
+
+          <a href="../../portal/story/index.html" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">📖</span>
+            <div>
+              <div class="realm-jump-name">Worldsmith Codex</div>
+              <div class="realm-jump-tag">Realm 04 · 9 Chapters</div>
+            </div>
+          </a>
+
+          <a href="../../portal/about/index.html" class="realm-jump-card" style="--card-accent: #ff759f;">
+            <span class="realm-jump-icon">🪄</span>
+            <div>
+              <div class="realm-jump-name">Character Sheet</div>
+              <div class="realm-jump-tag">Realm 05 · Tech Forge</div>
+            </div>
+          </a>
+
+          <a href="../../portal/guestbook/index.html" class="realm-jump-card" style="--card-accent: #38bdf8;">
+            <span class="realm-jump-icon">✨</span>
+            <div>
+              <div class="realm-jump-name">Dreamers' Beacon</div>
+              <div class="realm-jump-tag">Realm 06 · Live Wall</div>
+            </div>
+          </a>
+
+          <a href="../../portal/arcade/index.html" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">🎮</span>
+            <div>
+              <div class="realm-jump-name">Arcade & Synth Lab</div>
+              <div class="realm-jump-tag">Creative Labs</div>
+            </div>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Retro Web Badges & Footer -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div class="footer-badges">
+        <span class="retro-chip">🪄 Aman Sharma · The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Full-Stack Software Developer</span>
+        <span class="retro-chip">🐍 Python 3.13 + Flask</span>
+        <span class="retro-chip">💾 SQLite3 Storage</span>
+        <span class="retro-chip">✨ Wand Navigation</span>
+      </div>
+
+      <!-- Developer Tech Badges Strip -->
+      <div class="chaos-badges-strip" title="Aman Sharma · Developer Badges">
+        <span class="retro-badge-88x31">Aman.dev</span>
+        <span class="retro-badge-88x31">Python 3.13</span>
+        <span class="retro-badge-88x31">SQLite3</span>
+        <span class="retro-badge-88x31">Three.js 3D</span>
+        <span class="retro-badge-88x31">Audio Synth</span>
+        <span class="retro-badge-88x31">Portfolio</span>
+        <span class="retro-badge-88x31">Starlight UI</span>
+        <span class="retro-badge-88x31">Modern Web</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        Designed & engineered by <strong>Aman Sharma</strong> · Software Architect & Living World Creator.<br>
+        Tagline: <em>“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”</em>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Mascot Companion (Baby Iron Man & Baby Hulk) -->
+  <div class="floating-companion-widget" id="floating-companion-widget">
+    <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+      <div class="companion-bubble-header">
+        <div class="companion-bubble-title" id="companion-name-display">
+          <span>🚀</span>
+          <span id="companion-name-text">Baby Tony (Iron Man)</span>
+        </div>
+        <button id="close-companion-bubble" class="btn-pill" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;" aria-label="Close companion speech">✕</button>
+      </div>
+      <p class="companion-bubble-text" id="companion-dialogue-text">
+        “Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”
+      </p>
+      <div class="companion-switch-bar">
+        <button class="companion-switch-btn active" id="switch-to-ironman" data-character="ironman">🔴 Baby Iron Man</button>
+        <button class="companion-switch-btn" id="switch-to-hulk" data-character="hulk">💚 Baby Hulk</button>
+      </div>
+      <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+        <a href="../../portal/arcade#lullaby-lab/index.html" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem;">🎵 Lullaby Box</a>
+        <a href="../../portal/about#character-assets/index.html" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem; border-color: var(--solar-gold); color: var(--solar-gold);">🎨 Asset Vault</a>
+      </div>
+    </div>
+
+    <button class="companion-trigger-btn" id="companion-trigger-btn" aria-label="Toggle Companion Mascot" title="Click to talk with your Baby Super-Hero Companion!">
+      <img id="companion-avatar-img" src="../../static/assets/baby_ironman_cloud.png" alt="Baby Superhero Companion">
+      <span class="companion-online-dot"></span>
+    </button>
+  </div>
+
+  <!-- Interactive Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Chat with Aman in real-time">
+    <span>💬</span>
+    <span>Chat with Aman</span>
+  </button>
+
+  <div id="chat-console-panel" class="hidden" role="dialog" aria-label="Chat with Aman">
+    <div class="chat-console-header">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="font-size: 1.25rem;">🪄</span>
+        <div>
+          <div style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.95rem; color: #fff;">Aman, The Worldsmith</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">Online · Listening in real-time</div>
+        </div>
+      </div>
+      <button id="close-chat-btn" class="btn-pill" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages-scroll" id="chat-messages-scroll">
+      <div class="chat-bubble aman">
+        Hey there! I'm Aman. Ask me about MyRail, why I build INVENTRA, how I deal with imposter syndrome and self-doubts, or what keeping faith in family means to me.
+      </div>
+    </div>
+
+    <div class="chat-quick-prompts">
+      <button class="quick-prompt-chip" data-prompt="Dealing with doubt">Dealing with doubt</button>
+      <button class="quick-prompt-chip" data-prompt="Why MyRail?">Why MyRail?</button>
+      <button class="quick-prompt-chip" data-prompt="Tell me about your family">Family & Care</button>
+      <button class="quick-prompt-chip" data-prompt="Advice for beginners">Advice for beginners</button>
+    </div>
+
+    <form id="chat-form" class="chat-input-bar">
+      <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Ask Aman something..." maxlength="140" autocomplete="off">
+      <button type="submit" class="btn-pill btn-cyan" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Send</button>
+    </form>
+  </div>
+
+  <script src="../../static/js/main.js"></script>
+  
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dispatchBtn = document.getElementById('dispatch-train-btn');
+  const transitTrainGroup = document.getElementById('transit-train-group');
+  const transitPath = document.getElementById('transit-path');
+  const statusIndicator = document.getElementById('train-status-indicator');
+
+  if (dispatchBtn && transitTrainGroup && transitPath) {
+    dispatchBtn.addEventListener('click', () => {
+      let progress = 0;
+      const pathLen = transitPath.getTotalLength();
+      if (statusIndicator) statusIndicator.textContent = "⚡ Dispatching Express Train...";
+      
+      const anim = setInterval(() => {
+        progress += 0.015;
+        if (progress > 1) {
+          clearInterval(anim);
+          if (statusIndicator) statusIndicator.textContent = "✓ Train Arrived at Worldsmith Peak!";
+          return;
+        }
+        const pt = transitPath.getPointAtLength(progress * pathLen);
+        transitTrainGroup.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+      }, 30);
+    });
+  }
+});
+</script>
+
+</body>
+</html>

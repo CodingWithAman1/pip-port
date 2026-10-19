@@ -504,7 +504,11 @@
       if (progress < 1) {
         requestAnimationFrame(animateWarp);
       } else {
-        window.location.href = portal.targetUrl;
+        let dest = portal.targetUrl;
+        if (window.location.pathname.includes('/pip-port/')) {
+          dest = '/pip-port' + dest + '/';
+        }
+        window.location.href = dest;
       }
     }
     requestAnimationFrame(animateWarp);

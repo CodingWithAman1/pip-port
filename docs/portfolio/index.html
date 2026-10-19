@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aman Sharma: Software Architect & Digital Worldsmith — Portfolio, Inventions, and Creative Engineering.">
+  <title>Aman Sharma — Software Architect & Digital Worldsmith</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
+  <link rel="stylesheet" href="../static/css/style.css">
+
+<script>
+// Standalone API interceptor for GitHub Pages & static hosting
+(function() {
+  const originalFetch = window.fetch;
+  window.fetch = async function(url, options) {
+    if (typeof url === 'string' && (url.startsWith('/api/') || url.includes('/api/'))) {
+      try {
+        const response = await originalFetch(url, options);
+        if (response.ok) return response;
+      } catch (err) {
+        // Fall back to offline emulation
+      }
+      
+      const endpoint = url.split('/api/')[1];
+      const body = options && options.body ? JSON.parse(options.body) : {};
+      
+      if (endpoint === 'chat') {
+        const msg = (body.message || '').toLowerCase();
+        let reply = "Thank you for visiting my universe! Keep building and never stop learning.";
+        if (msg.includes('doubt') || msg.includes('fail') || msg.includes('hard') || msg.includes('stuck')) {
+          reply = "I know that feeling so well. Every expert had once been a beginner who couldn't understand an error. There is a difference between being lost and being unfinished. You are unfinished.";
+        } else if (msg.includes('myrail') || msg.includes('train')) {
+          reply = "MyRail was inspired by real commuter struggles. Connecting routing engines, real-time tracking, and seamless transit maps!";
+        } else if (msg.includes('inventra') || msg.includes('inventory')) {
+          reply = "INVENTRA is an enterprise inventory and dashboard engine. CRUD integrity, supplier relations, and real-time analytics.";
+        } else if (msg.includes('civic') || msg.includes('citizen')) {
+          reply = "CivicConnect empowers citizens to report civic grievances and hold municipal authorities accountable with transparency.";
+        } else if (msg.includes('family') || msg.includes('mom')) {
+          reply = "Aman isn't made entirely of ambition. Caring for family gives our code true meaning and purpose.";
+        }
+        return new Response(JSON.stringify({ status: 'ok', reply: reply, character: 'Aman, The Young Worldsmith' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'project/star') {
+        const pid = body.project_id || 'project';
+        const key = 'stars_' + pid;
+        const current = parseInt(localStorage.getItem(key) || '350') + 1;
+        localStorage.setItem(key, current.toString());
+        return new Response(JSON.stringify({ status: 'ok', project_id: pid, stars_count: current }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'guestbook') {
+        const entry = {
+          id: Date.now(),
+          author_name: body.author_name || 'Fellow Builder',
+          dream_wish: body.dream_wish || 'Keep shining!',
+          mood_badge: body.mood_badge || '✨ Dream Builder',
+          created_at: new Date().toISOString()
+        };
+        const saved = JSON.parse(localStorage.getItem('guestbook_wishes') || '[]');
+        saved.unshift(entry);
+        localStorage.setItem('guestbook_wishes', JSON.stringify(saved));
+        return new Response(JSON.stringify({ status: 'ok', entry: entry }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      
+      if (endpoint === 'stats/visit') {
+        const visits = parseInt(localStorage.getItem('visit_count') || '612') + 1;
+        localStorage.setItem('visit_count', visits.toString());
+        return new Response(JSON.stringify({ status: 'ok', visits_count: visits }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+    return originalFetch(url, options);
+  };
+})();
+</script>
+
+</head>
+<body>
+
+  <!-- Flashlight / Torch Cursor Overlay Canvas -->
+  <canvas id="torch-overlay-canvas"></canvas>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Wand Handle -->
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <!-- Wand Shaft -->
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Glowing Magic Tip -->
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Sticky Top Navigation -->
+  <header class="site-nav">
+    <div class="container nav-wrap">
+      <a href="../index.html" class="brand-badge" aria-label="Aman Worldsmith Home">
+        <span class="brand-gem">🪄</span>
+        <span>Aman<span style="color: var(--neon-cyan);">.dev</span></span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../portals/index.html" class="nav-link">🌀 Nexus</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/about/index.html" class="nav-link">🪄 Character Sheet</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/myrail/index.html" class="nav-link">🚆 MyRail</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/inventra/index.html" class="nav-link">📦 INVENTRA</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/civicconnect/index.html" class="nav-link">🏛️ CivicConnect</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/story/index.html" class="nav-link">📖 9 Chapters</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/guestbook/index.html" class="nav-link">✨ Beacon Wall</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="../portal/arcade/index.html" class="nav-link">🎮 Arcade Lab</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day / Night Ambience">
+          <span id="mood-icon">🌙</span>
+          <span id="mood-label">Night</span>
+        </button>
+
+        <!-- Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Toggle Torch Focus Light">
+          <span id="torch-icon">🔦</span>
+          <span id="torch-label">Torch: Off</span>
+        </button>
+
+        <!-- 3D Circular Portals Hub Switcher -->
+        <a href="../portals/index.html" class="btn-pill btn-cyan" title="Step into the 3D Circular Portals Nexus">
+          <span>🌀 3D Portals Nexus</span>
+        </a>
+
+        <!-- Sound Toggle -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle audio effects" title="Toggle sound effects">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+
+        <a href="#guestbook" class="btn-pill btn-violet">Leave a Spark ✦</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <!-- Returning Visitor Memory Badge -->
+          <div id="visitor-memory-badge" class="visitor-memory-badge">
+            <span>✦</span>
+            <span id="visitor-memory-text">Welcome, voyager! Starting your Worldsmith journey...</span>
+          </div>
+
+          <div class="hero-tag-pill">
+            <span>✨</span>
+            <span>Full-Stack Developer & Living World Creator</span>
+          </div>
+
+          <h1 class="hero-title">
+            The Boy Who Was<br>
+            <em>Building His Own World.</em>
+          </h1>
+
+          <p class="hero-quote">
+            “There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”
+          </p>
+
+          <p style="color: var(--text-soft); font-size: 1.05rem; margin-bottom: 2rem; max-width: 520px;">
+            Meet <strong>Aman, The Young Worldsmith</strong>. A student and software creator turning lines of C, Python, and SQL into living platforms that solve real human challenges.
+          </p>
+
+          <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+            <a href="#projects" class="btn-pill btn-cyan" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">
+              Explore 3 Creations ↓
+            </a>
+            <button id="open-story-codex-btn" class="btn-pill btn-violet" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">
+              Read Full 9-Chapter Story 📖
+            </button>
+          </div>
+
+          <!-- Live SQLite Platform Stats -->
+          <div class="hero-odometer-row">
+            <div class="stat-box">
+              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Dreams Delivered
+              </span>
+              <div class="odometer-neon" title="Live SQLite Dreams Delivered Count">
+                <span>✦</span>
+                <span id="odometer-val">2,873</span>
+              </div>
+            </div>
+
+            <div class="stat-box">
+              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Lines of Code Written
+              </span>
+              <div class="odometer-neon" style="color: var(--solar-gold); border-color: rgba(251, 191, 36, 0.4);" title="Lines of Code">
+                <span>⚡</span>
+                <span>48,920</span>
+              </div>
+            </div>
+
+            <div class="stat-box">
+              <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+                Core Philosophy
+              </span>
+              <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 1.15rem; color: var(--neon-cyan);">
+                Never Stop Learning
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Hologram Character Stage with Eye & Cursor Tracking -->
+        <div class="hero-character-stage">
+          <div class="hologram-halo"></div>
+
+          <div class="character-card-holographic" id="character-holo-card">
+            <div class="character-avatar-icon" id="character-avatar-icon">🪄</div>
+
+            <!-- Character Eyes Tracking Pointer -->
+            <div class="character-eyes-container" aria-hidden="true">
+              <div class="character-eye" id="left-eye"><div class="character-pupil" id="left-pupil"></div></div>
+              <div class="character-eye" id="right-eye"><div class="character-pupil" id="right-pupil"></div></div>
+            </div>
+
+            <h2 class="character-role-title">Aman</h2>
+            <div class="character-spec">&lt; The Young Worldsmith /&gt;</div>
+            <div id="character-mood-status" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--solar-gold); margin-bottom: 0.75rem;">
+              🌙 Mode: Midnight Sleepless Coder
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin-bottom: 1.25rem;">
+              Armed with a glowing coding wand, star-dusted patience, and an unshakeable belief that broken code is just the first draft of mastery.
+            </p>
+
+            <div class="character-chips">
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">C / C++</span>
+              <span class="tech-chip">SQL</span>
+              <span class="tech-chip">Flask</span>
+              <span class="tech-chip">Web Dev</span>
+              <span class="tech-chip">Algorithms</span>
+            </div>
+
+            <!-- Secret Wand Gem for Discoverable Easter Egg -->
+            <button id="secret-wand-gem" class="btn-pill btn-violet" style="margin-top: 1.25rem; font-size: 0.8rem; width: 100%; justify-content: center;" title="Click to channel wand energy">
+              ✦ Channel Wand Energy (Easter Egg)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About The Developer Profile -->
+    <section id="about" class="section" style="background: var(--bg-space); border-top: 1px solid var(--border-neon); border-bottom: 1px solid var(--border-neon);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">About The Developer · Creator Profile</div>
+          <h2 class="section-title">Developer Profile: The Worldsmith</h2>
+          <p class="section-subtitle">
+            An authentic developer journey grounded in real-world aspirations, quiet persistence, and the craft of code.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 2px solid var(--border-neon); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--card-shadow); max-width: 860px; margin: 0 auto;">
+          <div style="display: grid; gap: 1.5rem;">
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">1. The Developer</span>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.25rem;">Aman Sharma · The Young Worldsmith</h3>
+            </div>
+
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">2. Identity, Craft & Mindset</span>
+              <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
+                A young computer science student and digital architect wrapped in a midnight hoodie with glowing circuitry patterns. Curious, impatient with stagnation yet endlessly patient with bugs, deeply devoted to his family, and driven by the quiet hunger to build things that outlast ordinary marks.
+              </p>
+            </div>
+
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">3. Engineered Systems & Flagship Projects</span>
+              <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
+                Software Developer & Living World Creator. He architects real systems: <strong>MyRail</strong> (transit intelligence), <strong>INVENTRA</strong> (inventory management), and <strong>CivicConnect</strong> (citizen civic empowerment platform).
+              </p>
+            </div>
+
+            <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">4. Journey, Family & Purpose</span>
+              <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
+                The quiet battle between wanting to improve and the time required to do so. Navigating family health hurdles, exam deadlines, API failures, and silent uncertainties—discovering that becoming someone isn’t a single event, but a continuous decision to open the laptop and build.
+              </p>
+            </div>
+
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">5. Guiding Motto</span>
+              <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--solar-gold); margin-top: 0.25rem;">
+                “The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discoverable Easter Egg Banner -->
+        <div id="easter-egg-banner" class="easter-egg-banner">
+          <h4 style="font-family: var(--font-bubbly); color: var(--solar-gold); font-size: 1.25rem; margin-bottom: 0.35rem;">
+            🌟 Hidden Easter Egg Discovered!
+          </h4>
+          <p style="font-size: 0.98rem; color: #ffffff; line-height: 1.6;">
+            “Every expert was once a beginner who refused to quit.”<br>
+            <strong style="color: var(--neon-cyan);">✦ You unlocked Aman’s Secret Constellation! (Developer Secret Unlocked)</strong>
+          </p>
+        </div>
+
+        <!-- Creative Visual Assets & Companions -->
+        <div class="character-assets-section" style="margin-top: 3.5rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.25rem;">Visual Artifacts & Companions · Asset Showcase</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.85rem; color: #fff; margin: 0;">
+                Creative Character & Relic Showcase
+              </h3>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan);">
+              3D Stylized Studio Showcase
+            </div>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.5rem; max-width: 780px; line-height: 1.6;">
+            Explore the four foundational visual artifacts designed for Aman's universe. Featuring Baby Iron Man (and Baby Hulk companion) bridging high-tech invention with childhood bedtime warmth.
+          </p>
+
+          <div class="character-assets-grid">
+            <!-- Card 1: Baby Waving on Cloud -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img id="asset-cloud-img-index" src="../static/assets/baby_ironman_cloud.png" alt="Baby Iron Man Waving on Cloud" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">Baby Hero Waving on Cloud</h4>
+              <p class="asset-card-desc">
+                Chibi Baby Iron Man floating on a sleepy cloud waving a tiny hand. Features polished nano-armor, smiling baby eyes, and starlight aura. Ideal for floating hero avatars and cursor companions.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <button class="btn-pill" id="btn-toggle-cloud-hero-index" style="flex: 1; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: var(--neon-cyan); color: var(--neon-cyan);">
+                  ⇄ Swap to Baby Hulk
+                </button>
+              </div>
+              <a href="../static/assets/baby_ironman_cloud.png" target="_blank" download="baby_hero_cloud.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+
+            <!-- Card 2: The Lullaby Lab Music Box -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img src="../static/assets/baby_ironman_music_box.png" alt="The Lullaby Lab Music Box" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">The Lullaby Lab Music Box</h4>
+              <p class="asset-card-desc">
+                Pastel high-tech music box with a golden winding key, glowing micro arc-reactor core, circuit traces, and floating star chimes. Centerpiece for Aman's Web Audio sound engine.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <a href="#lab" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.74rem; padding: 0.35rem 0.6rem;">
+                  ▶ Test in Audio Lab
+                </a>
+              </div>
+              <a href="../static/assets/baby_ironman_music_box.png" target="_blank" download="lullaby_music_box.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+
+            <!-- Card 3: Dream Nightlight Lantern -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img src="../static/assets/baby_ironman_lantern.png" alt="Dream Nightlight Lantern" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">Dream Nightlight Lantern</h4>
+              <p class="asset-card-desc">
+                Glowing sleeping crescent moon porcelain lamp with crimson-and-gold brass trim, glowing filament core, and bedside handle. Perfect for day/night ambient focus illumination.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <button class="btn-pill" id="btn-lantern-ignite-index" style="flex: 1; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: var(--solar-gold); color: var(--solar-gold);">
+                  💡 Ignite Lantern
+                </button>
+              </div>
+              <a href="../static/assets/baby_ironman_lantern.png" target="_blank" download="dream_nightlight_lantern.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+
+            <!-- Card 4: Studio Character Portrait -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img src="../static/assets/baby_ironman_portrait.png" alt="Baby Iron Man Studio Character Portrait" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">3D Hero Studio Portrait</h4>
+              <p class="asset-card-desc">
+                Official full-body reference illustration of Baby Iron Man holding the dream nightlight lantern on a studio pedestal. Official character mascot of the Worldsmith ecosystem.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <a href="#story" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: #ff759f; color: #ff759f;">
+                  📖 Read in Codex
+                </a>
+              </div>
+              <a href="../static/assets/baby_ironman_portrait.png" target="_blank" download="character_studio_portrait.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: What Aman Does (3 Showcase Projects) -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Section 02 · 3 Flagship Projects</div>
+          <h2 class="section-title">The Worldsmith’s Creations</h2>
+          <p class="section-subtitle">
+            Three real applications built by Aman, turning theoretical code into tools that solve tangible problems.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: MyRail -->
+          <article class="project-card">
+            <div class="project-header-top">
+              <div class="project-icon-cube">🚆</div>
+              <span class="project-badge-pill">Project 01 · Transit</span>
+            </div>
+
+            <h3 class="project-name">MyRail</h3>
+            <p class="project-lore">
+              An intelligent railway information and train service navigation platform inspired by real-world commuter logistics. Connects live railway schedules, route optimization, and intuitive journey tracking.
+            </p>
+
+            <div class="project-tech-bar">
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">Flask API</span>
+              <span class="tech-chip">SQL</span>
+              <span class="tech-chip">Real-Time Data</span>
+            </div>
+
+            <div class="project-action-row" style="flex-wrap: wrap; gap: 0.5rem;">
+              <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-cyan" style="padding: 0.45rem 1rem; font-size: 0.82rem; width: 100%; justify-content: center;">
+                <span>🚀 Go to Actual Project</span>
+                <span class="btn-actual-arrow">↗</span>
+              </a>
+              <a href="https://github.com/CodingWithAman1/myRail" target="_blank" rel="noopener noreferrer" class="btn-pill" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>🐙 GitHub</span>
+              </a>
+              <a href="../portal/myrail/index.html" class="btn-pill btn-cyan" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>Enter Realm 🚆</span>
+              </a>
+              <button class="star-project-btn" data-project="myrail">
+                <span>⭐ Star</span>
+                <span class="star-num">342</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 2: INVENTRA -->
+          <article class="project-card">
+            <div class="project-header-top">
+              <div class="project-icon-cube">📦</div>
+              <span class="project-badge-pill">Project 02 · Enterprise</span>
+            </div>
+
+            <h3 class="project-name">INVENTRA</h3>
+            <p class="project-lore">
+              A comprehensive inventory and resource management system. Orchestrates warehouse stock, suppliers, automated reorder thresholds, and interactive analytics dashboards in harmony.
+            </p>
+
+            <div class="project-tech-bar">
+              <span class="tech-chip">Database Architecture</span>
+              <span class="tech-chip">CRUD Engine</span>
+              <span class="tech-chip">Analytics</span>
+              <span class="tech-chip">Full-Stack</span>
+            </div>
+
+            <div class="project-action-row" style="flex-wrap: wrap; gap: 0.5rem;">
+              <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-violet" style="padding: 0.45rem 1rem; font-size: 0.82rem; width: 100%; justify-content: center;">
+                <span>🚀 Go to Actual Project</span>
+                <span class="btn-actual-arrow">↗</span>
+              </a>
+              <a href="https://github.com/CodingWithAman1/Inventra" target="_blank" rel="noopener noreferrer" class="btn-pill" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>🐙 GitHub</span>
+              </a>
+              <a href="../portal/inventra/index.html" class="btn-pill btn-violet" style="font-size: 0.78rem; padding: 0.35rem 0.85rem; color: #fff;">
+                <span>Enter Realm 📦</span>
+              </a>
+              <button class="star-project-btn" data-project="inventra">
+                <span>⭐ Star</span>
+                <span class="star-num">460</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 3: CivicConnect -->
+          <article class="project-card">
+            <div class="project-header-top">
+              <div class="project-icon-cube">🏛️</div>
+              <span class="project-badge-pill">Project 03 · Civic Impact</span>
+            </div>
+
+            <h3 class="project-name">CivicConnect</h3>
+            <p class="project-lore">
+              A public engagement and transparency platform reaching beyond ordinary code. Empowers citizens to report local civic issues, track governmental resolution progress, and hold authorities accountable.
+            </p>
+
+            <div class="project-tech-bar">
+              <span class="tech-chip">Public Transparency</span>
+              <span class="tech-chip">Geo-Reporting</span>
+              <span class="tech-chip">Community Core</span>
+              <span class="tech-chip">Social Good</span>
+            </div>
+
+            <div class="project-action-row" style="flex-wrap: wrap; gap: 0.5rem;">
+              <a href="https://civicconnectweb.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-emerald" style="padding: 0.45rem 1rem; font-size: 0.82rem; width: 100%; justify-content: center;">
+                <span>🚀 Go to Actual Project</span>
+                <span class="btn-actual-arrow">↗</span>
+              </a>
+              <a href="https://github.com/CodingWithAman1/CivicConnect" target="_blank" rel="noopener noreferrer" class="btn-pill" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>🐙 GitHub</span>
+              </a>
+              <a href="../portal/civicconnect/index.html" class="btn-pill" style="border-color: #10b981; color: #10b981; font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>Enter Realm 🏛️</span>
+              </a>
+              <button class="star-project-btn" data-project="civicconnect">
+                <span>⭐ Star</span>
+                <span class="star-num">535</span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Dream Delivery & Transit Routes SVG Map (Synced with Scroll) -->
+        <div class="transit-map-card" id="dream-transit-map">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Logistics · Route Motion</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
+                MyRail & Dream Delivery Transit Map
+              </h3>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan);">
+              Scroll-Synced Transit Animation
+            </span>
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.5;">
+            Follow the starlit transit line connecting midnight nursery stops to the central world-building station. The transit star capsule glides along the curve as you journey down the page!
+          </p>
+          <div class="transit-route-svg-box">
+            <svg id="transit-svg" width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none">
+              <!-- Background Grid Lines -->
+              <line x1="0" y1="60" x2="800" y2="60" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+              <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+              <line x1="0" y1="180" x2="800" y2="180" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+
+              <!-- Animated Route Path -->
+              <path id="transit-path" class="svg-route-path" d="M 40 190 Q 220 30, 400 120 T 760 60" />
+
+              <!-- Stations along Route -->
+              <circle cx="40" cy="190" r="7" fill="#00f5ff" />
+              <text x="40" y="222" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Nursery Lab</text>
+
+              <circle cx="260" cy="85" r="7" fill="#a855f7" />
+              <text x="260" y="115" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Algorithm Ridge</text>
+
+              <circle cx="490" cy="125" r="7" fill="#ff759f" />
+              <text x="490" y="155" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Civic Plaza</text>
+
+              <circle cx="760" cy="60" r="7" fill="#38bdf8" />
+              <text x="760" y="90" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Worldsmith Peak</text>
+
+              <!-- Animated Transit Train Vehicle -->
+              <g class="transit-vehicle" id="transit-train-group" transform="translate(40, 190)">
+                <circle r="14" fill="#fbbf24" stroke="#ffffff" stroke-width="2"/>
+                <text text-anchor="middle" dy="5" font-size="12">🚆</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Lullaby Lab & Multi-Voice Generative Audio Synth -->
+        <div class="lullaby-synth-card" id="lullaby-lab">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Procedural Audio · Generative Synthesizer</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
+                Lullaby Lab & Multi-Voice Generative Audio Synth
+              </h3>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold);">
+              Polyphonic Web Audio API Engine
+            </span>
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.5;">
+            Algorithmic generative pentatonic lullabies designed to help Aman (and late-night deep focus coders) focus, rest, and build. Generated in real-time with multi-voice oscillators, sub-bass drones, and organic interval walks!
+          </p>
+
+          <!-- Interactive Music Box Centerpiece (Card 2) -->
+          <div class="lullaby-interactive-box" id="lullaby-box-centerpiece-index">
+            <div class="lullaby-box-visual" id="lullaby-box-visual-index">
+              <img src="../static/assets/baby_ironman_music_box.png" alt="The Lullaby Lab Music Box">
+            </div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--solar-gold); text-transform: uppercase;">
+                Ambient Soundscape Centerpiece
+              </div>
+              <h4 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin: 0.2rem 0;">
+                The Arc Reactor Lullaby Music Box
+              </h4>
+              <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin: 0;">
+                Crafted with brass gears, glowing arc-reactor coils, and harmonic chimes. When activated, it generates procedural pentatonic lullabies in real time to recharge weary developers.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0;">
+            <button id="synth-play-btn" class="btn-pill btn-cyan" style="padding: 0.75rem 1.5rem;">
+              <span id="synth-play-icon">▶</span>
+              <span id="synth-play-label">Play Generative Lullaby</span>
+            </button>
+            <button id="synth-drone-toggle" class="btn-pill" style="border-color: #a855f7; color: #c084fc; font-size: 0.8rem;">
+              <span>🌌 Sub-Bass Drone: <strong id="drone-status-text">OFF</strong></span>
+            </button>
+            <div style="display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg-surface); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-glass);">
+              <span style="color: var(--text-muted);">Tempo:</span>
+              <button class="synth-tempo-btn btn-pill" data-tempo="slow" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">Slumber</button>
+              <button class="synth-tempo-btn btn-pill active" data-tempo="medium" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">Calm</button>
+              <button class="synth-tempo-btn btn-pill" data-tempo="fast" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">Focus</button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg-surface); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-glass);">
+              <span style="color: var(--text-muted);">Texture:</span>
+              <button class="synth-texture-btn btn-pill active" data-texture="bells" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">🔔 Bells</button>
+              <button class="synth-texture-btn btn-pill" data-texture="pad" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">☁️ Pad</button>
+              <button class="synth-texture-btn btn-pill" data-texture="harp" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">🎵 Harp</button>
+              <button class="synth-texture-btn btn-pill" data-texture="chiptune" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">👾 8-Bit</button>
+            </div>
+          </div>
+
+          <div class="synth-controls-row" style="flex-wrap: wrap;">
+            <button id="synth-preset-midnight" class="btn-pill active" style="font-size: 0.8rem;">🌙 Midnight Nursery</button>
+            <button id="synth-preset-coder" class="btn-pill" style="font-size: 0.8rem;">⚡ Deep Coder Focus</button>
+            <button id="synth-preset-starlight" class="btn-pill" style="font-size: 0.8rem;">✨ Stardust Serenade</button>
+            <button id="synth-preset-aurora" class="btn-pill" style="font-size: 0.8rem;">🌌 Aurora Void</button>
+            <button id="synth-preset-raindrop" class="btn-pill" style="font-size: 0.8rem;">🌧️ Raindrop Zen</button>
+            <button id="synth-preset-cosmic" class="btn-pill" style="font-size: 0.8rem;">🪐 Cosmic Chimes</button>
+            <button id="synth-preset-retro" class="btn-pill" style="font-size: 0.8rem;">👾 8-Bit Sleeptime</button>
+            
+            <div class="synth-visualizer-bar" id="synth-visualizer" aria-label="Synthesizer Visualizer" style="width: 220px;">
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playable Arcade Mini-Game: Starlight Ping Pong -->
+        <div class="arcade-minigame-card" id="minigame-section">
+          <div class="minigame-hud-top">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Minigame · Cyber-Pong Arcade</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
+                Starlight Ping Pong: Player vs Aman AI 🏓
+              </h3>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+              <div style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--neon-cyan);">
+                Player: <span id="pong-player-score" style="font-weight: 700; font-size: 1.35rem; color: #fff;">0</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.88rem; color: #ff759f;">
+                Aman AI: <span id="pong-ai-score" style="font-weight: 700; font-size: 1.35rem; color: #fff;">0</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--solar-gold);">
+                Max Volley: <span id="pong-high-rally" style="font-weight: 700; color: #fff;">0</span>
+              </div>
+              <button id="pong-start-btn" class="btn-pill btn-cyan" style="padding: 0.5rem 1.15rem; font-size: 0.85rem;">
+                Serve Ball 🏓
+              </button>
+              <button id="pong-reset-btn" class="btn-pill" style="padding: 0.5rem 0.85rem; font-size: 0.8rem;">
+                Reset ↻
+              </button>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-soft); margin-bottom: 0.85rem;">
+            Control your left paddle with <strong>Mouse, Touch drag, or [W / S] / [↑ / ↓] keys</strong> to challenge Aman's autonomous Worldsmith Bot!
+          </p>
+          <div style="position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1.5px solid var(--border-neon);">
+            <canvas id="pingpong-canvas" width="800" height="340" style="width: 100%; height: auto; display: block; background: #060914;"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 03: The 9 Chapters of Aman's Journey -->
+    <section id="story" class="section" style="background: var(--bg-space);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Section 03 · The 9 Chapters</div>
+          <h2 class="section-title">The Boy Who Was Building His Own World</h2>
+          <p class="section-subtitle">
+            An honest chronicle of ambition, responsibility, family, and the quiet struggle of becoming someone.
+          </p>
+        </div>
+
+        <!-- Interactive Storybook Flipbook -->
+        <div class="flipbook-container" id="flipbook-section">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <span class="section-tag" style="margin-bottom: 0.2rem;">The Story Codex · Interactive Flipbook</span>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff;">Flip Through Aman's Codex</h3>
+            </div>
+            <span id="flipbook-page-indicator" style="font-family: var(--font-mono); font-weight: 700; font-size: 0.88rem; color: var(--solar-gold); background: rgba(251, 191, 36, 0.12); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid rgba(251, 191, 36, 0.3);">
+              Chapter 1 of 9
+            </span>
+          </div>
+
+          
+          <div class="flipbook-page active" data-page="0">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #00f5ff);">✨</span>
+              <div>
+                <span class="chapter-tag" style="color: #00f5ff;">The Spark</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 1: A Boy With Too Many Dreams</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              Aman wasn&#39;t the kind of boy who had his entire life planned out. But he had something that kept him moving: he had dreams of turning lines of code into something meaningful.
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="1">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #a855f7);">⚔️</span>
+              <div>
+                <span class="chapter-tag" style="color: #a855f7;">The Silent Battle</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 2: The War Nobody Could See</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              People measure progress by completed projects and marks. They don&#39;t see the silent days staring at broken screens, fighting impatience, wondering: &#39;Am I moving fast enough?&#39;
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="2">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #38bdf8);">🚀</span>
+              <div>
+                <span class="chapter-tag" style="color: #38bdf8;">The Inventions</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 3: More Than Just a Student</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              He wanted skills that lived outside classrooms. He started building MyRail for transportation, INVENTRA for inventory systems, and CivicConnect for public accountability.
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="3">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #ff759f);">❤️</span>
+              <div>
+                <span class="chapter-tag" style="color: #ff759f;">Love &amp; Duty</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 4: The People He Carried in His Heart</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              Aman wasn&#39;t made entirely of ambition. When his mother fell ill, he learned that life cannot be governed solely by a timetable. Relationships gave his code purpose.
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="4">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #fbbf24);">⏳</span>
+              <div>
+                <span class="chapter-tag" style="color: #fbbf24;">Patience</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 5: The Endless Race Against Time</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              College, exams, frameworks, algorithms—he learned that becoming someone requires pacing yourself. &#39;There is a difference between being lost and being unfinished.&#39;
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="5">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #10b981);">🌍</span>
+              <div>
+                <span class="chapter-tag" style="color: #10b981;">Real Impact</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 6: Building Something That Mattered</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              He didn&#39;t need to be the most talented person in the room. He needed to be someone willing to learn from the room, break things, and rebuild them stronger.
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="6">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #00f5ff);">🌱</span>
+              <div>
+                <span class="chapter-tag" style="color: #00f5ff;">Invisible Growth</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 7: The Days When Nothing Seemed to Change</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              Routine days. Repetitive code. Yet every fixed bug and every returned attempt was quietly shaping him. He wasn&#39;t where he wanted to be, but he wasn&#39;t where he started.
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="7">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #c084fc);">🔮</span>
+              <div>
+                <span class="chapter-tag" style="color: #c084fc;">Courage</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 8: The Future Was Not a Promise</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              Effort didn&#39;t guarantee immediate success. The future wasn&#39;t an entitlement—it was something built while living through an imperfect, challenging present.
+            </p>
+          </div>
+          
+          <div class="flipbook-page " data-page="8">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px #fbbf24);">🌟</span>
+              <div>
+                <span class="chapter-tag" style="color: #fbbf24;">The Becoming</span>
+                <h3 class="chapter-title" style="font-size: 1.35rem; margin-top: 0.2rem;">Chapter 9: The Real Beginning</h3>
+              </div>
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-soft); min-height: 90px;">
+              He opened his laptop again. Not because he had figured everything out, but because between the lines of code and the next bug, he was building more than software—he was building himself.
+            </p>
+          </div>
+          
+
+          <div class="flipbook-nav-row">
+            <button id="flipbook-prev-btn" class="btn-pill" style="padding: 0.55rem 1.35rem;">
+              ← Previous Chapter
+            </button>
+            <span style="font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono);">
+              Use Arrow Keys (← / →) or Buttons
+            </span>
+            <button id="flipbook-next-btn" class="btn-pill btn-cyan" style="padding: 0.55rem 1.35rem;">
+              Next Chapter →
+            </button>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0 1.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">
+            Or Explore All 9 Chapter Overview Cards Below:
+          </span>
+        </div>
+
+        <div class="story-chapters-grid">
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">1</div>
+              <span class="chapter-tag">The Spark</span>
+            </div>
+
+            <h3 class="chapter-title">A Boy With Too Many Dreams</h3>
+            <p class="chapter-excerpt">Aman wasn&#39;t the kind of boy who had his entire life planned out. But he had something that kept him moving: he had dreams of turning lines of code into something meaningful.</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">2</div>
+              <span class="chapter-tag">The Silent Battle</span>
+            </div>
+
+            <h3 class="chapter-title">The War Nobody Could See</h3>
+            <p class="chapter-excerpt">People measure progress by completed projects and marks. They don&#39;t see the silent days staring at broken screens, fighting impatience, wondering: &#39;Am I moving fast enough?&#39;</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">3</div>
+              <span class="chapter-tag">The Inventions</span>
+            </div>
+
+            <h3 class="chapter-title">More Than Just a Student</h3>
+            <p class="chapter-excerpt">He wanted skills that lived outside classrooms. He started building MyRail for transportation, INVENTRA for inventory systems, and CivicConnect for public accountability.</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">4</div>
+              <span class="chapter-tag">Love &amp; Duty</span>
+            </div>
+
+            <h3 class="chapter-title">The People He Carried in His Heart</h3>
+            <p class="chapter-excerpt">Aman wasn&#39;t made entirely of ambition. When his mother fell ill, he learned that life cannot be governed solely by a timetable. Relationships gave his code purpose.</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">5</div>
+              <span class="chapter-tag">Patience</span>
+            </div>
+
+            <h3 class="chapter-title">The Endless Race Against Time</h3>
+            <p class="chapter-excerpt">College, exams, frameworks, algorithms—he learned that becoming someone requires pacing yourself. &#39;There is a difference between being lost and being unfinished.&#39;</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">6</div>
+              <span class="chapter-tag">Real Impact</span>
+            </div>
+
+            <h3 class="chapter-title">Building Something That Mattered</h3>
+            <p class="chapter-excerpt">He didn&#39;t need to be the most talented person in the room. He needed to be someone willing to learn from the room, break things, and rebuild them stronger.</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">7</div>
+              <span class="chapter-tag">Invisible Growth</span>
+            </div>
+
+            <h3 class="chapter-title">The Days When Nothing Seemed to Change</h3>
+            <p class="chapter-excerpt">Routine days. Repetitive code. Yet every fixed bug and every returned attempt was quietly shaping him. He wasn&#39;t where he wanted to be, but he wasn&#39;t where he started.</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">8</div>
+              <span class="chapter-tag">Courage</span>
+            </div>
+
+            <h3 class="chapter-title">The Future Was Not a Promise</h3>
+            <p class="chapter-excerpt">Effort didn&#39;t guarantee immediate success. The future wasn&#39;t an entitlement—it was something built while living through an imperfect, challenging present.</p>
+          </div>
+          
+          <div class="chapter-card">
+            <div class="chapter-header">
+              <div class="chapter-number-circle">9</div>
+              <span class="chapter-tag">The Becoming</span>
+            </div>
+
+            <h3 class="chapter-title">The Real Beginning</h3>
+            <p class="chapter-excerpt">He opened his laptop again. Not because he had figured everything out, but because between the lines of code and the next bug, he was building more than software—he was building himself.</p>
+          </div>
+          
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <button id="open-story-codex-btn-2" class="btn-pill btn-violet" style="padding: 0.85rem 2rem; font-size: 1rem;">
+            Read the Complete Unabridged Story 📖
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 04: The Dreamers' Wall (SQLite Guestbook) -->
+    <section id="guestbook" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-tag">Community Wall · Dreamers' Beacon</div>
+          <h2 class="section-title">The Dreamers’ Beacon</h2>
+          <p class="section-subtitle">
+            Leave a message, piece of advice, or encouragement for Aman on this persistent SQLite wall!
+          </p>
+        </div>
+
+        <div class="guestbook-layout">
+          <!-- Submission Form -->
+          <div class="guestbook-card">
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-bottom: 1.25rem;">
+              ✍ Transmit a Thought
+            </h3>
+
+            <form id="guestbook-form">
+              <div class="form-group">
+                <label for="guest-author" class="form-label">Your Name or Handle</label>
+                <input type="text" id="guest-author" class="form-input" placeholder="e.g. Fellow Coder" maxlength="40" required>
+              </div>
+
+              <div class="form-group">
+                <label for="guest-mood" class="form-label">Your Tag / Badge</label>
+                <select id="guest-mood" class="form-select">
+                  <option value="✨ Dream Builder">✨ Dream Builder</option>
+                  <option value="💻 Code Craftsman">💻 Code Craftsman</option>
+                  <option value="❤️ Family Heart">❤️ Family Heart</option>
+                  <option value="⚡ Relentless Learner">⚡ Relentless Learner</option>
+                  <option value="🏆 Fellow Builder">🏆 Fellow Builder</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="guest-wish" class="form-label">Message / Advice for the Worldsmith</label>
+                <textarea id="guest-wish" class="form-textarea" rows="4" placeholder="What words keep you moving when the code gets tough?" maxlength="320" required></textarea>
+              </div>
+
+              <button type="submit" class="btn-pill btn-cyan" style="width: 100%; justify-content: center; padding: 0.85rem;">
+                Broadcast Message ✦
+              </button>
+            </form>
+          </div>
+
+          <!-- Live Wish Cards Wall -->
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+              <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 1rem; color: var(--text-soft);">
+                Messages from Across the Web:
+              </span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">
+                SQLite Real-Time Beacon
+              </span>
+            </div>
+
+            <div id="wishes-list" class="wishes-scroll-grid">
+              
+              <div class="wish-card">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-cyan); margin-bottom: 0.4rem;">
+                  ❤️ Family Heart
+                </div>
+                <p style="font-size: 0.92rem; color: #fff; line-height: 1.5; margin-bottom: 0.85rem;">
+                  “You are going good”
+                </p>
+                <div style="font-family: var(--font-bubbly); font-size: 0.82rem; font-weight: 700; color: var(--solar-gold);">
+                  — aman
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); opacity: 0.8;">
+                  2026-10-18
+                </div>
+              </div>
+              
+              <div class="wish-card">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-cyan); margin-bottom: 0.4rem;">
+                  🏆 haX Certified
+                </div>
+                <p style="font-size: 0.92rem; color: #fff; line-height: 1.5; margin-bottom: 0.85rem;">
+                  “A magnificent story of resilience, responsibility, and genuine software craft. Welcome to haX!”
+                </p>
+                <div style="font-family: var(--font-bubbly); font-size: 0.82rem; font-weight: 700; color: var(--solar-gold);">
+                  — haX.baby Hackathon Jury
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); opacity: 0.8;">
+                  2026-10-18
+                </div>
+              </div>
+              
+              <div class="wish-card">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-cyan); margin-bottom: 0.4rem;">
+                  ❤️ Family Heart
+                </div>
+                <p style="font-size: 0.92rem; color: #fff; line-height: 1.5; margin-bottom: 0.85rem;">
+                  “So proud of your heart and your hard work. You carry our love wherever your code takes you.”
+                </p>
+                <div style="font-family: var(--font-bubbly); font-size: 0.82rem; font-weight: 700; color: var(--solar-gold);">
+                  — Mom
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); opacity: 0.8;">
+                  2026-10-18
+                </div>
+              </div>
+              
+              <div class="wish-card">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-cyan); margin-bottom: 0.4rem;">
+                  💻 Code Craftsman
+                </div>
+                <p style="font-size: 0.92rem; color: #fff; line-height: 1.5; margin-bottom: 0.85rem;">
+                  “Keep pushing through the compiler errors, Aman. Every bug fixed is a step closer to mastery!”
+                </p>
+                <div style="font-family: var(--font-bubbly); font-size: 0.82rem; font-weight: 700; color: var(--solar-gold);">
+                  — A Fellow Coder
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); opacity: 0.8;">
+                  2026-10-18
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Complete 9-Chapter Story Modal Reader -->
+  <div id="story-codex-modal" class="hidden" style="position: fixed; inset: 0; background: rgba(6, 9, 20, 0.92); backdrop-filter: blur(16px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--bg-surface); border: 2px solid var(--border-neon); border-radius: var(--radius-lg); max-width: 760px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.8);">
+      <div style="padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: space-between; background: var(--bg-space);">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); text-transform: uppercase;">The Complete Story Codex</span>
+          <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">The Boy Who Was Building His Own World</h3>
+        </div>
+        <button id="close-story-codex-btn" class="btn-pill" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">✕ Close</button>
+      </div>
+
+      <div style="padding: 2rem; overflow-y: auto; line-height: 1.8; color: var(--text-soft); font-size: 0.98rem; space-y: 1.5rem;">
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem;">Chapter 1: A Boy With Too Many Dreams</h4>
+        <p>There was once a boy named Aman. He wasn't the kind of boy who had his entire life planned out. But he had something that kept him moving: he had dreams. C. Python. SQL. Web development. Data structures and algorithms. He didn't want to spend his life simply following instructions; he wanted to build, create, and find out what he was capable of.</p>
+        
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 2: The War Nobody Could See</h4>
+        <p>People measure progress by what they can see: a certificate, a competition, a mark. They rarely see the days someone sits in front of a screen, staring at an error they cannot understand. Every expert had once been a beginner who couldn't understand something. Aman was unfinished.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 3: More Than Just a Student</h4>
+        <p>He wanted skills that lived outside classrooms. He started building MyRail for railway transit, INVENTRA for inventory management, and CivicConnect for civic accountability. Every broken database connection was collecting the real kind of experience: understanding why things break and fixing them.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 4: The People He Carried in His Heart</h4>
+        <p>Aman wasn't made entirely of ambition. When his mother had health problems, ordinary student schedules could no longer be all that mattered. Caring was part of his story. He had a future to build, but also a life to live while building it.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 5: The Endless Race Against Time</h4>
+        <p>A person can be so determined to become someone in the future that he starts treating his present self as a disappointment. Aman learned that becoming someone is about continuing—not at somebody else's speed, just forward.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 6: Building Something That Mattered</h4>
+        <p>What if technology could make public services transparent? What if code could solve real problems? You didn't become capable first and then enter difficult situations; you entered them uncertain, and became capable along the way.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 7: The Days When Nothing Seemed to Change</h4>
+        <p>Routine days. Staring at the terminal. Yet every fixed bug strengthened the habit of continuing. He wasn't where he wanted to be, but he wasn't where he had started, either.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 8: The Future Was Not a Promise</h4>
+        <p>The future wasn't an entitlement. Becoming someone was not a single event; it was a process—one decision, one skill, one difficult day at a time.</p>
+
+        <h4 style="color: var(--neon-cyan); font-family: var(--font-bubbly); font-size: 1.15rem; margin-top: 1.5rem;">Chapter 9: The Real Beginning</h4>
+        <p>He opened his laptop again. Not because he had figured everything out, but because there was something he wanted to build, understand, and become. He was building more than an application. He was building himself.</p>
+
+        <div style="border-top: 1px dashed var(--border-glass); padding-top: 1.5rem; margin-top: 2rem;">
+          <p style="font-family: var(--font-serif); font-style: italic; color: var(--solar-gold); font-size: 1.1rem; text-align: center;">
+            “The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Retro Web Badges & Footer -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div class="footer-badges">
+        <span class="retro-chip">🪄 Aman Sharma · The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Full-Stack Software Developer</span>
+        <span class="retro-chip">🐍 Python 3.13 + Flask</span>
+        <span class="retro-chip">💾 SQLite3 Storage</span>
+        <span class="retro-chip">✨ Wand Navigation</span>
+      </div>
+
+      <!-- Developer Tech Badges Strip -->
+      <div class="chaos-badges-strip" title="Aman Sharma · Developer Badges">
+        <span class="retro-badge-88x31">Aman.dev</span>
+        <span class="retro-badge-88x31">Python 3.13</span>
+        <span class="retro-badge-88x31">SQLite3</span>
+        <span class="retro-badge-88x31">Three.js 3D</span>
+        <span class="retro-badge-88x31">Audio Synth</span>
+        <span class="retro-badge-88x31">Portfolio</span>
+        <span class="retro-badge-88x31">Starlight UI</span>
+        <span class="retro-badge-88x31">Modern Web</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        Designed & engineered by <strong>Aman Sharma</strong> · Software Architect & Living World Creator.<br>
+        Tagline: <em>“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”</em>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Mascot Companion (Baby Iron Man & Baby Hulk) -->
+  <div class="floating-companion-widget" id="floating-companion-widget">
+    <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+      <div class="companion-bubble-header">
+        <div class="companion-bubble-title" id="companion-name-display">
+          <span>🚀</span>
+          <span id="companion-name-text">Baby Tony (Iron Man)</span>
+        </div>
+        <button id="close-companion-bubble" class="btn-pill" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;" aria-label="Close companion speech">✕</button>
+      </div>
+      <p class="companion-bubble-text" id="companion-dialogue-text">
+        “Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”
+      </p>
+      <div class="companion-switch-bar">
+        <button class="companion-switch-btn active" id="switch-to-ironman" data-character="ironman">🔴 Baby Iron Man</button>
+        <button class="companion-switch-btn" id="switch-to-hulk" data-character="hulk">💚 Baby Hulk</button>
+      </div>
+      <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+        <a href="#lab" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem;">🎵 Lullaby Box</a>
+        <a href="#about" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem; border-color: var(--solar-gold); color: var(--solar-gold);">🎨 Asset Vault</a>
+      </div>
+    </div>
+
+    <button class="companion-trigger-btn" id="companion-trigger-btn" aria-label="Toggle Companion Mascot" title="Click to talk with your Baby Super-Hero Companion!">
+      <img id="companion-avatar-img" src="../static/assets/baby_ironman_cloud.png" alt="Baby Superhero Companion">
+      <span class="companion-online-dot"></span>
+    </button>
+  </div>
+
+  <!-- Interactive Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Chat with Aman in real-time">
+    <span>💬</span>
+    <span>Chat with Aman</span>
+  </button>
+
+  <div id="chat-console-panel" class="hidden" role="dialog" aria-label="Chat with Aman">
+    <div class="chat-console-header">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="font-size: 1.25rem;">🪄</span>
+        <div>
+          <div style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.95rem; color: #fff;">Aman, The Worldsmith</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">Online · Listening in real-time</div>
+        </div>
+      </div>
+      <button id="close-chat-btn" class="btn-pill" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages-scroll" id="chat-messages-scroll">
+      <div class="chat-bubble aman">
+        Hey there! I'm Aman. Ask me about MyRail, why I build INVENTRA, how I deal with imposter syndrome and self-doubts, or what keeping faith in family means to me.
+      </div>
+    </div>
+
+    <div class="chat-quick-prompts">
+      <button class="quick-prompt-chip" data-prompt="Dealing with doubt">Dealing with doubt</button>
+      <button class="quick-prompt-chip" data-prompt="Why MyRail?">Why MyRail?</button>
+      <button class="quick-prompt-chip" data-prompt="Tell me about your family">Family & Care</button>
+      <button class="quick-prompt-chip" data-prompt="Advice for beginners">Advice for beginners</button>
+    </div>
+
+    <form id="chat-form" class="chat-input-bar">
+      <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Ask Aman something..." maxlength="140" autocomplete="off">
+      <button type="submit" class="btn-pill btn-cyan" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Send</button>
+    </form>
+  </div>
+
+  <script src="../static/js/main.js"></script>
+</body>
+</html>
