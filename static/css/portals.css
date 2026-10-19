@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Pip's Starlight Nexus - 3D Circular Portals Landing Page
+   Aman Sharma's Starlight Nexus - 3D Circular Portals Landing Page
    Theme: Midnight Dreamspace (#070814) with Ethereal Cosmic Glows
-   haX.baby 48-Hour Hackathon - Tier 3 Boss Level 3D Experience
+   Full-Stack Portfolio Interactive 3D Experience
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,600&family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
@@ -110,6 +110,44 @@ body, html {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.portal-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.portal-nav-item {
+  color: var(--text-soft);
+  text-decoration: none;
+  font-family: var(--font-bubbly);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.portal-nav-item:hover {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  transform: translateY(-1px);
+}
+
+.nav-sep {
+  color: var(--accent-cyan);
+  opacity: 0.55;
+  font-size: 0.68rem;
+  user-select: none;
+  filter: drop-shadow(0 0 4px var(--accent-cyan));
 }
 
 .brand-capsule {

@@ -29,13 +29,29 @@
 
   <!-- Interactive 3D HUD UI Overlay -->
   <div class="portal-ui-layer">
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar with Separators -->
     <header class="portal-top-bar">
       <div class="brand-capsule">
         <div class="brand-orb"></div>
         <span class="brand-title">Aman<span style="color: var(--accent-cyan);">.dev</span> · Cosmic Nexus</span>
-        <span class="brand-tag">Track 2: Original Character</span>
+        <span class="brand-tag">Software Architect & Creator</span>
       </div>
+
+      <nav class="portal-nav-bar" aria-label="Portals Navigation">
+        <a href="/portal/about" class="portal-nav-item">🪄 Character</a>
+        <span class="nav-sep" aria-hidden="true">✦</span>
+        <a href="/portal/myrail" class="portal-nav-item">🚆 MyRail</a>
+        <span class="nav-sep" aria-hidden="true">✦</span>
+        <a href="/portal/inventra" class="portal-nav-item">📦 INVENTRA</a>
+        <span class="nav-sep" aria-hidden="true">✦</span>
+        <a href="/portal/civicconnect" class="portal-nav-item">🏛️ CivicConnect</a>
+        <span class="nav-sep" aria-hidden="true">✦</span>
+        <a href="/portal/story" class="portal-nav-item">📖 9 Chapters</a>
+        <span class="nav-sep" aria-hidden="true">✦</span>
+        <a href="/portal/guestbook" class="portal-nav-item">✨ Beacon Wall</a>
+        <span class="nav-sep" aria-hidden="true">✦</span>
+        <a href="/portal/arcade" class="portal-nav-item">🎮 Arcade Lab</a>
+      </nav>
 
       <div class="top-actions">
         <!-- Sound Toggle Switch -->
@@ -44,9 +60,9 @@
           <span id="mute-label">Sound On</span>
         </button>
 
-        <!-- Switch to Full Portfolio View -->
-        <a href="{{ url_for('portfolio') }}" class="glass-btn glass-btn-primary" title="View complete portfolio & 9-chapter codex">
-          <span>Full Portfolio 📖</span>
+        <!-- Direct Character Sheet Link -->
+        <a href="/portal/about" class="glass-btn glass-btn-primary" title="Meet Aman: The Young Worldsmith">
+          <span>Character Sheet 🪄</span>
         </a>
       </div>
     </header>

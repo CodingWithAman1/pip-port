@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aman Sharma: Software Architect & Digital Worldsmith — Portfolio, Inventions, and Creative Engineering.">
+  <title>{% block title %}Aman Sharma · The Young Worldsmith{% endblock %} | Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Flashlight / Torch Cursor Overlay Canvas -->
+  <canvas id="torch-overlay-canvas"></canvas>
+
+  <!-- Custom Magic Wand Cursor -->
+  <div id="magic-wand-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 42L26 22" stroke="#a855f7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M8 40L14 34" stroke="#c084fc" stroke-width="2"/>
+      <path d="M26 22L36 12" stroke="#00f5ff" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="38" cy="10" r="5" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+      <path d="M38 3V7M38 13V17M31 10H35M41 10H45" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Sticky Top Navigation with Visible Separators -->
+  <header class="site-nav">
+    <div class="container nav-wrap">
+      <a href="/portals" class="brand-badge" aria-label="Aman Worldsmith Cosmic Nexus">
+        <span class="brand-gem">🪄</span>
+        <span>Aman<span style="color: var(--neon-cyan);">.dev</span></span>
+      </a>
+
+      <!-- Navigation with required separators in between -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="/portals" class="nav-link {% if active_page == 'nexus' %}active{% endif %}">🌀 Nexus</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/about" class="nav-link {% if active_page == 'about' %}active{% endif %}">🪄 About &amp; Profile</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/myrail" class="nav-link {% if active_page == 'myrail' %}active{% endif %}">🚆 MyRail</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/inventra" class="nav-link {% if active_page == 'inventra' %}active{% endif %}">📦 INVENTRA</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/civicconnect" class="nav-link {% if active_page == 'civicconnect' %}active{% endif %}">🏛️ CivicConnect</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/story" class="nav-link {% if active_page == 'story' %}active{% endif %}">📖 9 Chapters</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/guestbook" class="nav-link {% if active_page == 'guestbook' %}active{% endif %}">✨ Beacon Wall</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/arcade" class="nav-link {% if active_page == 'arcade' %}active{% endif %}">🎮 Arcade Lab</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day (Dawn) / Night (Midnight) Mood">
+          <span id="mood-icon">🌙</span>
+          <span id="mood-label">Night</span>
+        </button>
+
+        <!-- Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Flashlight Torch Mode">
+          <span id="torch-icon">🔦</span>
+          <span id="torch-label">Torch: Off</span>
+        </button>
+
+        <!-- 3D Circular Portals Nexus Hub Switcher -->
+        <a href="/portals" class="btn-pill btn-cyan" title="Step into the 3D Circular Portals Nexus">
+          <span>🌀 3D Nexus</span>
+        </a>
+
+        <!-- Sound Toggle -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle magic audio chimes" title="Toggle sound effects">
+          <span id="mute-icon">🔔</span>
+          <span id="mute-label">Sound On</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Portal Content -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+
+    <!-- Universal Realm Jumper Strip -->
+    <div class="container">
+      <aside class="realm-jumper-strip" aria-label="Warp into other portal realms">
+        <div class="realm-jumper-head">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--neon-cyan); text-transform: uppercase;">
+              🌀 The Cosmic Nexus Gateways
+            </span>
+            <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-top: 0.2rem;">
+              Jump Between Portal Realms
+            </h3>
+          </div>
+          <a href="/portals" class="btn-pill btn-cyan" style="font-size: 0.8rem;">
+            <span>🌀 3D Rotating Portals View</span>
+          </a>
+        </div>
+
+        <div class="realm-jumper-grid">
+          <a href="/portal/myrail" class="realm-jump-card" style="--card-accent: #00f5ff;">
+            <span class="realm-jump-icon">🚆</span>
+            <div>
+              <div class="realm-jump-name">MyRail Orbit</div>
+              <div class="realm-jump-tag">Realm 01 · Transit</div>
+            </div>
+          </a>
+
+          <a href="/portal/inventra" class="realm-jump-card" style="--card-accent: #a855f7;">
+            <span class="realm-jump-icon">📦</span>
+            <div>
+              <div class="realm-jump-name">INVENTRA Vault</div>
+              <div class="realm-jump-tag">Realm 02 · Enterprise</div>
+            </div>
+          </a>
+
+          <a href="/portal/civicconnect" class="realm-jump-card" style="--card-accent: #10b981;">
+            <span class="realm-jump-icon">🏛️</span>
+            <div>
+              <div class="realm-jump-name">CivicConnect Pulse</div>
+              <div class="realm-jump-tag">Realm 03 · Public Good</div>
+            </div>
+          </a>
+
+          <a href="/portal/story" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">📖</span>
+            <div>
+              <div class="realm-jump-name">Worldsmith Codex</div>
+              <div class="realm-jump-tag">Realm 04 · 9 Chapters</div>
+            </div>
+          </a>
+
+          <a href="/portal/about" class="realm-jump-card" style="--card-accent: #ff759f;">
+            <span class="realm-jump-icon">🪄</span>
+            <div>
+              <div class="realm-jump-name">Character Sheet</div>
+              <div class="realm-jump-tag">Realm 05 · Tech Forge</div>
+            </div>
+          </a>
+
+          <a href="/portal/guestbook" class="realm-jump-card" style="--card-accent: #38bdf8;">
+            <span class="realm-jump-icon">✨</span>
+            <div>
+              <div class="realm-jump-name">Dreamers' Beacon</div>
+              <div class="realm-jump-tag">Realm 06 · Live Wall</div>
+            </div>
+          </a>
+
+          <a href="/portal/arcade" class="realm-jump-card" style="--card-accent: #fbbf24;">
+            <span class="realm-jump-icon">🎮</span>
+            <div>
+              <div class="realm-jump-name">Arcade & Synth Lab</div>
+              <div class="realm-jump-tag">Creative Labs</div>
+            </div>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Retro Web Badges & Footer -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div class="footer-badges">
+        <span class="retro-chip">🪄 Aman Sharma · The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Full-Stack Software Developer</span>
+        <span class="retro-chip">🐍 Python 3.13 + Flask</span>
+        <span class="retro-chip">💾 SQLite3 Storage</span>
+        <span class="retro-chip">✨ Wand Navigation</span>
+      </div>
+
+      <!-- Developer Tech Badges Strip -->
+      <div class="chaos-badges-strip" title="Aman Sharma · Developer Badges">
+        <span class="retro-badge-88x31">Aman.dev</span>
+        <span class="retro-badge-88x31">Python 3.13</span>
+        <span class="retro-badge-88x31">SQLite3</span>
+        <span class="retro-badge-88x31">Three.js 3D</span>
+        <span class="retro-badge-88x31">Audio Synth</span>
+        <span class="retro-badge-88x31">Portfolio</span>
+        <span class="retro-badge-88x31">Starlight UI</span>
+        <span class="retro-badge-88x31">Modern Web</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+        Designed & engineered by <strong>Aman Sharma</strong> · Software Architect & Living World Creator.<br>
+        Tagline: <em>“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”</em>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Mascot Companion (Baby Iron Man & Baby Hulk) -->
+  <div class="floating-companion-widget" id="floating-companion-widget">
+    <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+      <div class="companion-bubble-header">
+        <div class="companion-bubble-title" id="companion-name-display">
+          <span>🚀</span>
+          <span id="companion-name-text">Baby Tony (Iron Man)</span>
+        </div>
+        <button id="close-companion-bubble" class="btn-pill" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;" aria-label="Close companion speech">✕</button>
+      </div>
+      <p class="companion-bubble-text" id="companion-dialogue-text">
+        “Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”
+      </p>
+      <div class="companion-switch-bar">
+        <button class="companion-switch-btn active" id="switch-to-ironman" data-character="ironman">🔴 Baby Iron Man</button>
+        <button class="companion-switch-btn" id="switch-to-hulk" data-character="hulk">💚 Baby Hulk</button>
+      </div>
+      <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+        <a href="/portal/arcade#lullaby-lab" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem;">🎵 Lullaby Box</a>
+        <a href="/portal/about#character-assets" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem; border-color: var(--solar-gold); color: var(--solar-gold);">🎨 Asset Vault</a>
+      </div>
+    </div>
+
+    <button class="companion-trigger-btn" id="companion-trigger-btn" aria-label="Toggle Companion Mascot" title="Click to talk with your Baby Super-Hero Companion!">
+      <img id="companion-avatar-img" src="{{ url_for('static', filename='assets/baby_ironman_cloud.png') }}" alt="Baby Superhero Companion">
+      <span class="companion-online-dot"></span>
+    </button>
+  </div>
+
+  <!-- Interactive Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Chat with Aman in real-time">
+    <span>💬</span>
+    <span>Chat with Aman</span>
+  </button>
+
+  <div id="chat-console-panel" class="hidden" role="dialog" aria-label="Chat with Aman">
+    <div class="chat-console-header">
+      <div style="display: flex; align-items: center; gap: 0.6rem;">
+        <span style="font-size: 1.25rem;">🪄</span>
+        <div>
+          <div style="font-family: var(--font-bubbly); font-weight: 700; font-size: 0.95rem; color: #fff;">Aman, The Worldsmith</div>
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">Online · Listening in real-time</div>
+        </div>
+      </div>
+      <button id="close-chat-btn" class="btn-pill" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" aria-label="Close Chat">✕</button>
+    </div>
+
+    <div class="chat-messages-scroll" id="chat-messages-scroll">
+      <div class="chat-bubble aman">
+        Hey there! I'm Aman. Ask me about MyRail, why I build INVENTRA, how I deal with imposter syndrome and self-doubts, or what keeping faith in family means to me.
+      </div>
+    </div>
+
+    <div class="chat-quick-prompts">
+      <button class="quick-prompt-chip" data-prompt="Dealing with doubt">Dealing with doubt</button>
+      <button class="quick-prompt-chip" data-prompt="Why MyRail?">Why MyRail?</button>
+      <button class="quick-prompt-chip" data-prompt="Tell me about your family">Family & Care</button>
+      <button class="quick-prompt-chip" data-prompt="Advice for beginners">Advice for beginners</button>
+    </div>
+
+    <form id="chat-form" class="chat-input-bar">
+      <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Ask Aman something..." maxlength="140" autocomplete="off">
+      <button type="submit" class="btn-pill btn-cyan" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Send</button>
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

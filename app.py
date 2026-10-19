@@ -1,7 +1,6 @@
 """
-Aman: The Young Worldsmith - Flask & SQLite Backend
-Built for the haX.baby 48-Hour Hackathon: "Baby's First Website"
-Track 2: Your Own Baby (Original Character & World)
+Aman Sharma: The Young Worldsmith - Flask & SQLite Backend
+Software Developer Portfolio & Interactive Project Ecosystem
 Character: Aman, The Boy Who Was Building His Own World
 """
 
@@ -95,7 +94,7 @@ def init_db():
         seed_wishes = [
             ('A Fellow Coder', 'Keep pushing through the compiler errors, Aman. Every bug fixed is a step closer to mastery!', '💻 Code Craftsman'),
             ('Mom', 'So proud of your heart and your hard work. You carry our love wherever your code takes you.', '❤️ Family Heart'),
-            ('haX.baby Hackathon Jury', 'A magnificent story of resilience, responsibility, and genuine software craft. Welcome to haX!', '🏆 haX Certified'),
+            ('Tech Community Reviewer', 'A magnificent story of resilience, responsibility, and genuine software craft. Exceptional portfolio!', '⭐ Star Creator'),
         ]
         for author, wish, mood in seed_wishes:
             cursor.execute('''
@@ -191,7 +190,7 @@ AMAN_STORY_CHAPTERS = [
 
 
 # -------------------------------------------------------------
-# Web Page Routes
+# Web Page Routes (Separate Dedicated Portals & Realms)
 # -------------------------------------------------------------
 @app.route('/')
 @app.route('/portals')
@@ -201,16 +200,163 @@ def portals_landing():
     cursor = db.cursor()
     cursor.execute('SELECT lines_of_code, dreams_delivered, visits_count FROM stats WHERE id = 1')
     stats = cursor.fetchone()
-    return render_template('portals.html', stats=stats)
+    return render_template('portals.html', stats=stats, active_page='nexus')
+
+
+# -------------------------------------------------------------
+# Real Flagship Projects Metadata
+# -------------------------------------------------------------
+PROJECTS_METADATA = {
+    'myrail': {
+        'project_id': 'myrail',
+        'name': 'MyRail Transit System',
+        'category': 'Infrastructure & Public Transport',
+        'tech_stack': 'Python, Flask, API, SQL',
+        'live_url': 'https://myrailbase.netlify.app/',
+        'github_url': 'https://github.com/CodingWithAman1/myRail',
+        'preview_img': 'myrail.png',
+        'tagline': 'Real-Time Train Transit Intelligence & Routing System'
+    },
+    'inventra': {
+        'project_id': 'inventra',
+        'name': 'INVENTRA Core',
+        'category': 'Enterprise Inventory & Dashboard Engine',
+        'tech_stack': 'Database Design, Full-Stack, Analytics',
+        'live_url': 'https://inventra-rho-lac.vercel.app/',
+        'github_url': 'https://github.com/CodingWithAman1/Inventra',
+        'preview_img': 'inv.png',
+        'tagline': 'Full-Stack Warehouse Relational Database & Dashboard Engine'
+    },
+    'civicconnect': {
+        'project_id': 'civicconnect',
+        'name': 'CivicConnect',
+        'category': 'Public Transparency & Civic Action',
+        'tech_stack': 'Community Empowerment, Accountability, Web',
+        'live_url': 'https://civicconnectweb.onrender.com/',
+        'github_url': 'https://github.com/CodingWithAman1/CivicConnect',
+        'preview_img': 'civicconnect.png',
+        'tagline': 'AI-Powered Citizen Grievance Resolution & Transparency Platform'
+    }
+}
+
+
+@app.route('/portal/myrail')
+@app.route('/realm/myrail')
+@app.route('/projects/myrail')
+def realm_myrail():
+    """Renders dedicated MyRail Transit System portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM projects WHERE project_id = "myrail"')
+    project = cursor.fetchone()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    return render_template(
+        'portal_myrail.html',
+        project=project,
+        project_meta=PROJECTS_METADATA['myrail'],
+        stats=stats,
+        active_page='myrail'
+    )
+
+
+@app.route('/portal/inventra')
+@app.route('/realm/inventra')
+@app.route('/projects/inventra')
+def realm_inventra():
+    """Renders dedicated INVENTRA Core enterprise inventory portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM projects WHERE project_id = "inventra"')
+    project = cursor.fetchone()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    return render_template(
+        'portal_inventra.html',
+        project=project,
+        project_meta=PROJECTS_METADATA['inventra'],
+        stats=stats,
+        active_page='inventra'
+    )
+
+
+@app.route('/portal/civicconnect')
+@app.route('/realm/civicconnect')
+@app.route('/projects/civicconnect')
+def realm_civicconnect():
+    """Renders dedicated CivicConnect civic action & transparency portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM projects WHERE project_id = "civicconnect"')
+    project = cursor.fetchone()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    return render_template(
+        'portal_civicconnect.html',
+        project=project,
+        project_meta=PROJECTS_METADATA['civicconnect'],
+        stats=stats,
+        active_page='civicconnect'
+    )
+
+
+@app.route('/portal/story')
+@app.route('/story')
+@app.route('/codex')
+@app.route('/portal/codex')
+def realm_story():
+    """Renders dedicated Worldsmith Codex 9-chapter chronicle portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    return render_template('portal_story.html', chapters=AMAN_STORY_CHAPTERS, stats=stats, active_page='story')
+
+
+@app.route('/portal/about')
+@app.route('/about')
+@app.route('/character')
+@app.route('/portal/forge')
+def realm_about():
+    """Renders dedicated Character Sheet & Tech Forge portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    return render_template('portal_about.html', stats=stats, active_page='about')
+
+
+@app.route('/portal/guestbook')
+@app.route('/guestbook')
+@app.route('/beacon')
+@app.route('/portal/beacon')
+def realm_guestbook():
+    """Renders dedicated Dreamers' Beacon SQLite inspiration wall portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    cursor.execute('SELECT * FROM guestbook ORDER BY id DESC LIMIT 40')
+    wishes = cursor.fetchall()
+    return render_template('portal_guestbook.html', wishes=wishes, stats=stats, active_page='guestbook')
+
+
+@app.route('/portal/arcade')
+@app.route('/arcade')
+@app.route('/lab')
+def realm_arcade():
+    """Renders dedicated Arcade mini-game & Lullaby Synth lab portal."""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM stats WHERE id = 1')
+    stats = cursor.fetchone()
+    return render_template('portal_arcade.html', stats=stats, active_page='arcade')
 
 
 @app.route('/portfolio')
-@app.route('/story')
 @app.route('/projects')
-@app.route('/about')
-@app.route('/guestbook')
 def portfolio():
-    """Renders the full interactive world portfolio page."""
+    """Redirects or renders the full interactive world portfolio view."""
     db = get_db()
     cursor = db.cursor()
 
@@ -229,8 +375,10 @@ def portfolio():
         stats=stats,
         wishes=wishes,
         projects=projects,
+        projects_meta=PROJECTS_METADATA,
         chapters=AMAN_STORY_CHAPTERS,
-        current_year=2026
+        current_year=2026,
+        active_page='portfolio'
     )
 
 
@@ -357,7 +505,7 @@ def star_project():
 
 @app.route('/api/chat', methods=['POST'])
 def chat_with_aman():
-    """Character Chats Back: Interactive dialogue in Aman's authentic voice (Tier 3)."""
+    """Interactive dialogue in Aman's authentic developer voice."""
     data = request.get_json() or {}
     message = (data.get('message') or '').strip().lower()
 

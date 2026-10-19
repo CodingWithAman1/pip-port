@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aman: The Young Worldsmith · The Boy Who Was Building His Own World. Built for the haX.baby 48-Hour Hackathon (Track 2).">
-  <title>Aman · The Young Worldsmith | haX.baby Portfolio</title>
+  <meta name="description" content="Aman Sharma: Software Architect & Digital Worldsmith — Portfolio, Inventions, and Creative Engineering.">
+  <title>Aman Sharma — Software Architect & Digital Worldsmith</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-  <!-- Tier 2: Flashlight / Torch Cursor Overlay Canvas -->
+  <!-- Flashlight / Torch Cursor Overlay Canvas -->
   <canvas id="torch-overlay-canvas"></canvas>
 
   <!-- Custom Magic Wand Cursor -->
@@ -37,22 +37,33 @@
 
       <nav aria-label="Main Navigation">
         <ul class="nav-links">
-          <li><a href="#about" class="nav-link">Character Sheet</a></li>
-          <li><a href="#projects" class="nav-link">Creations</a></li>
-          <li><a href="#story" class="nav-link">The 9 Chapters</a></li>
-          <li><a href="#guestbook" class="nav-link">Inspiration Wall</a></li>
+          <li><a href="/portals" class="nav-link">🌀 Nexus</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/about" class="nav-link">🪄 Character Sheet</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/myrail" class="nav-link">🚆 MyRail</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/inventra" class="nav-link">📦 INVENTRA</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/civicconnect" class="nav-link">🏛️ CivicConnect</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/story" class="nav-link">📖 9 Chapters</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/guestbook" class="nav-link">✨ Beacon Wall</a></li>
+          <li class="nav-divider" aria-hidden="true">✦</li>
+          <li><a href="/portal/arcade" class="nav-link">🎮 Arcade Lab</a></li>
         </ul>
       </nav>
 
       <div class="nav-controls">
-        <!-- Tier 1: Day / Night Mood Toggle -->
-        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day (Dawn) / Night (Midnight) Mood (Tier 1)">
+        <!-- Day / Night Mood Toggle -->
+        <button id="mood-toggle-btn" class="btn-pill" aria-label="Toggle Day / Night mood" title="Toggle Day / Night Ambience">
           <span id="mood-icon">🌙</span>
           <span id="mood-label">Night</span>
         </button>
 
-        <!-- Tier 2: Flashlight / Torch Mode Toggle -->
-        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Flashlight Torch Mode (Tier 2)">
+        <!-- Flashlight / Torch Mode Toggle -->
+        <button id="torch-toggle-btn" class="btn-pill" aria-label="Toggle Flashlight Torch Mode" title="Toggle Torch Focus Light">
           <span id="torch-icon">🔦</span>
           <span id="torch-label">Torch: Off</span>
         </button>
@@ -62,8 +73,8 @@
           <span>🌀 3D Portals Nexus</span>
         </a>
 
-        <!-- Accessible Mute / Sound Toggle (Side Quest 4) -->
-        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle magic audio chimes" title="Toggle sound effects">
+        <!-- Sound Toggle -->
+        <button id="mute-toggle-btn" class="btn-pill" aria-label="Toggle audio effects" title="Toggle sound effects">
           <span id="mute-icon">🔔</span>
           <span id="mute-label">Sound On</span>
         </button>
@@ -78,7 +89,7 @@
     <section class="hero-section">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <!-- Tier 3: Returning Visitor Memory Badge -->
+          <!-- Returning Visitor Memory Badge -->
           <div id="visitor-memory-badge" class="visitor-memory-badge">
             <span>✦</span>
             <span id="visitor-memory-text">Welcome, voyager! Starting your Worldsmith journey...</span>
@@ -86,7 +97,7 @@
 
           <div class="hero-tag-pill">
             <span>✨</span>
-            <span>haX.baby Hackathon · Track 2 (Original Character)</span>
+            <span>Full-Stack Developer & Living World Creator</span>
           </div>
 
           <h1 class="hero-title">
@@ -111,7 +122,7 @@
             </button>
           </div>
 
-          <!-- Live SQLite Odometer Stats (Side Quest 3) -->
+          <!-- Live SQLite Platform Stats -->
           <div class="hero-odometer-row">
             <div class="stat-box">
               <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
@@ -144,14 +155,14 @@
           </div>
         </div>
 
-        <!-- 3D Hologram Character Stage with Tier 1 Eye & Cursor Tracking -->
+        <!-- 3D Hologram Character Stage with Eye & Cursor Tracking -->
         <div class="hero-character-stage">
           <div class="hologram-halo"></div>
 
           <div class="character-card-holographic" id="character-holo-card">
             <div class="character-avatar-icon" id="character-avatar-icon">🪄</div>
 
-            <!-- Tier 1: Character Eyes Tracking Pointer -->
+            <!-- Character Eyes Tracking Pointer -->
             <div class="character-eyes-container" aria-hidden="true">
               <div class="character-eye" id="left-eye"><div class="character-pupil" id="left-pupil"></div></div>
               <div class="character-eye" id="right-eye"><div class="character-pupil" id="right-pupil"></div></div>
@@ -185,47 +196,47 @@
       </div>
     </section>
 
-    <!-- Character Sheet (Section 01 - Track 2 Formal Profile) -->
+    <!-- About The Developer Profile -->
     <section id="about" class="section" style="background: var(--bg-space); border-top: 1px solid var(--border-neon); border-bottom: 1px solid var(--border-neon);">
       <div class="container">
         <div class="section-head">
-          <div class="section-tag">Track 2 · 5-Point Character Sheet</div>
-          <h2 class="section-title">Character Profile: The Worldsmith</h2>
+          <div class="section-tag">About The Developer · Creator Profile</div>
+          <h2 class="section-title">Developer Profile: The Worldsmith</h2>
           <p class="section-subtitle">
-            An original character grounded in real-world aspirations, quiet persistence, and the craft of code.
+            An authentic developer journey grounded in real-world aspirations, quiet persistence, and the craft of code.
           </p>
         </div>
 
         <div style="background: var(--bg-surface); border: 2px solid var(--border-neon); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--card-shadow); max-width: 860px; margin: 0 auto;">
           <div style="display: grid; gap: 1.5rem;">
             <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">1. Character Name</span>
-              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.25rem;">Aman, The Young Worldsmith</h3>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">1. The Developer</span>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.25rem;">Aman Sharma · The Young Worldsmith</h3>
             </div>
 
             <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">2. What They Are (Species, Look & Personality)</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">2. Identity, Craft & Mindset</span>
               <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
                 A young computer science student and digital architect wrapped in a midnight hoodie with glowing circuitry patterns. Curious, impatient with stagnation yet endlessly patient with bugs, deeply devoted to his family, and driven by the quiet hunger to build things that outlast ordinary marks.
               </p>
             </div>
 
             <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">3. What They Do (Craft & Inventions)</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">3. Engineered Systems & Flagship Projects</span>
               <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
                 Software Developer & Living World Creator. He architects real systems: <strong>MyRail</strong> (transit intelligence), <strong>INVENTRA</strong> (inventory management), and <strong>CivicConnect</strong> (citizen civic empowerment platform).
               </p>
             </div>
 
             <div style="border-bottom: 1px dashed var(--border-glass); padding-bottom: 1rem;">
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">4. Their Story</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">4. Journey, Family & Purpose</span>
               <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.25rem; line-height: 1.6;">
                 The quiet battle between wanting to improve and the time required to do so. Navigating family health hurdles, exam deadlines, API failures, and silent uncertainties—discovering that becoming someone isn’t a single event, but a continuous decision to open the laptop and build.
               </p>
             </div>
 
             <div>
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">5. Tagline Motto</span>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase;">5. Guiding Motto</span>
               <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--solar-gold); margin-top: 0.25rem;">
                 “The story wasn't about a boy who knew he would win. It was about a boy who chose to find out what he was capable of.”
               </p>
@@ -233,20 +244,115 @@
           </div>
         </div>
 
-        <!-- Tier 1: Discoverable Easter Egg Banner (Triggered by Wand Gem or Keyboard) -->
+        <!-- Discoverable Easter Egg Banner -->
         <div id="easter-egg-banner" class="easter-egg-banner">
           <h4 style="font-family: var(--font-bubbly); color: var(--solar-gold); font-size: 1.25rem; margin-bottom: 0.35rem;">
             🌟 Hidden Easter Egg Discovered!
           </h4>
           <p style="font-size: 0.98rem; color: #ffffff; line-height: 1.6;">
             “Every expert was once a beginner who refused to quit.”<br>
-            <strong style="color: var(--neon-cyan);">✦ You unlocked Aman’s Secret Constellation! (+500 Worldsmith XP)</strong>
+            <strong style="color: var(--neon-cyan);">✦ You unlocked Aman’s Secret Constellation! (Developer Secret Unlocked)</strong>
           </p>
         </div>
 
-        <!-- Tier 2: Hidden Torch Message (Revealed by Flashlight Torch Mode) -->
-        <div class="torch-secret-message" style="text-align: center; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.88rem; color: var(--neon-cyan);">
-          🔦 [TORCH SECRET]: "A broken program isn't a dead end. It is a map of what needs understanding next."
+        <!-- Creative Visual Assets & Companions -->
+        <div class="character-assets-section" style="margin-top: 3.5rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <div class="section-tag" style="margin-bottom: 0.25rem;">Visual Artifacts & Companions · Asset Showcase</div>
+              <h3 style="font-family: var(--font-bubbly); font-size: 1.85rem; color: #fff; margin: 0;">
+                Creative Character & Relic Showcase
+              </h3>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan);">
+              3D Stylized Studio Showcase
+            </div>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-soft); margin-top: 0.5rem; max-width: 780px; line-height: 1.6;">
+            Explore the four foundational visual artifacts designed for Aman's universe. Featuring Baby Iron Man (and Baby Hulk companion) bridging high-tech invention with childhood bedtime warmth.
+          </p>
+
+          <div class="character-assets-grid">
+            <!-- Card 1: Baby Waving on Cloud -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img id="asset-cloud-img-index" src="{{ url_for('static', filename='assets/baby_ironman_cloud.png') }}" alt="Baby Iron Man Waving on Cloud" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">Baby Hero Waving on Cloud</h4>
+              <p class="asset-card-desc">
+                Chibi Baby Iron Man floating on a sleepy cloud waving a tiny hand. Features polished nano-armor, smiling baby eyes, and starlight aura. Ideal for floating hero avatars and cursor companions.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <button class="btn-pill" id="btn-toggle-cloud-hero-index" style="flex: 1; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: var(--neon-cyan); color: var(--neon-cyan);">
+                  ⇄ Swap to Baby Hulk
+                </button>
+              </div>
+              <a href="{{ url_for('static', filename='assets/baby_ironman_cloud.png') }}" target="_blank" download="baby_hero_cloud.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+
+            <!-- Card 2: The Lullaby Lab Music Box -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img src="{{ url_for('static', filename='assets/baby_ironman_music_box.png') }}" alt="The Lullaby Lab Music Box" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">The Lullaby Lab Music Box</h4>
+              <p class="asset-card-desc">
+                Pastel high-tech music box with a golden winding key, glowing micro arc-reactor core, circuit traces, and floating star chimes. Centerpiece for Aman's Web Audio sound engine.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <a href="#lab" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.74rem; padding: 0.35rem 0.6rem;">
+                  ▶ Test in Audio Lab
+                </a>
+              </div>
+              <a href="{{ url_for('static', filename='assets/baby_ironman_music_box.png') }}" target="_blank" download="lullaby_music_box.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+
+            <!-- Card 3: Dream Nightlight Lantern -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img src="{{ url_for('static', filename='assets/baby_ironman_lantern.png') }}" alt="Dream Nightlight Lantern" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">Dream Nightlight Lantern</h4>
+              <p class="asset-card-desc">
+                Glowing sleeping crescent moon porcelain lamp with crimson-and-gold brass trim, glowing filament core, and bedside handle. Perfect for day/night ambient focus illumination.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <button class="btn-pill" id="btn-lantern-ignite-index" style="flex: 1; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: var(--solar-gold); color: var(--solar-gold);">
+                  💡 Ignite Lantern
+                </button>
+              </div>
+              <a href="{{ url_for('static', filename='assets/baby_ironman_lantern.png') }}" target="_blank" download="dream_nightlight_lantern.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+
+            <!-- Card 4: Studio Character Portrait -->
+            <article class="character-asset-card">
+              <span class="asset-badge-top">HIGH-RES IMAGE</span>
+              <div class="asset-image-box">
+                <img src="{{ url_for('static', filename='assets/baby_ironman_portrait.png') }}" alt="Baby Iron Man Studio Character Portrait" loading="lazy">
+              </div>
+              <h4 class="asset-card-title">3D Hero Studio Portrait</h4>
+              <p class="asset-card-desc">
+                Official full-body reference illustration of Baby Iron Man holding the dream nightlight lantern on a studio pedestal. Official character mascot of the Worldsmith ecosystem.
+              </p>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.65rem;">
+                <a href="#story" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.74rem; padding: 0.35rem 0.6rem; border-color: #ff759f; color: #ff759f;">
+                  📖 Read in Codex
+                </a>
+              </div>
+              <a href="{{ url_for('static', filename='assets/baby_ironman_portrait.png') }}" target="_blank" download="character_studio_portrait.png" class="asset-action-btn">
+                <span>📥 Download Image</span>
+              </a>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -282,12 +388,21 @@
               <span class="tech-chip">Real-Time Data</span>
             </div>
 
-            <div class="project-action-row">
+            <div class="project-action-row" style="flex-wrap: wrap; gap: 0.5rem;">
+              <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-cyan" style="padding: 0.45rem 1rem; font-size: 0.82rem; width: 100%; justify-content: center;">
+                <span>🚀 Go to Actual Project</span>
+                <span class="btn-actual-arrow">↗</span>
+              </a>
+              <a href="https://github.com/CodingWithAman1/myRail" target="_blank" rel="noopener noreferrer" class="btn-pill" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>🐙 GitHub</span>
+              </a>
+              <a href="/portal/myrail" class="btn-pill btn-cyan" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>Enter Realm 🚆</span>
+              </a>
               <button class="star-project-btn" data-project="myrail">
-                <span>⭐ Star Project</span>
+                <span>⭐ Star</span>
                 <span class="star-num">{{ projects['myrail']['stars_count'] if projects.get('myrail') else 342 }}</span>
               </button>
-              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-cyan);">Infrastructure</span>
             </div>
           </article>
 
@@ -310,12 +425,21 @@
               <span class="tech-chip">Full-Stack</span>
             </div>
 
-            <div class="project-action-row">
+            <div class="project-action-row" style="flex-wrap: wrap; gap: 0.5rem;">
+              <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-violet" style="padding: 0.45rem 1rem; font-size: 0.82rem; width: 100%; justify-content: center;">
+                <span>🚀 Go to Actual Project</span>
+                <span class="btn-actual-arrow">↗</span>
+              </a>
+              <a href="https://github.com/CodingWithAman1/Inventra" target="_blank" rel="noopener noreferrer" class="btn-pill" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>🐙 GitHub</span>
+              </a>
+              <a href="/portal/inventra" class="btn-pill btn-violet" style="font-size: 0.78rem; padding: 0.35rem 0.85rem; color: #fff;">
+                <span>Enter Realm 📦</span>
+              </a>
               <button class="star-project-btn" data-project="inventra">
-                <span>⭐ Star Project</span>
+                <span>⭐ Star</span>
                 <span class="star-num">{{ projects['inventra']['stars_count'] if projects.get('inventra') else 418 }}</span>
               </button>
-              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-cyan);">Operations</span>
             </div>
           </article>
 
@@ -338,21 +462,30 @@
               <span class="tech-chip">Social Good</span>
             </div>
 
-            <div class="project-action-row">
+            <div class="project-action-row" style="flex-wrap: wrap; gap: 0.5rem;">
+              <a href="https://civicconnectweb.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-emerald" style="padding: 0.45rem 1rem; font-size: 0.82rem; width: 100%; justify-content: center;">
+                <span>🚀 Go to Actual Project</span>
+                <span class="btn-actual-arrow">↗</span>
+              </a>
+              <a href="https://github.com/CodingWithAman1/CivicConnect" target="_blank" rel="noopener noreferrer" class="btn-pill" style="font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>🐙 GitHub</span>
+              </a>
+              <a href="/portal/civicconnect" class="btn-pill" style="border-color: #10b981; color: #10b981; font-size: 0.78rem; padding: 0.35rem 0.85rem;">
+                <span>Enter Realm 🏛️</span>
+              </a>
               <button class="star-project-btn" data-project="civicconnect">
-                <span>⭐ Star Project</span>
+                <span>⭐ Star</span>
                 <span class="star-num">{{ projects['civicconnect']['stars_count'] if projects.get('civicconnect') else 529 }}</span>
               </button>
-              <span style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--neon-cyan);">Civic Tech</span>
             </div>
           </article>
         </div>
 
-        <!-- Tier 2: Dream Delivery & Transit Routes SVG Map (Synced with Scroll) -->
+        <!-- Dream Delivery & Transit Routes SVG Map (Synced with Scroll) -->
         <div class="transit-map-card" id="dream-transit-map">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
             <div>
-              <div class="section-tag" style="margin-bottom: 0.3rem;">Tier 2 Memorable Standout · Route Motion</div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Logistics · Route Motion</div>
               <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
                 MyRail & Dream Delivery Transit Map
               </h3>
@@ -396,32 +529,76 @@
           </div>
         </div>
 
-        <!-- Tier 2: Lullaby Lab & Generative Audio Synth (with Required Mute Switch) -->
+        <!-- Lullaby Lab & Multi-Voice Generative Audio Synth -->
         <div class="lullaby-synth-card" id="lullaby-lab">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
             <div>
-              <div class="section-tag" style="margin-bottom: 0.3rem;">Tier 2 Memorable Standout · Real Audio</div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Procedural Audio · Generative Synthesizer</div>
               <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
-                Lullaby Lab & Generative Audio Synth
+                Lullaby Lab & Multi-Voice Generative Audio Synth
               </h3>
             </div>
             <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold);">
-              Web Audio API Oscillator Engine
+              Polyphonic Web Audio API Engine
             </span>
           </div>
           <p style="font-size: 0.92rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.5;">
-            Generative pentatonic chime lullabies designed to help Aman (and late-night hackathon coders) focus, rest, and build. Generated in real-time with Web Audio oscillators!
+            Algorithmic generative pentatonic lullabies designed to help Aman (and late-night deep focus coders) focus, rest, and build. Generated in real-time with multi-voice oscillators, sub-bass drones, and organic interval walks!
           </p>
-          <div class="synth-controls-row">
+
+          <!-- Interactive Music Box Centerpiece (Card 2) -->
+          <div class="lullaby-interactive-box" id="lullaby-box-centerpiece-index">
+            <div class="lullaby-box-visual" id="lullaby-box-visual-index">
+              <img src="{{ url_for('static', filename='assets/baby_ironman_music_box.png') }}" alt="The Lullaby Lab Music Box">
+            </div>
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--solar-gold); text-transform: uppercase;">
+                Ambient Soundscape Centerpiece
+              </div>
+              <h4 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin: 0.2rem 0;">
+                The Arc Reactor Lullaby Music Box
+              </h4>
+              <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin: 0;">
+                Crafted with brass gears, glowing arc-reactor coils, and harmonic chimes. When activated, it generates procedural pentatonic lullabies in real time to recharge weary developers.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0;">
             <button id="synth-play-btn" class="btn-pill btn-cyan" style="padding: 0.75rem 1.5rem;">
               <span id="synth-play-icon">▶</span>
               <span id="synth-play-label">Play Generative Lullaby</span>
             </button>
-            <button id="synth-preset-midnight" class="btn-pill active" style="font-size: 0.82rem;">🌙 Midnight Nursery</button>
-            <button id="synth-preset-coder" class="btn-pill" style="font-size: 0.82rem;">⚡ Deep Coder Focus</button>
-            <button id="synth-preset-starlight" class="btn-pill" style="font-size: 0.82rem;">✨ Stardust Serenade</button>
+            <button id="synth-drone-toggle" class="btn-pill" style="border-color: #a855f7; color: #c084fc; font-size: 0.8rem;">
+              <span>🌌 Sub-Bass Drone: <strong id="drone-status-text">OFF</strong></span>
+            </button>
+            <div style="display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg-surface); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-glass);">
+              <span style="color: var(--text-muted);">Tempo:</span>
+              <button class="synth-tempo-btn btn-pill" data-tempo="slow" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">Slumber</button>
+              <button class="synth-tempo-btn btn-pill active" data-tempo="medium" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">Calm</button>
+              <button class="synth-tempo-btn btn-pill" data-tempo="fast" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">Focus</button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg-surface); padding: 0.3rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-glass);">
+              <span style="color: var(--text-muted);">Texture:</span>
+              <button class="synth-texture-btn btn-pill active" data-texture="bells" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">🔔 Bells</button>
+              <button class="synth-texture-btn btn-pill" data-texture="pad" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">☁️ Pad</button>
+              <button class="synth-texture-btn btn-pill" data-texture="harp" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">🎵 Harp</button>
+              <button class="synth-texture-btn btn-pill" data-texture="chiptune" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;">👾 8-Bit</button>
+            </div>
+          </div>
+
+          <div class="synth-controls-row" style="flex-wrap: wrap;">
+            <button id="synth-preset-midnight" class="btn-pill active" style="font-size: 0.8rem;">🌙 Midnight Nursery</button>
+            <button id="synth-preset-coder" class="btn-pill" style="font-size: 0.8rem;">⚡ Deep Coder Focus</button>
+            <button id="synth-preset-starlight" class="btn-pill" style="font-size: 0.8rem;">✨ Stardust Serenade</button>
+            <button id="synth-preset-aurora" class="btn-pill" style="font-size: 0.8rem;">🌌 Aurora Void</button>
+            <button id="synth-preset-raindrop" class="btn-pill" style="font-size: 0.8rem;">🌧️ Raindrop Zen</button>
+            <button id="synth-preset-cosmic" class="btn-pill" style="font-size: 0.8rem;">🪐 Cosmic Chimes</button>
+            <button id="synth-preset-retro" class="btn-pill" style="font-size: 0.8rem;">👾 8-Bit Sleeptime</button>
             
-            <div class="synth-visualizer-bar" id="synth-visualizer" aria-label="Synthesizer Visualizer">
+            <div class="synth-visualizer-bar" id="synth-visualizer" aria-label="Synthesizer Visualizer" style="width: 220px;">
+              <div class="synth-viz-column"></div>
+              <div class="synth-viz-column"></div>
               <div class="synth-viz-column"></div>
               <div class="synth-viz-column"></div>
               <div class="synth-viz-column"></div>
@@ -434,31 +611,39 @@
           </div>
         </div>
 
-        <!-- Tier 2: Playable Arcade Mini-Game: Catch the Code Sparks -->
+        <!-- Playable Arcade Mini-Game: Starlight Ping Pong -->
         <div class="arcade-minigame-card" id="minigame-section">
           <div class="minigame-hud-top">
             <div>
-              <div class="section-tag" style="margin-bottom: 0.3rem;">Tier 2 Memorable Standout · Mini-Game</div>
+              <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Minigame · Cyber-Pong Arcade</div>
               <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff;">
-                Playable Arcade: Catch the Code Sparks
+                Starlight Ping Pong: Player vs Aman AI 🏓
               </h3>
             </div>
             <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-              <div style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--solar-gold);">
-                Score: <span id="game-score" style="font-weight: 700; font-size: 1.15rem; color: #fff;">0</span>
+              <div style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--neon-cyan);">
+                Player: <span id="pong-player-score" style="font-weight: 700; font-size: 1.35rem; color: #fff;">0</span>
               </div>
-              <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan);">
-                Best: <span id="game-high-score" style="font-weight: 700; color: #fff;">0</span>
+              <div style="font-family: var(--font-mono); font-size: 0.88rem; color: #ff759f;">
+                Aman AI: <span id="pong-ai-score" style="font-weight: 700; font-size: 1.35rem; color: #fff;">0</span>
               </div>
-              <button id="game-start-btn" class="btn-pill btn-violet" style="padding: 0.5rem 1.15rem; font-size: 0.85rem;">
-                Start Game 🎮
+              <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--solar-gold);">
+                Max Volley: <span id="pong-high-rally" style="font-weight: 700; color: #fff;">0</span>
+              </div>
+              <button id="pong-start-btn" class="btn-pill btn-cyan" style="padding: 0.5rem 1.15rem; font-size: 0.85rem;">
+                Serve Ball 🏓
+              </button>
+              <button id="pong-reset-btn" class="btn-pill" style="padding: 0.5rem 0.85rem; font-size: 0.8rem;">
+                Reset ↻
               </button>
             </div>
           </div>
           <p style="font-size: 0.88rem; color: var(--text-soft); margin-bottom: 0.85rem;">
-            Slide Aman's magic wand basket with your cursor to catch falling syntax runes ({ }, &lt;/&gt;, 01, ⚡, ★) before they fade into the void!
+            Control your left paddle with <strong>Mouse, Touch drag, or [W / S] / [↑ / ↓] keys</strong> to challenge Aman's autonomous Worldsmith Bot!
           </p>
-          <canvas id="minigame-canvas" width="800" height="260"></canvas>
+          <div style="position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1.5px solid var(--border-neon);">
+            <canvas id="pingpong-canvas" width="800" height="340" style="width: 100%; height: auto; display: block; background: #060914;"></canvas>
+          </div>
         </div>
       </div>
     </section>
@@ -474,11 +659,11 @@
           </p>
         </div>
 
-        <!-- Tier 2: Interactive Storybook Flipbook (Touch & Keyboard Left/Right Arrow Support) -->
+        <!-- Interactive Storybook Flipbook -->
         <div class="flipbook-container" id="flipbook-section">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
             <div>
-              <span class="section-tag" style="margin-bottom: 0.2rem;">Tier 2 Memorable Standout · Interactive Flipbook</span>
+              <span class="section-tag" style="margin-bottom: 0.2rem;">The Story Codex · Interactive Flipbook</span>
               <h3 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff;">Flip Through Aman's Codex</h3>
             </div>
             <span id="flipbook-page-indicator" style="font-family: var(--font-mono); font-weight: 700; font-size: 0.88rem; color: var(--solar-gold); background: rgba(251, 191, 36, 0.12); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid rgba(251, 191, 36, 0.3);">
@@ -546,7 +731,7 @@
     <section id="guestbook" class="section">
       <div class="container">
         <div class="section-head">
-          <div class="section-tag">Side Quest · Live Beacon Wall (+2 Pts)</div>
+          <div class="section-tag">Community Wall · Dreamers' Beacon</div>
           <h2 class="section-title">The Dreamers’ Beacon</h2>
           <p class="section-subtitle">
             Leave a message, piece of advice, or encouragement for Aman on this persistent SQLite wall!
@@ -573,7 +758,7 @@
                   <option value="💻 Code Craftsman">💻 Code Craftsman</option>
                   <option value="❤️ Family Heart">❤️ Family Heart</option>
                   <option value="⚡ Relentless Learner">⚡ Relentless Learner</option>
-                  <option value="🏆 haX Champion">🏆 haX Champion</option>
+                  <option value="🏆 Fellow Builder">🏆 Fellow Builder</option>
                 </select>
               </div>
 
@@ -671,38 +856,67 @@
     </div>
   </div>
 
-  <!-- Retro Early-Web Footer -->
+  <!-- Retro Web Badges & Footer -->
   <footer class="site-footer">
     <div class="container" style="text-align: center;">
       <div class="footer-badges">
-        <span class="retro-chip">🪄 Aman: The Young Worldsmith</span>
-        <span class="retro-chip">⚡ Track 2: Original Character</span>
+        <span class="retro-chip">🪄 Aman Sharma · The Young Worldsmith</span>
+        <span class="retro-chip">⚡ Full-Stack Software Developer</span>
         <span class="retro-chip">🐍 Python 3.13 + Flask</span>
         <span class="retro-chip">💾 SQLite3 Storage</span>
-        <span class="retro-chip">✨ Magic Wand Cursor</span>
+        <span class="retro-chip">✨ Wand Navigation</span>
       </div>
 
-      <!-- Side Quest 5: Retro 88x31 Chaos Mode Badges -->
-      <div class="chaos-badges-strip" title="haX.baby Retro 88x31 Chaos Badges (+5 Pts)">
-        <span class="retro-badge-88x31">haX.baby '26</span>
+      <!-- Developer Tech Badges Strip -->
+      <div class="chaos-badges-strip" title="Aman Sharma · Developer Badges">
+        <span class="retro-badge-88x31">Aman.dev</span>
         <span class="retro-badge-88x31">Python 3.13</span>
         <span class="retro-badge-88x31">SQLite3</span>
         <span class="retro-badge-88x31">Three.js 3D</span>
         <span class="retro-badge-88x31">Audio Synth</span>
-        <span class="retro-badge-88x31">Track 2 Baby</span>
-        <span class="retro-badge-88x31">Wand Stardust</span>
-        <span class="retro-badge-88x31">Netscape OK</span>
+        <span class="retro-badge-88x31">Portfolio</span>
+        <span class="retro-badge-88x31">Starlight UI</span>
+        <span class="retro-badge-88x31">Modern Web</span>
       </div>
 
       <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-        Original Character & Story for <strong>haX.baby 48-Hour Hackathon</strong> · “Baby’s First Website” (October 2026).<br>
-        Character: <strong>Aman, The Young Worldsmith</strong> · Tagline: <em>“There is a difference between being lost and being unfinished.”</em>
+        Designed & engineered by <strong>Aman Sharma</strong> · Software Architect & Living World Creator.<br>
+        Tagline: <em>“There is a difference between being lost and being unfinished. I am unfinished—and I am building myself.”</em>
       </p>
     </div>
   </footer>
 
-  <!-- Tier 3: Floating "Chat with Aman" Dialogue Console -->
-  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Character Chats Back (Tier 3)">
+  <!-- Floating Mascot Companion (Baby Iron Man & Baby Hulk) -->
+  <div class="floating-companion-widget" id="floating-companion-widget">
+    <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+      <div class="companion-bubble-header">
+        <div class="companion-bubble-title" id="companion-name-display">
+          <span>🚀</span>
+          <span id="companion-name-text">Baby Tony (Iron Man)</span>
+        </div>
+        <button id="close-companion-bubble" class="btn-pill" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;" aria-label="Close companion speech">✕</button>
+      </div>
+      <p class="companion-bubble-text" id="companion-dialogue-text">
+        “Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”
+      </p>
+      <div class="companion-switch-bar">
+        <button class="companion-switch-btn active" id="switch-to-ironman" data-character="ironman">🔴 Baby Iron Man</button>
+        <button class="companion-switch-btn" id="switch-to-hulk" data-character="hulk">💚 Baby Hulk</button>
+      </div>
+      <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+        <a href="#lab" class="btn-pill btn-cyan" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem;">🎵 Lullaby Box</a>
+        <a href="#about" class="btn-pill" style="flex: 1; text-align: center; font-size: 0.72rem; padding: 0.35rem 0.5rem; border-color: var(--solar-gold); color: var(--solar-gold);">🎨 Asset Vault</a>
+      </div>
+    </div>
+
+    <button class="companion-trigger-btn" id="companion-trigger-btn" aria-label="Toggle Companion Mascot" title="Click to talk with your Baby Super-Hero Companion!">
+      <img id="companion-avatar-img" src="{{ url_for('static', filename='assets/baby_ironman_cloud.png') }}" alt="Baby Superhero Companion">
+      <span class="companion-online-dot"></span>
+    </button>
+  </div>
+
+  <!-- Interactive Dialogue Console -->
+  <button id="chat-toggle-pill" aria-label="Open chat console with Aman" title="Chat with Aman in real-time">
     <span>💬</span>
     <span>Chat with Aman</span>
   </button>

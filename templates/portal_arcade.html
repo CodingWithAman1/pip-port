@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Arcade & Audio Lab · Starlight Ping Pong & Lullaby Synth{% endblock %}
+
+{% block content %}
+<section class="realm-hero-banner" style="--realm-color: var(--solar-gold); --realm-glow: rgba(251, 191, 36, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: var(--solar-gold); color: var(--solar-gold);">
+      <span>🎮</span>
+      <span>Creative Labs · Interactive Audio & Game Arena</span>
+    </div>
+
+    <h1 class="realm-title">
+      Arcade<span style="color: var(--solar-gold);">.lab</span> & Synth
+    </h1>
+
+    <p class="realm-subtitle">
+      Step into Aman's creative playground! Test your reflexes in retro <strong>Cyber-Pong (Player vs Worldsmith AI)</strong>, or relax to rich multi-voice algorithmic generative ambient lullabies powered by Web Audio API synthesizers.
+    </p>
+
+    <div class="project-actions-cta">
+      <a href="#minigame-section" class="btn-pill btn-cyan" style="padding: 0.85rem 1.75rem;">
+        <span>🏓 Play Cyber-Pong</span>
+      </a>
+      <a href="#lullaby-lab" class="btn-pill" style="border-color: var(--solar-gold); color: #fff;">
+        <span>🎵 Launch Multi-Voice Synth</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: Playable Arcade Ping Pong -->
+  <div class="arcade-minigame-card" id="minigame-section" style="margin-bottom: 3rem;">
+    <div class="minigame-hud-top">
+      <div>
+        <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Minigame · Cyber-Pong Arcade</div>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff;">
+          Starlight Ping Pong: Player vs Aman AI 🏓
+        </h3>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--neon-cyan);">
+          Player: <span id="pong-player-score" style="font-weight: 700; font-size: 1.4rem; color: #fff;">0</span>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.95rem; color: #ff759f;">
+          Aman AI: <span id="pong-ai-score" style="font-weight: 700; font-size: 1.4rem; color: #fff;">0</span>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--solar-gold);">
+          Max Volley: <span id="pong-high-rally" style="font-weight: 700; color: #fff;">0</span>
+        </div>
+        <button id="pong-start-btn" class="btn-pill btn-cyan" style="padding: 0.55rem 1.35rem; font-size: 0.9rem;">
+          Serve Ball 🏓
+        </button>
+        <button id="pong-reset-btn" class="btn-pill" style="padding: 0.55rem 1rem; font-size: 0.82rem;">
+          Reset Match ↻
+        </button>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.85rem;">
+      <p style="font-size: 0.92rem; color: var(--text-soft); margin: 0;">
+        Defeat Aman's autonomous bot! Control your paddle (Left, Cyan) with <strong>Mouse</strong>, <strong>Touch drag</strong>, or <strong>[W / S] / [↑ / ↓] keys</strong>.
+      </p>
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+        <span style="color: var(--text-muted);">Bot Skill:</span>
+        <button class="pong-diff-btn btn-pill active" data-diff="normal" style="padding: 0.2rem 0.65rem; font-size: 0.75rem;">Standard</button>
+        <button class="pong-diff-btn btn-pill" data-diff="master" style="padding: 0.2rem 0.65rem; font-size: 0.75rem;">Worldsmith Master</button>
+      </div>
+    </div>
+
+    <div style="position: relative; border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-neon); box-shadow: 0 0 24px rgba(0, 245, 255, 0.15);">
+      <canvas id="pingpong-canvas" width="800" height="360" style="width: 100%; height: auto; display: block; background: #060914; cursor: grab;"></canvas>
+    </div>
+  </div>
+
+  <!-- Section 2: Generative Lullaby Synthesizer (With Expanded Sound Variations) -->
+  <div class="lullaby-synth-card" id="lullaby-lab">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <div>
+        <div class="section-tag" style="margin-bottom: 0.3rem;">Procedural Audio · Generative Synthesizer</div>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff;">
+          Lullaby Lab & Multi-Voice Generative Audio Synth
+        </h3>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--solar-gold);">
+        Multi-Oscillator Polyphonic Engine
+      </span>
+    </div>
+    <p style="font-size: 0.94rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.6;">
+      Algorithmic generative pentatonic lullabies designed to help Aman (and late-night deep focus coders) focus, rest, and build. Generated in real-time with multi-voice Web Audio oscillators, sub-bass drones, and organic interval walks!
+    </p>
+
+    <!-- Interactive Music Box Centerpiece (Card 2) -->
+    <div class="lullaby-interactive-box" id="lullaby-box-centerpiece">
+      <div class="lullaby-box-visual" id="lullaby-box-visual">
+        <img src="{{ url_for('static', filename='assets/baby_ironman_music_box.png') }}" alt="The Lullaby Lab Music Box">
+      </div>
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--solar-gold); text-transform: uppercase;">
+          Ambient Soundscape Centerpiece
+        </div>
+        <h4 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin: 0.2rem 0;">
+          The Arc Reactor Lullaby Music Box
+        </h4>
+        <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin: 0;">
+          Crafted with brass gears, glowing arc-reactor coils, and harmonic chimes. When activated, it generates procedural pentatonic lullabies in real time to recharge weary developers.
+        </p>
+      </div>
+    </div>
+
+    <!-- Master Play/Pause & Sub-bass Drone controls -->
+    <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; margin: 1.25rem 0 1rem;">
+      <button id="synth-play-btn" class="btn-pill btn-cyan" style="padding: 0.75rem 1.6rem;">
+        <span id="synth-play-icon">▶</span>
+        <span id="synth-play-label">Play Generative Lullaby</span>
+      </button>
+
+      <button id="synth-drone-toggle" class="btn-pill" style="border-color: #a855f7; color: #c084fc; font-size: 0.82rem;">
+        <span>🌌 Sub-Bass Drone: <strong id="drone-status-text">OFF</strong></span>
+      </button>
+
+      <!-- Tempo Speed Selector -->
+      <div style="display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.78rem; background: var(--bg-surface); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid var(--border-glass);">
+        <span style="color: var(--text-muted);">Tempo:</span>
+        <button class="synth-tempo-btn btn-pill" data-tempo="slow" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">Slumber (650ms)</button>
+        <button class="synth-tempo-btn btn-pill active" data-tempo="medium" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">Calm (450ms)</button>
+        <button class="synth-tempo-btn btn-pill" data-tempo="fast" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">Focus (320ms)</button>
+      </div>
+
+      <!-- Tone Texture Selector -->
+      <div style="display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.78rem; background: var(--bg-surface); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid var(--border-glass);">
+        <span style="color: var(--text-muted);">Texture:</span>
+        <button class="synth-texture-btn btn-pill active" data-texture="bells" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">🔔 Bells</button>
+        <button class="synth-texture-btn btn-pill" data-texture="pad" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">☁️ Warm Pad</button>
+        <button class="synth-texture-btn btn-pill" data-texture="harp" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">🎵 Ethereal Harp</button>
+        <button class="synth-texture-btn btn-pill" data-texture="chiptune" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">👾 8-Bit</button>
+      </div>
+    </div>
+
+    <!-- Extended Sound Variation Presets Row -->
+    <div style="margin-top: 1rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); text-transform: uppercase;">
+        Select Mood & Scale Harmony (7 Sound Variations):
+      </span>
+      <div class="synth-controls-row" style="margin-top: 0.5rem; flex-wrap: wrap;">
+        <button id="synth-preset-midnight" class="btn-pill active" style="font-size: 0.82rem;">🌙 Midnight Nursery (C Major)</button>
+        <button id="synth-preset-coder" class="btn-pill" style="font-size: 0.82rem;">⚡ Deep Coder Focus (A Minor)</button>
+        <button id="synth-preset-starlight" class="btn-pill" style="font-size: 0.82rem;">✨ Stardust Serenade (E Minor)</button>
+        <button id="synth-preset-aurora" class="btn-pill" style="font-size: 0.82rem;">🌌 Aurora Void (F Lydian)</button>
+        <button id="synth-preset-raindrop" class="btn-pill" style="font-size: 0.82rem;">🌧️ Raindrop Zen (Akebono)</button>
+        <button id="synth-preset-cosmic" class="btn-pill" style="font-size: 0.82rem;">🪐 Cosmic Wind Chimes (Penta+)</button>
+        <button id="synth-preset-retro" class="btn-pill" style="font-size: 0.82rem;">👾 8-Bit Sleeptime (Vintage)</button>
+      </div>
+    </div>
+
+    <!-- Responsive Animated Spectrum Visualizer -->
+    <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+        Real-Time Frequency Harmonic Visualizer:
+      </span>
+      <div class="synth-visualizer-bar" id="synth-visualizer" aria-label="Synthesizer Visualizer" style="width: 260px;">
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+        <div class="synth-viz-column"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block title %}INVENTRA Vault · Enterprise Realm{% endblock %}
+
+{% block content %}
+<section class="realm-hero-banner" style="--realm-color: var(--neon-violet); --realm-glow: rgba(168, 85, 247, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: var(--neon-violet); color: #c084fc;">
+      <span>📦</span>
+      <span>Realm 02 · Enterprise Core Vault</span>
+    </div>
+
+    <h1 class="realm-title">
+      INVENTRA<span style="color: #c084fc;">.core</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      A full-stack enterprise inventory architecture orchestrating multi-warehouse relational databases, supplier APIs, automated reorder thresholds, and executive dashboards.
+    </p>
+
+    <!-- Prominent "Go to Actual Project" CTA Row -->
+    <div class="project-actions-cta">
+      <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-violet" id="btn-actual-project-inventra" title="Launch the live INVENTRA platform (inventra-rho-lac.vercel.app)">
+        <span class="btn-actual-icon">🚀</span>
+        <span>Go to Actual Project</span>
+        <span class="btn-actual-arrow">↗</span>
+      </a>
+
+      <a href="https://github.com/CodingWithAman1/Inventra" target="_blank" rel="noopener noreferrer" class="btn-pill" style="border-color: #c084fc; color: #fff; font-weight: 700; padding: 0.65rem 1.25rem;" title="Explore the source code on GitHub">
+        <span>🐙 GitHub Repo ↗</span>
+      </a>
+
+      <button class="star-project-btn" data-project="inventra" title="Star this project in SQLite">
+        <span>⭐ Star Project</span>
+        <span class="star-num">{{ project['stars_count'] if project else 418 }}</span>
+      </button>
+
+      <button id="add-stock-btn" class="btn-pill" style="border-color: var(--neon-violet); color: #fff;">
+        <span>📦 Bulk Restock (+50 Units)</span>
+      </button>
+
+      <span style="font-family: var(--font-mono); font-size: 0.82rem; color: #c084fc; opacity: 0.85;">
+        ● Live on Vercel: inventra-rho-lac.vercel.app
+      </span>
+    </div>
+
+    <!-- Live Project Interface Screenshot Preview Card -->
+    <div style="margin: 2rem 0 1rem; border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--card-shadow); background: var(--bg-surface);">
+      <div style="background: var(--bg-space); padding: 0.65rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass); flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #c084fc; margin-left: 0.5rem;">
+            🔒 https://inventra-rho-lac.vercel.app/
+          </span>
+        </div>
+        <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-pill btn-violet" style="font-size: 0.76rem; padding: 0.35rem 0.85rem; color: #fff;">
+          Open Live App in Fullscreen ↗
+        </a>
+      </div>
+      <a href="https://inventra-rho-lac.vercel.app/" target="_blank" rel="noopener noreferrer" style="display: block; position: relative;">
+        <img src="{{ url_for('static', filename='assets/inv.png') }}" alt="INVENTRA Live Interface Screenshot" style="width: 100%; height: auto; max-height: 480px; object-fit: cover; display: block; filter: brightness(0.96);">
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: The Story & Inspiration -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #c084fc; text-transform: uppercase;">
+        The Creator's Log · Aman
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        The Architecture of Reliable Data
+      </h3>
+      <p style="font-size: 0.96rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 1rem;">
+        “In software, things can look fine on the surface while quietly falling apart behind the scenes. INVENTRA was my commitment to deep database integrity—relational schemas, ACID transactions, foreign keys, and preventing duplicate stock leaks during simultaneous orders.”
+      </p>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tech-chip">Database Architecture</span>
+        <span class="tech-chip">Relational CRUD</span>
+        <span class="tech-chip">Automated Thresholds</span>
+        <span class="tech-chip">Real-time Analytics</span>
+      </div>
+    </div>
+
+    <!-- Live Warehouse Valuation Dashboard -->
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold); text-transform: uppercase;">
+        Live Warehouse Telemetry
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        Vault Inventory Snapshot
+      </h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">TOTAL UNITS MANAGED</div>
+          <div id="total-units-val" style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #c084fc; font-weight: 700;">1,480 Units</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Across 3 warehouses</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">INVENTORY VALUE</div>
+          <div id="total-value-val" style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--solar-gold); font-weight: 700;">$94,520</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Live market valuation</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ACTIVE SUPPLIERS</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #10b981; font-weight: 700;">24 Partners</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">API connected</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">STOCK REORDER RATE</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--heart-rose); font-weight: 700;">0.8s Trigger</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Automated alert dispatch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Interactive Warehouse & Stock Manager Console -->
+  <div class="sim-console-card">
+    <div class="sim-header">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 0.76rem; color: #c084fc; text-transform: uppercase;">
+          Interactive Live Sandbox · CRUD & Threshold Simulator
+        </span>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">
+          INVENTRA Live Stock Controller
+        </h3>
+      </div>
+      <div style="display: flex; gap: 0.5rem;">
+        <span id="warehouse-alert-badge" class="status-badge-pulse ok">● All Warehouses Optimal</span>
+      </div>
+    </div>
+
+    <p style="font-size: 0.92rem; color: var(--text-soft); margin-bottom: 1rem;">
+      Test Aman's automated threshold engine: Click <strong>“- Dispatch”</strong> to reduce stock. If any item falls below 15 units, the automated red alarm fires! Click <strong>“+ Restock”</strong> to replenish.
+    </p>
+
+    <div style="overflow-x: auto;">
+      <table class="sim-table" id="stock-sim-table">
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Component Name</th>
+            <th>Category</th>
+            <th>In Stock</th>
+            <th>Unit Price</th>
+            <th>Threshold Status</th>
+            <th>Interactive Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-sku="MCU-301">
+            <td style="color: #c084fc; font-weight: 700;">MCU-301</td>
+            <td>ESP32-S3 Dual-Core AI Processor</td>
+            <td>Microcontrollers</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">42</strong></td>
+            <td>$14.50</td>
+            <td><span class="status-badge-pulse ok status-badge">● Healthy Stock</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="MCU-301" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="MCU-301" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+          <tr data-sku="QNT-882">
+            <td style="color: #c084fc; font-weight: 700;">QNT-882</td>
+            <td>Quantum Low-Latency Relay</td>
+            <td>Photonics</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">12</strong></td>
+            <td>$88.00</td>
+            <td><span class="status-badge-pulse danger status-badge">⚠️ LOW STOCK (Reorder)</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="QNT-882" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="QNT-882" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+          <tr data-sku="OLED-104">
+            <td style="color: #c084fc; font-weight: 700;">OLED-104</td>
+            <td>Full-Spectrum E-Ink 4K Display Panel</td>
+            <td>Displays</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">55</strong></td>
+            <td>$32.00</td>
+            <td><span class="status-badge-pulse ok status-badge">● Healthy Stock</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="OLED-104" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="OLED-104" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+          <tr data-sku="SRV-550">
+            <td style="color: #c084fc; font-weight: 700;">SRV-550</td>
+            <td>Ultra-Precision Digital Servo Motor</td>
+            <td>Mechanics</td>
+            <td><strong class="stock-qty" style="color: #fff; font-size: 1.05rem;">8</strong></td>
+            <td>$45.00</td>
+            <td><span class="status-badge-pulse danger status-badge">⚠️ CRITICAL (Supplier Alert)</span></td>
+            <td>
+              <div style="display: flex; gap: 0.35rem;">
+                <button class="sim-btn-action restock-btn" data-sku="SRV-550" data-amount="10">+ Restock</button>
+                <button class="sim-btn-action dispatch-btn" data-sku="SRV-550" data-amount="5">- Dispatch</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 3: Relational Architecture & Code Blueprint -->
+  <div class="sim-console-card" style="background: var(--bg-space);">
+    <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #c084fc; text-transform: uppercase;">
+      Relational Database Architecture · SQL & Schema
+    </span>
+    <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin: 0.4rem 0 1rem;">
+      INVENTRA Transactional Integrity Schema
+    </h3>
+    <pre style="background: #060914; border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.84rem; color: #e9d5ff; line-height: 1.6;"><code>-- INVENTRA Enterprise Schema: Stock & Transaction Integrity
+CREATE TABLE products (
+    sku VARCHAR(24) PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    category VARCHAR(60) NOT NULL,
+    unit_price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL DEFAULT 0,
+    reorder_threshold INT NOT NULL DEFAULT 15,
+    supplier_id INT REFERENCES suppliers(id)
+);
+
+CREATE TABLE stock_audit_log (
+    audit_id SERIAL PRIMARY KEY,
+    sku VARCHAR(24) REFERENCES products(sku),
+    quantity_delta INT NOT NULL,
+    reason VARCHAR(50) NOT NULL,  -- 'DISPATCH', 'RESTOCK', 'SUPPLIER_RETURN'
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const table = document.getElementById('stock-sim-table');
+  const alertBadge = document.getElementById('warehouse-alert-badge');
+  const bulkBtn = document.getElementById('add-stock-btn');
+
+  function checkHealth() {
+    let hasDanger = false;
+    document.querySelectorAll('.status-badge').forEach(b => {
+      if (b.classList.contains('danger')) hasDanger = true;
+    });
+    if (alertBadge) {
+      if (hasDanger) {
+        alertBadge.className = 'status-badge-pulse danger';
+        alertBadge.textContent = '⚠️ Attention: Automated Reorder Triggered';
+      } else {
+        alertBadge.className = 'status-badge-pulse ok';
+        alertBadge.textContent = '● All Warehouses Optimal';
+      }
+    }
+  }
+
+  table.querySelectorAll('.restock-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const row = e.target.closest('tr');
+      const qtyEl = row.querySelector('.stock-qty');
+      const badge = row.querySelector('.status-badge');
+      let count = parseInt(qtyEl.textContent, 10) + parseInt(btn.dataset.amount, 10);
+      qtyEl.textContent = count;
+
+      if (count >= 15) {
+        badge.className = 'status-badge-pulse ok status-badge';
+        badge.textContent = '● Healthy Stock';
+      }
+      checkHealth();
+    });
+  });
+
+  table.querySelectorAll('.dispatch-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const row = e.target.closest('tr');
+      const qtyEl = row.querySelector('.stock-qty');
+      const badge = row.querySelector('.status-badge');
+      let count = Math.max(0, parseInt(qtyEl.textContent, 10) - parseInt(btn.dataset.amount, 10));
+      qtyEl.textContent = count;
+
+      if (count < 15) {
+        badge.className = 'status-badge-pulse danger status-badge';
+        badge.textContent = '⚠️ LOW STOCK (Reorder)';
+      }
+      checkHealth();
+    });
+  });
+
+  if (bulkBtn) {
+    bulkBtn.addEventListener('click', () => {
+      table.querySelectorAll('.stock-qty').forEach(qtyEl => {
+        qtyEl.textContent = parseInt(qtyEl.textContent, 10) + 20;
+      });
+      table.querySelectorAll('.status-badge').forEach(badge => {
+        badge.className = 'status-badge-pulse ok status-badge';
+        badge.textContent = '● Healthy Stock';
+      });
+      checkHealth();
+    });
+  }
+});
+</script>
+{% endblock %}

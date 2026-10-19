@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block title %}MyRail Orbit · Transit Realm{% endblock %}
+
+{% block content %}
+<section class="realm-hero-banner" style="--realm-color: var(--neon-cyan); --realm-glow: rgba(0, 245, 255, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: var(--neon-cyan); color: var(--neon-cyan);">
+      <span>🚆</span>
+      <span>Realm 01 · Infrastructure Orbit</span>
+    </div>
+
+    <h1 class="realm-title">
+      MyRail<span style="color: var(--neon-cyan);">.transit</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      An intelligent railway information and commuter navigation platform born from real-world platform delays. Powered by Python, Flask APIs, and graph shortest-path routing.
+    </p>
+
+    <!-- Prominent "Go to Actual Project" CTA Row -->
+    <div class="project-actions-cta">
+      <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-cyan" id="btn-actual-project-myrail" title="Launch the live MyRail web platform (myrailbase.netlify.app)">
+        <span class="btn-actual-icon">🚀</span>
+        <span>Go to Actual Project</span>
+        <span class="btn-actual-arrow">↗</span>
+      </a>
+
+      <a href="https://github.com/CodingWithAman1/myRail" target="_blank" rel="noopener noreferrer" class="btn-pill" style="border-color: var(--neon-cyan); color: #fff; font-weight: 700; padding: 0.65rem 1.25rem;" title="Explore the source code on GitHub">
+        <span>🐙 GitHub Repo ↗</span>
+      </a>
+
+      <button class="star-project-btn" data-project="myrail" title="Star this project in SQLite">
+        <span>⭐ Star Project</span>
+        <span class="star-num">{{ project['stars_count'] if project else 342 }}</span>
+      </button>
+
+      <button id="dispatch-train-btn" class="btn-pill" style="border-color: var(--neon-cyan); color: #fff;">
+        <span>🚆 Dispatch Express Train</span>
+      </button>
+
+      <span style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan); opacity: 0.85;">
+        ● Live on Netlify: myrailbase.netlify.app
+      </span>
+    </div>
+
+    <!-- Live Project Interface Screenshot Preview Card -->
+    <div style="margin: 2rem 0 1rem; border: 1.5px solid var(--border-neon); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--card-shadow); background: var(--bg-surface);">
+      <div style="background: var(--bg-space); padding: 0.65rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass); flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); margin-left: 0.5rem;">
+            🔒 https://myrailbase.netlify.app/
+          </span>
+        </div>
+        <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-pill btn-cyan" style="font-size: 0.76rem; padding: 0.35rem 0.85rem;">
+          Open Live App in Fullscreen ↗
+        </a>
+      </div>
+      <a href="https://myrailbase.netlify.app/" target="_blank" rel="noopener noreferrer" style="display: block; position: relative;">
+        <img src="{{ url_for('static', filename='assets/myrail.png') }}" alt="MyRail Live Interface Screenshot" style="width: 100%; height: auto; max-height: 480px; object-fit: cover; display: block; filter: brightness(0.96);">
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: The Story & Inspiration -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">
+        The Creator's Log · Aman
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        The War Against the Unknown Delay
+      </h3>
+      <p style="font-size: 0.96rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 1rem;">
+        “Standing on a crowded train platform between exams and home, watching the departure screen flicker with unexplained delays, I realized code should solve this. Commuters shouldn't have to guess. They deserve clear data, shortest-path alternatives, and calm predictability.”
+      </p>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tech-chip">Python 3.13</span>
+        <span class="tech-chip">Flask API</span>
+        <span class="tech-chip">Graph Algorithms</span>
+        <span class="tech-chip">SQLite</span>
+      </div>
+    </div>
+
+    <!-- Live System Metrics -->
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold); text-transform: uppercase;">
+        Telemetry & Performance
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        Core Service Specs
+      </h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ROUTE COMPUTATION</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--neon-cyan); font-weight: 700;">18ms</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Dijkstra shortest-path</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ACTIVE TRACKS</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--solar-gold); font-weight: 700;">4 Corridors</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Synchronized live</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">COMMUTERS HELPED</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #10b981; font-weight: 700;">14,200+</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Across suburban hubs</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">DISPATCH ACCURACY</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--heart-rose); font-weight: 700;">99.4%</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Real-time tracking</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Interactive SVG Transit Route Simulator -->
+  <div class="transit-map-card" id="dream-transit-map">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <div>
+        <div class="section-tag" style="margin-bottom: 0.3rem;">Interactive Transit Engine · Live Simulation</div>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff;">
+          MyRail Dynamic Transit Vector Map
+        </h3>
+      </div>
+      <span id="train-status-indicator" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--neon-cyan); background: rgba(0, 245, 255, 0.1); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); border: 1px solid var(--border-neon);">
+        Train 104: En Route (Platform 2)
+      </span>
+    </div>
+    <p style="font-size: 0.94rem; color: var(--text-soft); margin-top: 0.5rem; line-height: 1.6;">
+      Watch the starlit express train navigate between stations along the railway path. Click <strong>“Dispatch Express Train”</strong> above or slide down the route to run the physical simulation!
+    </p>
+
+    <div class="transit-route-svg-box">
+      <svg id="transit-svg" width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none">
+        <line x1="0" y1="60" x2="800" y2="60" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+        <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+        <line x1="0" y1="180" x2="800" y2="180" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4 4" />
+
+        <!-- Animated Route Path -->
+        <path id="transit-path" class="svg-route-path" d="M 40 190 Q 220 30, 400 120 T 760 60" />
+
+        <!-- Station Dots & Labels -->
+        <circle cx="40" cy="190" r="8" fill="#00f5ff" filter="drop-shadow(0 0 8px #00f5ff)" />
+        <text x="40" y="222" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Nursery Lab (0km)</text>
+
+        <circle cx="260" cy="85" r="8" fill="#a855f7" filter="drop-shadow(0 0 8px #a855f7)" />
+        <text x="260" y="115" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Algorithm Ridge (14km)</text>
+
+        <circle cx="490" cy="125" r="8" fill="#ff759f" filter="drop-shadow(0 0 8px #ff759f)" />
+        <text x="490" y="155" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Civic Plaza (28km)</text>
+
+        <circle cx="760" cy="60" r="8" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)" />
+        <text x="760" y="90" font-size="11" fill="var(--text-soft)" text-anchor="middle" font-family="var(--font-mono)">Worldsmith Peak (45km)</text>
+
+        <!-- Animated Transit Train Vehicle -->
+        <g class="transit-vehicle" id="transit-train-group" transform="translate(40, 190)">
+          <circle r="15" fill="#fbbf24" stroke="#ffffff" stroke-width="2"/>
+          <text text-anchor="middle" dy="5" font-size="13">🚆</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Section 3: Live Station Departure Board Simulator -->
+  <div class="sim-console-card">
+    <div class="sim-header">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--neon-cyan); text-transform: uppercase;">
+          Live Telemetry Feed · SQLite & REST API
+        </span>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">
+          Central Station Departure & Arrival Board
+        </h3>
+      </div>
+      <button id="refresh-board-btn" class="sim-btn-action">
+        ↻ Refresh Feed
+      </button>
+    </div>
+
+    <table class="sim-table">
+      <thead>
+        <tr>
+          <th>Train #</th>
+          <th>Destination</th>
+          <th>Platform</th>
+          <th>Scheduled</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="departure-board-body">
+        <tr>
+          <td style="color: var(--neon-cyan); font-weight: 700;">EXP-104</td>
+          <td>Algorithm Ridge → Worldsmith Peak</td>
+          <td>Platform 02</td>
+          <td>22:35</td>
+          <td><span class="status-badge-pulse ok">● On Time</span></td>
+          <td><button class="sim-btn-action" onclick="alert('Boarding pass issued for EXP-104!')">Board</button></td>
+        </tr>
+        <tr>
+          <td style="color: var(--neon-cyan); font-weight: 700;">LOC-218</td>
+          <td>Civic Plaza Metro Express</td>
+          <td>Platform 01</td>
+          <td>22:42</td>
+          <td><span class="status-badge-pulse ok">● Boarding</span></td>
+          <td><button class="sim-btn-action" onclick="alert('Boarding pass issued for LOC-218!')">Board</button></td>
+        </tr>
+        <tr>
+          <td style="color: var(--neon-cyan); font-weight: 700;">NGT-309</td>
+          <td>Midnight Coder Night Train</td>
+          <td>Track 4</td>
+          <td>23:15</td>
+          <td><span class="status-badge-pulse warn">● +3 Min Delay</span></td>
+          <td><button class="sim-btn-action" onclick="alert('Notification alert set for NGT-309')">Track</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 4: Architecture & Code Blueprint -->
+  <div class="sim-console-card" style="background: var(--bg-space);">
+    <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); text-transform: uppercase;">
+      Technical Architecture & Graph Routing
+    </span>
+    <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin: 0.4rem 0 1rem;">
+      How MyRail Solves Route Optimization
+    </h3>
+    <pre style="background: #060914; border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.84rem; color: #a5f3fc; line-height: 1.6;"><code># Aman's Graph-Based Train Transit Optimizer
+class TransitRouteOptimizer:
+    def __init__(self, stations, corridors):
+        self.network = corridors
+        self.stations = stations
+
+    def find_fastest_route(self, origin, destination, live_delays):
+        """Computes minimum-weight path accounting for real-time congestion."""
+        distances = {station: float('infinity') for station in self.stations}
+        distances[origin] = 0
+        priority_queue = [(0, origin, [origin])]
+        
+        while priority_queue:
+            current_delay, station, path = heapq.heappop(priority_queue)
+            if station == destination:
+                return {"path": path, "delay_min": current_delay, "status": "OPTIMAL"}
+            # Evaluate connecting tracks...</code></pre>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dispatchBtn = document.getElementById('dispatch-train-btn');
+  const transitTrainGroup = document.getElementById('transit-train-group');
+  const transitPath = document.getElementById('transit-path');
+  const statusIndicator = document.getElementById('train-status-indicator');
+
+  if (dispatchBtn && transitTrainGroup && transitPath) {
+    dispatchBtn.addEventListener('click', () => {
+      let progress = 0;
+      const pathLen = transitPath.getTotalLength();
+      if (statusIndicator) statusIndicator.textContent = "⚡ Dispatching Express Train...";
+      
+      const anim = setInterval(() => {
+        progress += 0.015;
+        if (progress > 1) {
+          clearInterval(anim);
+          if (statusIndicator) statusIndicator.textContent = "✓ Train Arrived at Worldsmith Peak!";
+          return;
+        }
+        const pt = transitPath.getPointAtLength(progress * pathLen);
+        transitTrainGroup.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+      }, 30);
+    });
+  }
+});
+</script>
+{% endblock %}

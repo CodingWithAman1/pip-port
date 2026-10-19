@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+{% block title %}CivicConnect Pulse · Public Good Realm{% endblock %}
+
+{% block content %}
+<section class="realm-hero-banner" style="--realm-color: #10b981; --realm-glow: rgba(16, 185, 129, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: #10b981; color: #10b981;">
+      <span>🏛️</span>
+      <span>Realm 03 · Public Good Pulse</span>
+    </div>
+
+    <h1 class="realm-title">
+      CivicConnect<span style="color: #10b981;">.pulse</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      A citizen empowerment and municipal transparency platform connecting neighborhood voices directly with public authorities. Geo-tagged reporting, public progress audits, and real accountability.
+    </p>
+
+    <!-- Prominent "Go to Actual Project" CTA Row -->
+    <div class="project-actions-cta">
+      <a href="https://civicconnectweb.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-actual-project glow-emerald" id="btn-actual-project-civicconnect" title="Launch the live CivicConnect platform (civicconnectweb.onrender.com)">
+        <span class="btn-actual-icon">🚀</span>
+        <span>Go to Actual Project</span>
+        <span class="btn-actual-arrow">↗</span>
+      </a>
+
+      <a href="https://github.com/CodingWithAman1/CivicConnect" target="_blank" rel="noopener noreferrer" class="btn-pill" style="border-color: #10b981; color: #fff; font-weight: 700; padding: 0.65rem 1.25rem;" title="Explore the source code on GitHub">
+        <span>🐙 GitHub Repo ↗</span>
+      </a>
+
+      <button class="star-project-btn" data-project="civicconnect" title="Star this project in SQLite">
+        <span>⭐ Star Project</span>
+        <span class="star-num">{{ project['stars_count'] if project else 529 }}</span>
+      </button>
+
+      <a href="#report-civic-form" class="btn-pill" style="border-color: #10b981; color: #fff;">
+        <span>📝 File Public Report</span>
+      </a>
+
+      <span style="font-family: var(--font-mono); font-size: 0.82rem; color: #10b981; opacity: 0.85;">
+        ● Live on Render: civicconnectweb.onrender.com
+      </span>
+    </div>
+
+    <!-- Live Project Interface Screenshot Preview Card -->
+    <div style="margin: 2rem 0 1rem; border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--card-shadow); background: var(--bg-surface);">
+      <div style="background: var(--bg-space); padding: 0.65rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass); flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #10b981; margin-left: 0.5rem;">
+            🔒 https://civicconnectweb.onrender.com/
+          </span>
+        </div>
+        <a href="https://civicconnectweb.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-pill" style="border-color: #10b981; color: #10b981; font-size: 0.76rem; padding: 0.35rem 0.85rem;">
+          Open Live App in Fullscreen ↗
+        </a>
+      </div>
+      <a href="https://civicconnectweb.onrender.com/" target="_blank" rel="noopener noreferrer" style="display: block; position: relative;">
+        <img src="{{ url_for('static', filename='assets/civicconnect.png') }}" alt="CivicConnect Live Interface Screenshot" style="width: 100%; height: auto; max-height: 480px; object-fit: cover; display: block; filter: brightness(0.96);">
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <!-- Section 1: The Story & Inspiration -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #10b981; text-transform: uppercase;">
+        The Creator's Log · Aman
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        Building Something That Truly Mattered
+      </h3>
+      <p style="font-size: 0.96rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 1rem;">
+        “Technology shouldn't exist just to sell ads or track clicks. When broken streetlights stay dark for months and roads break without accountability, ordinary families suffer. CivicConnect gives citizens transparent evidence that cannot be quietly swept aside.”
+      </p>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tech-chip">Public Transparency</span>
+        <span class="tech-chip">Geo-Tagging</span>
+        <span class="tech-chip">Community Core</span>
+        <span class="tech-chip">Citizen Auditing</span>
+      </div>
+    </div>
+
+    <!-- Live Impact Metrics -->
+    <div class="character-card-holographic" style="padding: 2rem;">
+      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold); text-transform: uppercase;">
+        Municipal Transparency Metrics
+      </span>
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.45rem; color: #fff; margin: 0.5rem 0 1rem;">
+        Community Impact Telemetry
+      </h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">ISSUES REPORTED</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: #10b981; font-weight: 700;">3,840 Cases</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Across 8 municipalities</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">RESOLUTION RATE</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--neon-cyan); font-weight: 700;">87.3%</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Verified with photo proof</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">CITIZEN ADVOCATES</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--solar-gold); font-weight: 700;">11,500+</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Neighborhood watchdogs</div>
+        </div>
+        <div style="background: var(--bg-space); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass);">
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">AVG RESOLUTION TIME</div>
+          <div style="font-family: var(--font-bubbly); font-size: 1.4rem; color: var(--heart-rose); font-weight: 700;">4.2 Days</div>
+          <div style="font-size: 0.72rem; color: var(--text-soft);">Down from 28 days</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Interactive Community Issue Feed Simulator -->
+  <div class="sim-console-card">
+    <div class="sim-header">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 0.76rem; color: #10b981; text-transform: uppercase;">
+          Live Citizen Dispatch Feed · Public Audit Log
+        </span>
+        <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">
+          Neighborhood Issue Resolution Tracker
+        </h3>
+      </div>
+      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: #10b981;">
+        Real-Time Endorsements Active
+      </span>
+    </div>
+
+    <!-- Live Report Cards -->
+    <div id="civic-reports-list" style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+      <!-- Issue 1 -->
+      <div class="wish-card" style="border-left: 4px solid #00f5ff;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan); font-weight: 700;">
+            CASE #CV-842 · INFRASTRUCTURE & LIGHTING
+          </span>
+          <span class="status-badge-pulse ok">● In Progress (Crew Dispatched)</span>
+        </div>
+        <h4 style="font-family: var(--font-bubbly); font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">
+          Flickering & Dark Streetlight on 4th Avenue Crossing
+        </h4>
+        <p style="font-size: 0.92rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 0.85rem;">
+          “Streetlight has been offline for 4 days near the pedestrian crossing. Creates hazardous conditions for schoolchildren walking home after sunset.”
+        </p>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted);">
+            Reported by: Ward 7 Neighborhood Council · 6 hours ago
+          </span>
+          <button class="sim-btn-action civic-upvote-btn" data-votes="34">
+            👍 Endorse (<span>34</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Issue 2 -->
+      <div class="wish-card" style="border-left: 4px solid #10b981;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #10b981; font-weight: 700;">
+            CASE #CV-799 · ROADS & TRANSIT
+          </span>
+          <span class="status-badge-pulse ok" style="background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #10b981;">
+            ✓ RESOLVED & VERIFIED
+          </span>
+        </div>
+        <h4 style="font-family: var(--font-bubbly); font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">
+          Deep Pothole at Central Railway Station Exit Loop
+        </h4>
+        <p style="font-size: 0.92rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 0.85rem;">
+          “Asphalt collapse was causing commuter traffic slowdowns and bicycle rim damage. Repaired and resealed by municipal works.”
+        </p>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted);">
+            Verified by: Aman (Worldsmith Public Auditor) · Yesterday
+          </span>
+          <button class="sim-btn-action civic-upvote-btn" data-votes="82">
+            👍 Endorse (<span>82</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Issue 3 -->
+      <div class="wish-card" style="border-left: 4px solid #fbbf24;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--solar-gold); font-weight: 700;">
+            CASE #CV-855 · PUBLIC SANITATION
+          </span>
+          <span class="status-badge-pulse warn">● Under Municipal Review</span>
+        </div>
+        <h4 style="font-family: var(--font-bubbly); font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">
+          Community Park Clean Water Station Pressure Drop
+        </h4>
+        <p style="font-size: 0.92rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 0.85rem;">
+          “Water fountain filter alert triggered. Low pressure detected. Awaiting maintenance technician dispatch.”
+        </p>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted);">
+            Reported by: Green Space Volunteers · 2 hours ago
+          </span>
+          <button class="sim-btn-action civic-upvote-btn" data-votes="19">
+            👍 Endorse (<span>19</span>)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Report Submission Form -->
+    <div id="report-civic-form" style="background: var(--bg-space); border: 1.5px dashed var(--border-neon); border-radius: var(--radius-md); padding: 1.75rem;">
+      <h4 style="font-family: var(--font-bubbly); font-size: 1.25rem; color: #fff; margin-bottom: 0.5rem;">
+        ✍ Submit a Public Issue Report (Interactive Simulator)
+      </h4>
+      <p style="font-size: 0.88rem; color: var(--text-soft); margin-bottom: 1.25rem;">
+        Test the civic pipeline! Type an issue in your neighborhood and broadcast it directly to the live feed:
+      </p>
+
+      <form id="civic-interactive-form">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label class="form-label" for="civic-title">Issue Title</label>
+            <input type="text" id="civic-title" class="form-input" placeholder="e.g. Broken bench at bus stop" required>
+          </div>
+          <div>
+            <label class="form-label" for="civic-cat">Category</label>
+            <select id="civic-cat" class="form-select">
+              <option value="Roads & Sidewalks">Roads & Sidewalks</option>
+              <option value="Public Lighting">Public Lighting</option>
+              <option value="Sanitation & Parks">Sanitation & Parks</option>
+              <option value="Transit Accessibility">Transit Accessibility</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="civic-desc">Description & Community Impact</label>
+          <textarea id="civic-desc" class="form-textarea" rows="3" placeholder="Describe the problem and why it matters..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-pill btn-cyan" style="padding: 0.75rem 1.75rem;">
+          Broadcast Civic Case ✦
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reportsList = document.getElementById('civic-reports-list');
+  const civicForm = document.getElementById('civic-interactive-form');
+
+  // Upvote handling
+  document.querySelectorAll('.civic-upvote-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      let votes = parseInt(btn.dataset.votes, 10) + 1;
+      btn.dataset.votes = votes;
+      btn.querySelector('span').textContent = votes;
+      btn.style.borderColor = '#10b981';
+      btn.style.color = '#10b981';
+    });
+  });
+
+  // Form submission
+  if (civicForm && reportsList) {
+    civicForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('civic-title').value.trim();
+      const cat = document.getElementById('civic-cat').value;
+      const desc = document.getElementById('civic-desc').value.trim();
+
+      if (!title || !desc) return;
+
+      const card = document.createElement('div');
+      card.className = 'wish-card';
+      card.style.borderLeft = '4px solid #10b981';
+      card.style.animation = 'eggPop 0.4s ease';
+
+      const caseNum = Math.floor(860 + Math.random() * 40);
+      card.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #10b981; font-weight: 700;">
+            CASE #CV-${caseNum} · ${cat.toUpperCase()}
+          </span>
+          <span class="status-badge-pulse ok">● Reported Just Now</span>
+        </div>
+        <h4 style="font-family: var(--font-bubbly); font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">
+          ${title}
+        </h4>
+        <p style="font-size: 0.92rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 0.85rem;">
+          “${desc}”
+        </p>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted);">
+            Reported by: Community Explorer · Just now
+          </span>
+          <button class="sim-btn-action civic-upvote-btn" data-votes="1">
+            👍 Endorse (<span>1</span>)
+          </button>
+        </div>
+      `;
+
+      reportsList.insertBefore(card, reportsList.firstChild);
+      civicForm.reset();
+
+      // Bind new upvote btn
+      const newUpvote = card.querySelector('.civic-upvote-btn');
+      newUpvote.addEventListener('click', () => {
+        let v = parseInt(newUpvote.dataset.votes, 10) + 1;
+        newUpvote.dataset.votes = v;
+        newUpvote.querySelector('span').textContent = v;
+      });
+    });
+  }
+});
+</script>
+{% endblock %}

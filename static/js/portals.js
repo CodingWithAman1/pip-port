@@ -1,7 +1,7 @@
 /**
- * The Starlight Nexus - 3D Circular Portals Engine (Track 2: Aman, The Young Worldsmith)
+ * The Starlight Nexus - 3D Circular Portals Engine
+ * Aman Sharma: The Young Worldsmith Portfolio
  * Powered by Three.js (r128) & Web Audio API
- * haX.baby 48-Hour Hackathon - Tier 3 Boss Level Feature
  */
 
 (function () {
@@ -90,7 +90,7 @@
       colorHex: '#00f5ff',
       glowHex: 'rgba(0, 245, 255, 0.45)',
       symbol: "🚆",
-      targetUrl: '/portfolio#projects',
+      targetUrl: '/portal/myrail',
     },
     {
       id: 'inventra',
@@ -101,7 +101,7 @@
       colorHex: '#a855f7',
       glowHex: 'rgba(168, 85, 247, 0.45)',
       symbol: "📦",
-      targetUrl: '/portfolio#projects',
+      targetUrl: '/portal/inventra',
     },
     {
       id: 'civicconnect',
@@ -112,7 +112,7 @@
       colorHex: '#10b981',
       glowHex: 'rgba(16, 185, 129, 0.45)',
       symbol: "🏛️",
-      targetUrl: '/portfolio#projects',
+      targetUrl: '/portal/civicconnect',
     },
     {
       id: 'codex',
@@ -123,7 +123,7 @@
       colorHex: '#fbbf24',
       glowHex: 'rgba(251, 191, 36, 0.45)',
       symbol: "📖",
-      targetUrl: '/portfolio#story',
+      targetUrl: '/portal/story',
     },
     {
       id: 'forge',
@@ -134,7 +134,7 @@
       colorHex: '#ff759f',
       glowHex: 'rgba(255, 117, 159, 0.45)',
       symbol: "🪄",
-      targetUrl: '/portfolio#about',
+      targetUrl: '/portal/about',
     },
     {
       id: 'beacon',
@@ -145,7 +145,7 @@
       colorHex: '#38bdf8',
       glowHex: 'rgba(56, 189, 248, 0.45)',
       symbol: "✨",
-      targetUrl: '/portfolio#guestbook',
+      targetUrl: '/portal/guestbook',
     },
   ];
 

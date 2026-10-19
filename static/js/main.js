@@ -1,12 +1,6 @@
 /**
- * Aman: The Young Worldsmith · Interactive Experience Engine
- * Built for haX.baby 48-Hour Hackathon (Track 2: Your Own Baby)
- * 
- * Features:
- * - Tier 1: Character Cursor Tilt & Eye-Tracking, Day/Night Mood Toggle, Scroll Story, Easter Egg
- * - Tier 2: Generative Lullaby Synth (Web Audio), Torch Mode Mask Canvas, Scroll-Synced Transit Map, 3D Flipbook, Arcade Mini-game
- * - Tier 3: Returning Visitor Memory, Floating Chat Console (/api/chat), 3D Portals Integration
- * - Side Quests: Magic Wand Sparkles (+2), SQLite Odometer (+1), Audio Chimes with Mute Switch (+3), Live Wall (+2), Chaos Badges (+5)
+ * Aman Sharma: The Young Worldsmith · Interactive Experience Engine
+ * Software Developer Portfolio & Creative Living World
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -80,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const PENTATONIC = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5];
 
   // =========================================================================
-  // 2. Custom Magic Wand Cursor & Stardust Runes (Side Quest 2)
+  // 2. Custom Magic Wand Cursor & Stardust Runes
   // =========================================================================
   const wandCursor = document.getElementById('magic-wand-cursor');
   let prevX = 0, prevY = 0;
@@ -112,9 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
       spawnWandSparkle(curX, curY);
     }
 
-    // Eye Tracking (Tier 1)
+    // Eye Tracking & Perspective Tilt
     updateEyeTracking(curX, curY);
-    // 3D Card Perspective Tilt (Tier 1)
     updateCharacterCardTilt(curX, curY);
   });
 
@@ -147,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 3. Tier 1: Character Eye-Tracking & 3D Perspective Tilt
+  // 3. Character Eye-Tracking & 3D Perspective Tilt
   // =========================================================================
   const leftPupil = document.getElementById('left-pupil');
   const rightPupil = document.getElementById('right-pupil');
@@ -195,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 4. Tier 1: Day / Night Mood Toggle (Changes Character Expression & Palette)
+  // 4. Day / Night Ambience Toggle (Changes Character Expression & Palette)
   // =========================================================================
   const moodBtn = document.getElementById('mood-toggle-btn');
   const moodIcon = document.getElementById('mood-icon');
@@ -232,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 5. Tier 1: Discoverable Hidden Easter Egg
+  // 5. Discoverable Hidden Easter Egg
   // =========================================================================
   const wandGemBtn = document.getElementById('secret-wand-gem');
   const eggBanner = document.getElementById('easter-egg-banner');
@@ -263,18 +256,18 @@ document.addEventListener('DOMContentLoaded', () => {
     wandGemBtn.addEventListener('click', triggerEasterEgg);
   }
 
-  // Keyboard shortcut secret: type 'hax' or 'aman'
+  // Keyboard shortcut secret: type 'code' or 'aman'
   let keyHistory = '';
   window.addEventListener('keydown', (e) => {
     keyHistory += e.key.toLowerCase();
     if (keyHistory.length > 8) keyHistory = keyHistory.slice(-8);
-    if (keyHistory.includes('hax') || keyHistory.includes('aman')) {
+    if (keyHistory.includes('code') || keyHistory.includes('aman')) {
       if (!eggRevealed) triggerEasterEgg();
     }
   });
 
   // =========================================================================
-  // 6. Tier 2: Flashlight / Torch Cursor Mode (Canvas Destination-Out Mask)
+  // 6. Flashlight / Torch Focus Mode (Canvas Destination-Out Mask)
   // =========================================================================
   const torchBtn = document.getElementById('torch-toggle-btn');
   const torchIcon = document.getElementById('torch-icon');
@@ -335,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 7. Tier 2: Scroll-Synced Dream Delivery & Transit Route Map
+  // 7. Scroll-Synced Transit Route Map
   // =========================================================================
   const transitPath = document.getElementById('transit-path');
   const transitTrainGroup = document.getElementById('transit-train-group');
@@ -360,37 +353,179 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTransitScroll();
 
   // =========================================================================
-  // 8. Tier 2: Generative Lullaby Synthesizer (Web Audio API)
+  // 8. Multi-Voice Generative Lullaby Synthesizer (Web Audio API)
   // =========================================================================
   const synthPlayBtn = document.getElementById('synth-play-btn');
   const synthPlayIcon = document.getElementById('synth-play-icon');
   const synthPlayLabel = document.getElementById('synth-play-label');
+  const synthDroneToggle = document.getElementById('synth-drone-toggle');
+  const droneStatusText = document.getElementById('drone-status-text');
   const synthVizColumns = document.querySelectorAll('.synth-viz-column');
+  
   let synthPlaying = false;
   let synthTimer = null;
   let synthStep = 0;
+  let isDroneOn = false;
+  let droneOsc = null;
+  let droneGain = null;
+  let currentTempoMs = 450;
+  let currentTexture = 'bells';
 
+  // 7 Unique Musical Scales & Harmonic Mood Variations
   const LULLABY_SCALES = {
-    midnight: [261.63, 329.63, 392.00, 440.00, 523.25, 659.25], // C major pentatonic
-    coder: [220.00, 261.63, 293.66, 329.63, 392.00, 440.00],    // A minor pentatonic
-    starlight: [329.63, 392.00, 440.00, 493.88, 587.33, 659.25] // E minor pentatonic
+    midnight: [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 659.25], // C major pentatonic + 9th
+    coder: [220.00, 261.63, 293.66, 329.63, 392.00, 440.00, 523.25],    // A minor pentatonic
+    starlight: [164.81, 196.00, 246.94, 329.63, 392.00, 493.88, 587.33, 659.25], // E minor ethereal
+    aurora: [174.61, 220.00, 261.63, 329.63, 392.00, 440.00, 523.25],   // F Lydian dream
+    raindrop: [146.83, 155.56, 196.00, 220.00, 261.63, 293.66, 392.00], // Akebono / Japanese Zen
+    cosmic: [277.18, 311.13, 369.99, 415.30, 466.16, 554.37, 622.25],   // C# Pentatonic cluster
+    retro: [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]              // Warm 8-Bit Vintage
   };
   let currentPreset = 'midnight';
 
+  // Advanced Synthesizer Voice Generator
+  function playMultiVoiceNote(freq) {
+    if (isMuted || !audioCtx) return;
+    initAudio();
+
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      // Texture Waveform & Filter Shaping
+      if (currentTexture === 'pad') {
+        osc.type = 'triangle';
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(800, now);
+        filter.frequency.exponentialRampToValueAtTime(300, now + 1.2);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+
+        osc.connect(filter);
+        filter.connect(gain);
+      } else if (currentTexture === 'harp') {
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.24, now + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
+        osc.connect(gain);
+
+        // Add subtle harmonic octave overtone
+        const overtone = audioCtx.createOscillator();
+        const overGain = audioCtx.createGain();
+        overtone.type = 'sine';
+        overtone.frequency.setValueAtTime(freq * 2, now);
+        overGain.gain.setValueAtTime(0.0001, now);
+        overGain.gain.linearRampToValueAtTime(0.08, now + 0.01);
+        overGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+        overtone.connect(overGain);
+        overGain.connect(audioCtx.destination);
+        overtone.start(now);
+        overtone.stop(now + 0.5);
+      } else if (currentTexture === 'chiptune') {
+        osc.type = 'square';
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.1, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+        osc.connect(gain);
+      } else {
+        // 'bells' (Default crystal chime)
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.2, now + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+        osc.connect(gain);
+      }
+
+      gain.connect(audioCtx.destination);
+      osc.frequency.setValueAtTime(freq, now);
+      osc.start(now);
+      osc.stop(now + 1.5);
+    } catch (e) {
+      // Audio autoplay policy fallback
+    }
+  }
+
+  // Sub-Bass Ambient Continuous Drone Engine
+  function startSubBassDrone() {
+    if (droneOsc || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      droneOsc = audioCtx.createOscillator();
+      droneGain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      droneOsc.type = 'triangle';
+      // Low sub root note (around 65Hz - 110Hz based on scale)
+      const scale = LULLABY_SCALES[currentPreset] || LULLABY_SCALES.midnight;
+      droneOsc.frequency.setValueAtTime(scale[0] / 4, now);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(140, now);
+
+      droneGain.gain.setValueAtTime(0.0001, now);
+      droneGain.gain.linearRampToValueAtTime(0.12, now + 0.8);
+
+      droneOsc.connect(filter);
+      filter.connect(droneGain);
+      droneGain.connect(audioCtx.destination);
+
+      droneOsc.start(now);
+    } catch (e) {}
+  }
+
+  function stopSubBassDrone() {
+    if (droneOsc && droneGain && audioCtx) {
+      try {
+        const now = audioCtx.currentTime;
+        droneGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+        droneOsc.stop(now + 0.6);
+      } catch (e) {}
+      droneOsc = null;
+      droneGain = null;
+    }
+  }
+
+  // Generative Melodic Stepping
   function playSynthArpeggioStep() {
     if (!synthPlaying || isMuted) return;
     initAudio();
     if (!audioCtx) return;
 
     const scale = LULLABY_SCALES[currentPreset] || LULLABY_SCALES.midnight;
-    const note = scale[synthStep % scale.length];
-    synthStep++;
+    
+    // 10% chance for a breath rest for organic calming cadence
+    if (Math.random() < 0.1) {
+      synthVizColumns.forEach(c => c.style.height = '14%');
+      return;
+    }
 
-    playWandChime(note, 0.7, 'triangle');
+    // Generative note walk
+    if (Math.random() < 0.45) {
+      synthStep = (synthStep + (Math.random() > 0.5 ? 1 : -1) + scale.length) % scale.length;
+    } else {
+      synthStep = Math.floor(Math.random() * scale.length);
+    }
 
-    // Visualizer bounce
+    let note = scale[synthStep];
+    // 20% chance for octave jump
+    if (Math.random() < 0.22) note *= 2;
+
+    playMultiVoiceNote(note);
+
+    // Update drone pitch gently with scale root
+    if (isDroneOn && droneOsc && Math.random() < 0.15) {
+      droneOsc.frequency.linearRampToValueAtTime(scale[0] / 4, audioCtx.currentTime + 0.5);
+    }
+
+    // Organic visualizer animation
     synthVizColumns.forEach((col, idx) => {
-      const heightPct = idx === (synthStep % synthVizColumns.length) ? 90 : Math.max(15, Math.random() * 65);
+      const isPeak = idx === (synthStep % synthVizColumns.length);
+      const heightPct = isPeak ? Math.min(95, 70 + Math.random() * 25) : Math.max(14, Math.random() * 55);
       col.style.height = `${heightPct}%`;
     });
   }
@@ -404,7 +539,9 @@ document.addEventListener('DOMContentLoaded', () => {
     synthPlaying = true;
     if (synthPlayIcon) synthPlayIcon.textContent = '⏸';
     if (synthPlayLabel) synthPlayLabel.textContent = 'Pause Lullaby';
-    synthTimer = setInterval(playSynthArpeggioStep, 450);
+    if (isDroneOn) startSubBassDrone();
+    document.querySelectorAll('#lullaby-box-visual, #lullaby-box-visual-index').forEach(b => b.classList.add('playing'));
+    synthTimer = setInterval(playSynthArpeggioStep, currentTempoMs);
   }
 
   function stopLullabySynth() {
@@ -412,6 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (synthTimer) clearInterval(synthTimer);
     if (synthPlayIcon) synthPlayIcon.textContent = '▶';
     if (synthPlayLabel) synthPlayLabel.textContent = 'Play Generative Lullaby';
+    stopSubBassDrone();
+    document.querySelectorAll('#lullaby-box-visual, #lullaby-box-visual-index').forEach(b => b.classList.remove('playing'));
     synthVizColumns.forEach(c => c.style.height = '12%');
   }
 
@@ -422,29 +561,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Presets
-  const presetButtons = [
-    { id: 'synth-preset-midnight', key: 'midnight' },
-    { id: 'synth-preset-coder', key: 'coder' },
-    { id: 'synth-preset-starlight', key: 'starlight' },
-  ];
-  presetButtons.forEach(({ id, key }) => {
-    const btn = document.getElementById(id);
+  if (synthDroneToggle) {
+    synthDroneToggle.addEventListener('click', () => {
+      isDroneOn = !isDroneOn;
+      if (droneStatusText) droneStatusText.textContent = isDroneOn ? 'ON' : 'OFF';
+      synthDroneToggle.style.background = isDroneOn ? 'rgba(168, 85, 247, 0.25)' : '';
+      if (synthPlaying) {
+        if (isDroneOn) startSubBassDrone();
+        else stopSubBassDrone();
+      }
+      playWandChime(isDroneOn ? 440 : 220, 0.2);
+    });
+  }
+
+  // Presets Switching
+  const PRESET_MAP = {
+    'synth-preset-midnight': 'midnight',
+    'synth-preset-coder': 'coder',
+    'synth-preset-starlight': 'starlight',
+    'synth-preset-aurora': 'aurora',
+    'synth-preset-raindrop': 'raindrop',
+    'synth-preset-cosmic': 'cosmic',
+    'synth-preset-retro': 'retro'
+  };
+
+  Object.entries(PRESET_MAP).forEach(([btnId, key]) => {
+    const btn = document.getElementById(btnId);
     if (btn) {
       btn.addEventListener('click', () => {
         currentPreset = key;
-        presetButtons.forEach(b => {
-          const el = document.getElementById(b.id);
-          if (el) el.classList.remove('active');
-        });
+        document.querySelectorAll('[id^="synth-preset-"]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        playWandChime(587.33, 0.4);
+        playWandChime(LULLABY_SCALES[key][0], 0.35);
       });
     }
   });
 
+  // Tempo Selection
+  document.querySelectorAll('.synth-tempo-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tempo;
+      document.querySelectorAll('.synth-tempo-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentTempoMs = t === 'slow' ? 650 : (t === 'fast' ? 320 : 450);
+      if (synthPlaying) {
+        clearInterval(synthTimer);
+        synthTimer = setInterval(playSynthArpeggioStep, currentTempoMs);
+      }
+    });
+  });
+
+  // Texture Selection
+  document.querySelectorAll('.synth-texture-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.synth-texture-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentTexture = btn.dataset.texture || 'bells';
+      playMultiVoiceNote(440);
+    });
+  });
+
   // =========================================================================
-  // 9. Tier 2: Interactive 3D Flipbook Storybook
+  // 9. Interactive 3D Flipbook Storybook
   // =========================================================================
   const flipPages = document.querySelectorAll('.flipbook-page');
   const prevPageBtn = document.getElementById('flipbook-prev-btn');
@@ -481,136 +659,331 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 10. Tier 2: Playable Arcade Mini-Game: Catch the Code Sparks
+  // 10. Cyber-Pong Arcade: Player vs Aman AI (Ping Pong Engine)
   // =========================================================================
-  const gameCanvas = document.getElementById('minigame-canvas');
-  const gameStartBtn = document.getElementById('game-start-btn');
-  const gameScoreEl = document.getElementById('game-score');
-  const gameHighEl = document.getElementById('game-high-score');
+  const pongCanvas = document.getElementById('pingpong-canvas') || document.getElementById('minigame-canvas');
+  const pongStartBtn = document.getElementById('pong-start-btn') || document.getElementById('game-start-btn');
+  const pongResetBtn = document.getElementById('pong-reset-btn');
+  const playerValEl = document.getElementById('pong-player-score') || document.getElementById('game-score');
+  const aiValEl = document.getElementById('pong-ai-score');
+  const highRallyEl = document.getElementById('pong-high-rally') || document.getElementById('game-high-score');
+  const diffBtns = document.querySelectorAll('.pong-diff-btn');
 
-  let gameCtx = gameCanvas ? gameCanvas.getContext('2d') : null;
-  let gameRunning = false;
-  let gameScore = 0;
-  let gameHighScore = parseInt(localStorage.getItem('aman_game_high') || '0', 10);
-  if (gameHighEl) gameHighEl.textContent = gameHighScore;
+  let pongCtx = pongCanvas ? pongCanvas.getContext('2d') : null;
+  let pongRunning = false;
+  let pongAnimFrame = null;
 
-  let paddleX = 350;
-  const paddleWidth = 100;
-  const paddleHeight = 16;
-  let sparks = [];
-  let gameAnimFrame = null;
-  let lastSparkSpawn = 0;
+  // Scores & Rally
+  let playerScore = 0;
+  let aiScore = 0;
+  let currentRally = 0;
+  let highRally = parseInt(localStorage.getItem('aman_pong_high_rally') || '0', 10);
+  if (highRallyEl) highRallyEl.textContent = highRally;
 
-  function spawnGameSpark() {
-    if (!gameCanvas) return;
-    const runes = ['{ }', '</>', '01', '⚡', '★', '★', '✦', '=>'];
-    const colors = ['#00f5ff', '#a855f7', '#fbbf24', '#ff759f', '#38bdf8'];
-    sparks.push({
-      x: 30 + Math.random() * (gameCanvas.width - 60),
-      y: 0,
-      speed: 1.8 + Math.random() * 2.2,
-      rune: runes[Math.floor(Math.random() * runes.length)],
-      color: colors[Math.floor(Math.random() * colors.length)],
-      size: 16 + Math.random() * 6
-    });
+  // Difficulty & Dimensions
+  let botSpeedMax = 4.4; // normal
+  const paddleWidth = 14;
+  const paddleHeight = 78;
+
+  // Paddle Positions
+  let playerY = 150;
+  let aiY = 150;
+
+  // Ball
+  let ballX = 400;
+  let ballY = 180;
+  let ballRadius = 8;
+  let ballSpeed = 5.2;
+  let ballVx = 5.2;
+  let ballVy = 2.4;
+
+  // Particle Sparks & Ball Trail
+  let pongParticles = [];
+  let ballTrail = [];
+
+  function resetBall(serveTowardsPlayer = false) {
+    if (!pongCanvas) return;
+    ballX = pongCanvas.width / 2;
+    ballY = pongCanvas.height / 2;
+    ballSpeed = 5.2;
+    const angle = (Math.random() * 0.8 - 0.4); // Random deflection angle
+    const dir = serveTowardsPlayer ? -1 : 1;
+    ballVx = dir * ballSpeed * Math.cos(angle);
+    ballVy = ballSpeed * Math.sin(angle);
+    ballTrail = [];
+    currentRally = 0;
   }
 
-  function gameLoop(time) {
-    if (!gameRunning || !gameCtx || !gameCanvas) return;
+  function spawnPongParticles(x, y, color = '#00f5ff', count = 10) {
+    for (let i = 0; i < count; i++) {
+      pongParticles.push({
+        x: x,
+        y: y,
+        vx: (Math.random() - 0.5) * 6,
+        vy: (Math.random() - 0.5) * 6,
+        life: 1.0,
+        color: color,
+        size: Math.random() * 4 + 2
+      });
+    }
+  }
 
-    gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+  function playPongTone(freq = 600, duration = 0.09, type = 'sine') {
+    if (isMuted) return;
+    initAudio();
+    if (!audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {}
+  }
 
-    // Draw basket / paddle
-    gameCtx.fillStyle = '#00f5ff';
-    gameCtx.shadowColor = '#00f5ff';
-    gameCtx.shadowBlur = 12;
-    gameCtx.beginPath();
-    gameCtx.roundRect(paddleX - paddleWidth / 2, gameCanvas.height - 24, paddleWidth, paddleHeight, 8);
-    gameCtx.fill();
-    gameCtx.shadowBlur = 0;
+  function pongLoop() {
+    if (!pongRunning || !pongCtx || !pongCanvas) return;
 
-    // Paddle gem indicator
-    gameCtx.fillStyle = '#fbbf24';
-    gameCtx.beginPath();
-    gameCtx.arc(paddleX, gameCanvas.height - 16, 5, 0, Math.PI * 2);
-    gameCtx.fill();
+    const w = pongCanvas.width;
+    const h = pongCanvas.height;
 
-    // Spawn sparks periodically
-    if (time - lastSparkSpawn > 600) {
-      lastSparkSpawn = time;
-      spawnGameSpark();
+    // Clear with retro trail fade
+    pongCtx.fillStyle = 'rgba(6, 9, 20, 0.35)';
+    pongCtx.fillRect(0, 0, w, h);
+
+    // Center Dashed Court Line
+    pongCtx.strokeStyle = 'rgba(0, 245, 255, 0.2)';
+    pongCtx.lineWidth = 2;
+    pongCtx.setLineDash([8, 8]);
+    pongCtx.beginPath();
+    pongCtx.moveTo(w / 2, 0);
+    pongCtx.lineTo(w / 2, h);
+    pongCtx.stroke();
+    pongCtx.setLineDash([]);
+
+    // Center Court Ring
+    pongCtx.strokeStyle = 'rgba(168, 85, 247, 0.15)';
+    pongCtx.lineWidth = 2;
+    pongCtx.beginPath();
+    pongCtx.arc(w / 2, h / 2, 45, 0, Math.PI * 2);
+    pongCtx.stroke();
+
+    // 1. Move AI Paddle with smooth anticipation
+    const aiTarget = ballY - paddleHeight / 2;
+    const aiDelta = aiTarget - aiY;
+    aiY += Math.sign(aiDelta) * Math.min(Math.abs(aiDelta), botSpeedMax);
+    aiY = Math.max(0, Math.min(h - paddleHeight, aiY));
+
+    // 2. Move Ball
+    ballX += ballVx;
+    ballY += ballVy;
+
+    // Record Trail
+    ballTrail.push({ x: ballX, y: ballY });
+    if (ballTrail.length > 7) ballTrail.shift();
+
+    // Top / Bottom Wall Collision
+    if (ballY - ballRadius <= 0) {
+      ballY = ballRadius;
+      ballVy = -ballVy;
+      playPongTone(320, 0.06, 'triangle');
+      spawnPongParticles(ballX, ballY, '#fbbf24', 4);
+    } else if (ballY + ballRadius >= h) {
+      ballY = h - ballRadius;
+      ballVy = -ballVy;
+      playPongTone(320, 0.06, 'triangle');
+      spawnPongParticles(ballX, ballY, '#fbbf24', 4);
     }
 
-    // Update and draw falling sparks
-    for (let i = sparks.length - 1; i >= 0; i--) {
-      const s = sparks[i];
-      s.y += s.speed;
+    // 3. Player Paddle Collision (Left side: x = 20)
+    const playerPaddleX = 24;
+    if (ballX - ballRadius <= playerPaddleX + paddleWidth && ballX + ballRadius >= playerPaddleX) {
+      if (ballY >= playerY - 4 && ballY <= playerY + paddleHeight + 4) {
+        ballX = playerPaddleX + paddleWidth + ballRadius;
+        // Angle deflection based on hit position
+        const hitOffset = (ballY - (playerY + paddleHeight / 2)) / (paddleHeight / 2);
+        ballSpeed = Math.min(11.5, ballSpeed * 1.04); // Speed up volley
+        ballVx = ballSpeed * Math.cos(hitOffset * 0.7);
+        ballVy = ballSpeed * Math.sin(hitOffset * 0.7);
 
-      gameCtx.font = `bold ${s.size}px 'Fredoka Variable', sans-serif`;
-      gameCtx.fillStyle = s.color;
-      gameCtx.shadowColor = s.color;
-      gameCtx.shadowBlur = 8;
-      gameCtx.fillText(s.rune, s.x, s.y);
-      gameCtx.shadowBlur = 0;
-
-      // Check collision with paddle
-      const paddleTop = gameCanvas.height - 24;
-      if (s.y >= paddleTop && s.y <= paddleTop + paddleHeight + 10) {
-        if (s.x >= paddleX - paddleWidth / 2 - 10 && s.x <= paddleX + paddleWidth / 2 + 10) {
-          // Spark caught!
-          gameScore += 10;
-          if (gameScoreEl) gameScoreEl.textContent = gameScore;
-          if (gameScore > gameHighScore) {
-            gameHighScore = gameScore;
-            localStorage.setItem('aman_game_high', gameHighScore);
-            if (gameHighEl) gameHighEl.textContent = gameHighScore;
-          }
-          playWandChime(PENTATONIC[Math.floor(Math.random() * PENTATONIC.length)], 0.25);
-          sparks.splice(i, 1);
-          continue;
+        currentRally++;
+        if (currentRally > highRally) {
+          highRally = currentRally;
+          localStorage.setItem('aman_pong_high_rally', highRally);
+          if (highRallyEl) highRallyEl.textContent = highRally;
         }
-      }
 
-      // Spark fell off screen
-      if (s.y > gameCanvas.height + 20) {
-        sparks.splice(i, 1);
+        playPongTone(659.25, 0.1, 'sine');
+        spawnPongParticles(ballX, ballY, '#00f5ff', 12);
       }
     }
 
-    gameAnimFrame = requestAnimationFrame(gameLoop);
-  }
+    // 4. AI Paddle Collision (Right side: x = w - 24 - paddleWidth)
+    const aiPaddleX = w - 24 - paddleWidth;
+    if (ballX + ballRadius >= aiPaddleX && ballX - ballRadius <= aiPaddleX + paddleWidth) {
+      if (ballY >= aiY - 4 && ballY <= aiY + paddleHeight + 4) {
+        ballX = aiPaddleX - ballRadius;
+        const hitOffset = (ballY - (aiY + paddleHeight / 2)) / (paddleHeight / 2);
+        ballSpeed = Math.min(11.5, ballSpeed * 1.04);
+        ballVx = -ballSpeed * Math.cos(hitOffset * 0.7);
+        ballVy = ballSpeed * Math.sin(hitOffset * 0.7);
 
-  if (gameCanvas) {
-    gameCanvas.addEventListener('mousemove', (e) => {
-      const rect = gameCanvas.getBoundingClientRect();
-      const scaleX = gameCanvas.width / rect.width;
-      paddleX = Math.max(paddleWidth / 2, Math.min(gameCanvas.width - paddleWidth / 2, (e.clientX - rect.left) * scaleX));
+        currentRally++;
+        if (currentRally > highRally) {
+          highRally = currentRally;
+          localStorage.setItem('aman_pong_high_rally', highRally);
+          if (highRallyEl) highRallyEl.textContent = highRally;
+        }
+
+        playPongTone(523.25, 0.1, 'sine');
+        spawnPongParticles(ballX, ballY, '#ff759f', 12);
+      }
+    }
+
+    // 5. Point Scored
+    if (ballX < 0) {
+      // AI scores
+      aiScore++;
+      if (aiValEl) aiValEl.textContent = aiScore;
+      playPongTone(240, 0.25, 'sawtooth');
+      resetBall(true);
+    } else if (ballX > w) {
+      // Player scores!
+      playerScore++;
+      if (playerValEl) playerValEl.textContent = playerScore;
+      [523.25, 659.25, 783.99].forEach((f, i) => setTimeout(() => playPongTone(f, 0.12), i * 80));
+      spawnPongParticles(w / 2, h / 2, '#fbbf24', 20);
+      resetBall(false);
+    }
+
+    // Draw Ball Trail
+    ballTrail.forEach((pt, i) => {
+      pongCtx.fillStyle = `rgba(251, 191, 36, ${(i + 1) / (ballTrail.length * 2)})`;
+      pongCtx.beginPath();
+      pongCtx.arc(pt.x, pt.y, ballRadius * (0.5 + 0.5 * (i / ballTrail.length)), 0, Math.PI * 2);
+      pongCtx.fill();
     });
 
-    gameCanvas.addEventListener('touchmove', (e) => {
+    // Draw Ball
+    pongCtx.fillStyle = '#ffffff';
+    pongCtx.shadowColor = '#fbbf24';
+    pongCtx.shadowBlur = 14;
+    pongCtx.beginPath();
+    pongCtx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+    pongCtx.fill();
+    pongCtx.shadowBlur = 0;
+
+    // Draw Player Paddle (Cyan)
+    pongCtx.fillStyle = '#00f5ff';
+    pongCtx.shadowColor = '#00f5ff';
+    pongCtx.shadowBlur = 14;
+    pongCtx.beginPath();
+    pongCtx.roundRect(playerPaddleX, playerY, paddleWidth, paddleHeight, 6);
+    pongCtx.fill();
+    pongCtx.shadowBlur = 0;
+
+    // Draw AI Paddle (Rose/Violet)
+    pongCtx.fillStyle = '#ff759f';
+    pongCtx.shadowColor = '#ff759f';
+    pongCtx.shadowBlur = 14;
+    pongCtx.beginPath();
+    pongCtx.roundRect(aiPaddleX, aiY, paddleWidth, paddleHeight, 6);
+    pongCtx.fill();
+    pongCtx.shadowBlur = 0;
+
+    // Update & Draw Particles
+    for (let i = pongParticles.length - 1; i >= 0; i--) {
+      const p = pongParticles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= 0.035;
+
+      if (p.life <= 0) {
+        pongParticles.splice(i, 1);
+        continue;
+      }
+
+      pongCtx.fillStyle = p.color;
+      pongCtx.globalAlpha = p.life;
+      pongCtx.beginPath();
+      pongCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      pongCtx.fill();
+      pongCtx.globalAlpha = 1.0;
+    }
+
+    pongAnimFrame = requestAnimationFrame(pongLoop);
+  }
+
+  // Mouse & Touch Controls for Left Paddle
+  if (pongCanvas) {
+    pongCanvas.addEventListener('mousemove', (e) => {
+      const rect = pongCanvas.getBoundingClientRect();
+      const scaleY = pongCanvas.height / rect.height;
+      playerY = Math.max(0, Math.min(pongCanvas.height - paddleHeight, (e.clientY - rect.top) * scaleY - paddleHeight / 2));
+    });
+
+    pongCanvas.addEventListener('touchmove', (e) => {
       if (!e.touches[0]) return;
-      const rect = gameCanvas.getBoundingClientRect();
-      const scaleX = gameCanvas.width / rect.width;
-      paddleX = Math.max(paddleWidth / 2, Math.min(gameCanvas.width - paddleWidth / 2, (e.touches[0].clientX - rect.left) * scaleX));
+      const rect = pongCanvas.getBoundingClientRect();
+      const scaleY = pongCanvas.height / rect.height;
+      playerY = Math.max(0, Math.min(pongCanvas.height - paddleHeight, (e.touches[0].clientY - rect.top) * scaleY - paddleHeight / 2));
     }, { passive: true });
   }
 
-  if (gameStartBtn) {
-    gameStartBtn.addEventListener('click', () => {
-      if (gameRunning) {
-        gameRunning = false;
-        gameStartBtn.textContent = 'Resume Game 🎮';
-        if (gameAnimFrame) cancelAnimationFrame(gameAnimFrame);
+  // Keyboard Controls (W/S and Up/Down arrows)
+  window.addEventListener('keydown', (e) => {
+    if (!pongRunning || !pongCanvas) return;
+    const step = 28;
+    if (e.key === 'w' || e.key === 'W' || e.key === 'ArrowUp') {
+      playerY = Math.max(0, playerY - step);
+    } else if (e.key === 's' || e.key === 'S' || e.key === 'ArrowDown') {
+      playerY = Math.min(pongCanvas.height - paddleHeight, playerY + step);
+    }
+  });
+
+  if (pongStartBtn) {
+    pongStartBtn.addEventListener('click', () => {
+      if (pongRunning) {
+        pongRunning = false;
+        pongStartBtn.textContent = 'Resume Game 🏓';
+        if (pongAnimFrame) cancelAnimationFrame(pongAnimFrame);
       } else {
-        gameRunning = true;
-        gameStartBtn.textContent = 'Pause Game ⏸';
-        gameAnimFrame = requestAnimationFrame(gameLoop);
+        pongRunning = true;
+        pongStartBtn.textContent = 'Pause Game ⏸';
+        if (!ballVx && !ballVy) resetBall(false);
+        pongAnimFrame = requestAnimationFrame(pongLoop);
       }
     });
   }
 
+  if (pongResetBtn) {
+    pongResetBtn.addEventListener('click', () => {
+      playerScore = 0;
+      aiScore = 0;
+      currentRally = 0;
+      if (playerValEl) playerValEl.textContent = '0';
+      if (aiValEl) aiValEl.textContent = '0';
+      resetBall(false);
+      playWandChime(440, 0.2);
+    });
+  }
+
+  diffBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      diffBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      botSpeedMax = btn.dataset.diff === 'master' ? 6.5 : 4.4;
+      playWandChime(botSpeedMax > 5 ? 784 : 523, 0.25);
+    });
+  });
+
   // =========================================================================
-  // 11. Tier 3: Returning Visitor Memory (localStorage)
+  // 11. Returning Visitor Memory (localStorage)
   // =========================================================================
   const visitorBadge = document.getElementById('visitor-memory-badge');
   const visitorText = document.getElementById('visitor-memory-text');
@@ -633,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVisitorMemory();
 
   // =========================================================================
-  // 12. Tier 3: Floating "Chat with Aman" Console (/api/chat)
+  // 12. Interactive "Chat with Aman" Dialogue Console (/api/chat)
   // =========================================================================
   const chatTogglePill = document.getElementById('chat-toggle-pill');
   const chatPanel = document.getElementById('chat-console-panel');
@@ -832,6 +1205,185 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   syncVisitStats();
+
+  // =========================================================================
+  // 18. Floating Superhero Baby Mascot & Character Asset Vault Controller
+  // =========================================================================
+  const companionBtn = document.getElementById('companion-trigger-btn');
+  const companionBubble = document.getElementById('companion-speech-bubble');
+  const closeCompanionBtn = document.getElementById('close-companion-bubble');
+  const companionAvatarImg = document.getElementById('companion-avatar-img');
+  const companionNameText = document.getElementById('companion-name-text');
+  const companionDialogueText = document.getElementById('companion-dialogue-text');
+  const switchToIronmanBtn = document.getElementById('switch-to-ironman');
+  const switchToHulkBtn = document.getElementById('switch-to-hulk');
+
+  const MASCOT_PROFILES = {
+    ironman: {
+      name: 'Baby Tony (Iron Man)',
+      icon: '🚀',
+      img: '/static/assets/baby_ironman_cloud.png',
+      color: '#00f5ff',
+      borderColor: 'var(--neon-cyan)',
+      boxShadow: '0 8px 24px rgba(0, 245, 255, 0.4)',
+      quotes: [
+        '“Jarvis said sleep is for mortals, but Aman coded me a starlight lullaby! Want to hear an arc-reactor synth beat or explore the realms?”',
+        '“Building MyRail, INVENTRA, and CivicConnect takes pure arc-reactor focus. What realm should we warp to?”',
+        '“I might be tiny, but my suit runs on 3000 horsepower and 0 compiler errors! Let\'s build something great!”',
+        '“Did you check out the Starlight Ping Pong game? Aman built an AI bot that anticipates your paddle spin!”'
+      ]
+    },
+    hulk: {
+      name: 'Baby Bruce (Baby Hulk)',
+      icon: '💚',
+      img: '/static/assets/baby_hulk_cloud.png',
+      color: '#10b981',
+      borderColor: '#10b981',
+      boxShadow: '0 8px 24px rgba(16, 185, 129, 0.4)',
+      quotes: [
+        '“HULK SMASH... BUGS! Baby Hulk protects Aman\'s database tables from runtime crashes!”',
+        '“Green is for gamma... and for 100% passed unit tests! Happy code makes Hulk happy!”',
+        '“Baby Hulk loves peaceful starlight lullabies! Play the Arc Reactor Music Box for me?”',
+        '“Don\'t make me hungry! Let\'s file a community report in CivicConnect or check warehouse stock in INVENTRA!”'
+      ]
+    }
+  };
+
+  let activeMascot = localStorage.getItem('active_mascot') || 'ironman';
+  let quoteIndex = 0;
+
+  function applyMascot(type, playChime = true) {
+    if (!MASCOT_PROFILES[type]) type = 'ironman';
+    activeMascot = type;
+    localStorage.setItem('active_mascot', type);
+    const profile = MASCOT_PROFILES[type];
+
+    if (companionAvatarImg) {
+      companionAvatarImg.src = profile.img;
+      companionAvatarImg.alt = profile.name;
+    }
+    if (companionBtn) {
+      companionBtn.style.borderColor = profile.borderColor;
+      companionBtn.style.boxShadow = profile.boxShadow;
+    }
+    if (companionNameText) companionNameText.textContent = profile.name;
+    if (companionDialogueText) companionDialogueText.textContent = profile.quotes[quoteIndex % profile.quotes.length];
+
+    if (switchToIronmanBtn && switchToHulkBtn) {
+      switchToIronmanBtn.classList.toggle('active', type === 'ironman');
+      switchToHulkBtn.classList.toggle('active', type === 'hulk');
+    }
+
+    if (playChime) {
+      playWandChime(type === 'ironman' ? 587.33 : 440, 0.25);
+    }
+  }
+
+  // Initial load
+  applyMascot(activeMascot, false);
+
+  if (companionBtn && companionBubble) {
+    companionBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = companionBubble.classList.contains('hidden');
+      if (isHidden) {
+        companionBubble.classList.remove('hidden');
+        const profile = MASCOT_PROFILES[activeMascot];
+        quoteIndex = (quoteIndex + 1) % profile.quotes.length;
+        if (companionDialogueText) companionDialogueText.textContent = profile.quotes[quoteIndex];
+        playWandChime(659.25, 0.2);
+      } else {
+        companionBubble.classList.add('hidden');
+      }
+    });
+
+    companionBubble.addEventListener('click', (e) => e.stopPropagation());
+
+    document.addEventListener('click', () => {
+      if (!companionBubble.classList.contains('hidden')) {
+        companionBubble.classList.add('hidden');
+      }
+    });
+  }
+
+  if (closeCompanionBtn && companionBubble) {
+    closeCompanionBtn.addEventListener('click', () => {
+      companionBubble.classList.add('hidden');
+    });
+  }
+
+  if (switchToIronmanBtn) {
+    switchToIronmanBtn.addEventListener('click', () => applyMascot('ironman', true));
+  }
+  if (switchToHulkBtn) {
+    switchToHulkBtn.addEventListener('click', () => applyMascot('hulk', true));
+  }
+
+  // Card 1 Cloud Hero Swap Controls (in /portal/about and /portfolio)
+  const toggleCloudHeroBtn = document.getElementById('btn-toggle-cloud-hero');
+  const toggleCloudHeroIndexBtn = document.getElementById('btn-toggle-cloud-hero-index');
+  const cloudHeroImg = document.getElementById('asset-cloud-img');
+  const cloudHeroIndexImg = document.getElementById('asset-cloud-img-index');
+  let currentCardHero = 'ironman';
+
+  function toggleCardCloudHero() {
+    currentCardHero = currentCardHero === 'ironman' ? 'hulk' : 'ironman';
+    const isHulk = currentCardHero === 'hulk';
+    const newSrc = isHulk ? '/static/assets/baby_hulk_cloud.png' : '/static/assets/baby_ironman_cloud.png';
+    const newAlt = isHulk ? 'Baby Hulk Waving on Cloud' : 'Baby Iron Man Waving on Cloud';
+    const btnLabel = isHulk ? '⇄ Swap to Baby Iron Man' : '⇄ Swap to Baby Hulk';
+
+    if (cloudHeroImg) {
+      cloudHeroImg.src = newSrc;
+      cloudHeroImg.alt = newAlt;
+    }
+    if (cloudHeroIndexImg) {
+      cloudHeroIndexImg.src = newSrc;
+      cloudHeroIndexImg.alt = newAlt;
+    }
+    if (toggleCloudHeroBtn) toggleCloudHeroBtn.textContent = btnLabel;
+    if (toggleCloudHeroIndexBtn) toggleCloudHeroIndexBtn.textContent = btnLabel;
+
+    playWandChime(isHulk ? 440 : 523.25, 0.25);
+  }
+
+  if (toggleCloudHeroBtn) toggleCloudHeroBtn.addEventListener('click', toggleCardCloudHero);
+  if (toggleCloudHeroIndexBtn) toggleCloudHeroIndexBtn.addEventListener('click', toggleCardCloudHero);
+
+  // Card 3 Lantern Ignite Controls
+  const lanternIgniteBtn = document.getElementById('btn-lantern-ignite');
+  const lanternIgniteIndexBtn = document.getElementById('btn-lantern-ignite-index');
+
+  function triggerLanternIgnite(btn) {
+    playWandChime(783.99, 0.4);
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✨ Lantern Glowing!';
+      btn.style.background = 'rgba(251, 191, 36, 0.25)';
+      btn.style.borderColor = 'var(--solar-gold)';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }, 2200);
+    }
+    // Subtle ambient flash
+    const flash = document.createElement('div');
+    flash.style.position = 'fixed';
+    flash.style.inset = '0';
+    flash.style.background = 'radial-gradient(circle at center, rgba(251, 191, 36, 0.18), transparent 70%)';
+    flash.style.pointerEvents = 'none';
+    flash.style.zIndex = '9999';
+    flash.style.transition = 'opacity 1.2s ease';
+    document.body.appendChild(flash);
+    setTimeout(() => {
+      flash.style.opacity = '0';
+      setTimeout(() => flash.remove(), 1200);
+    }, 400);
+  }
+
+  if (lanternIgniteBtn) lanternIgniteBtn.addEventListener('click', () => triggerLanternIgnite(lanternIgniteBtn));
+  if (lanternIgniteIndexBtn) lanternIgniteIndexBtn.addEventListener('click', () => triggerLanternIgnite(lanternIgniteIndexBtn));
 
   function escapeHtml(str) {
     return str.replace(/[&<>'"]/g, (tag) => ({

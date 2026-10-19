@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Dreamers' Beacon · Inspiration Wall{% endblock %}
+
+{% block content %}
+<section class="realm-hero-banner" style="--realm-color: #38bdf8; --realm-glow: rgba(56, 189, 248, 0.18);">
+  <div class="container">
+    <div class="realm-badge-capsule" style="border-color: #38bdf8; color: #38bdf8;">
+      <span>✨</span>
+      <span>Realm 06 · Live Beacon Wall</span>
+    </div>
+
+    <h1 class="realm-title">
+      The Dreamers’<span style="color: #38bdf8;">.beacon</span>
+    </h1>
+
+    <p class="realm-subtitle">
+      A persistent SQLite message beacon where hackathon travelers, fellow programmers, and mentors leave advice, encouragement, and sparks of inspiration for Aman.
+    </p>
+
+    <!-- Live Mechanical Odometer Row -->
+    <div class="hero-odometer-row" style="margin-top: 1.5rem;">
+      <div class="stat-box">
+        <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+          Dreams Delivered
+        </span>
+        <div class="odometer-neon" title="Live SQLite Dreams Delivered Count">
+          <span>✦</span>
+          <span id="odometer-val">{{ '{:,}'.format(stats['dreams_delivered']) if stats else '2,840' }}</span>
+        </div>
+      </div>
+
+      <div class="stat-box">
+        <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+          Lines of Code Written
+        </span>
+        <div class="odometer-neon" style="color: var(--solar-gold); border-color: rgba(251, 191, 36, 0.4);" title="Lines of Code">
+          <span>⚡</span>
+          <span>{{ '{:,}'.format(stats['lines_of_code']) if stats else '48,920' }}</span>
+        </div>
+      </div>
+
+      <div class="stat-box">
+        <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">
+          Worldsmith Travelers
+        </span>
+        <div class="odometer-neon" style="color: #10b981; border-color: rgba(16, 185, 129, 0.4);" title="Unique Page Visits">
+          <span>🌍</span>
+          <span>{{ '{:,}'.format(stats['visits_count']) if stats else '612' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding: 2.5rem 0;">
+  <div class="guestbook-layout">
+    <!-- Transmission Form -->
+    <div class="guestbook-card">
+      <h3 style="font-family: var(--font-bubbly); font-size: 1.35rem; color: #fff; margin-bottom: 1.25rem;">
+        ✍ Transmit a Thought to the Beacon
+      </h3>
+
+      <form id="guestbook-form">
+        <div class="form-group">
+          <label for="guest-author" class="form-label">Your Name or Handle</label>
+          <input type="text" id="guest-author" class="form-input" placeholder="e.g. Fellow Coder" maxlength="40" required>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-mood" class="form-label">Your Tag / Badge</label>
+          <select id="guest-mood" class="form-select">
+            <option value="✨ Dream Builder">✨ Dream Builder</option>
+            <option value="💻 Code Craftsman">💻 Code Craftsman</option>
+            <option value="❤️ Family Heart">❤️ Family Heart</option>
+            <option value="⚡ Relentless Learner">⚡ Relentless Learner</option>
+            <option value="🏆 Fellow Builder">🏆 Fellow Builder</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-wish" class="form-label">Message / Advice for Aman</label>
+          <textarea id="guest-wish" class="form-textarea" rows="4" placeholder="What words keep you moving when the compiler gives errors?" maxlength="320" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-pill btn-cyan" style="width: 100%; justify-content: center; padding: 0.85rem;">
+          Broadcast Message ✦
+        </button>
+      </form>
+    </div>
+
+    <!-- Live Wish Cards Wall -->
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-bubbly); font-weight: 700; font-size: 1.1rem; color: #fff;">
+          Messages from Across the Universe:
+        </span>
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">
+          SQLite Real-Time Beacon Feed
+        </span>
+      </div>
+
+      <div id="wishes-list" class="wishes-scroll-grid">
+        {% for wish in wishes %}
+        <div class="wish-card">
+          <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-cyan); margin-bottom: 0.4rem;">
+            {{ wish['mood_badge'] }}
+          </div>
+          <p style="font-size: 0.94rem; color: #fff; line-height: 1.6; margin-bottom: 0.85rem;">
+            “{{ wish['dream_wish'] }}”
+          </p>
+          <div style="font-family: var(--font-bubbly); font-size: 0.85rem; font-weight: 700; color: var(--solar-gold);">
+            — {{ wish['author_name'] }}
+          </div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); opacity: 0.8;">
+            {{ wish['created_at'][:10] }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
